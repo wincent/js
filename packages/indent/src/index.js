@@ -5,7 +5,7 @@
 /**
  * Indent every line (except for empty lines) by `count` spaces.
  */
-function indent(text /*: string */, count /*: number */ = 2) {
+function indent(text: string, count: number = 2) {
   return text
     .split('\n')
     .map(line => {

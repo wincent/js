@@ -6,10 +6,7 @@
  * Tagged template literal function that trims leading and trailing whitespace
  * and reduces the indent level back to column 0.
  */
-function dedent(
-  strings /*: Array<string> */,
-  ...interpolations /*: Array<mixed> */
-) {
+function dedent(strings: Array<string>, ...interpolations: Array<mixed>) {
   // Insert interpolations in template.
   const output = strings.reduce((acc, string, i) => {
     if (i < interpolations.length) {

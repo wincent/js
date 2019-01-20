@@ -7,6 +7,7 @@
     "@babel/cli": "*",
     "@babel/core": "*",
     "@babel/preset-env": "*",
+    "@babel/preset-flow": "*",
     "flow-bin": "*",
     "prettier": "*"
   },
