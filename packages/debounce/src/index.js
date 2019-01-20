@@ -7,13 +7,13 @@
  * in when a pending call is yet to be finalized, it replaces the pending call.
  */
 export default function debounce(
-  fn /*: (...Iterable<mixed>) => mixed */,
-  interval /*: number */,
+  fn: (...Iterable<mixed>) => mixed,
+  interval: number,
 ) {
-  var timeout = null;
+  let timeout = null;
   return function() {
-    var args = arguments;
-    var context = this;
+    const args = arguments;
+    const context = this;
     if (timeout) {
       clearTimeout(timeout);
     }
