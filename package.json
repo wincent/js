@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "prettier": "*"
+  },
+  "scripts": {
+    "checkFormat": "prettier --list-different packages/*/src/**/*.js packages/*/*.js",
+    "format": "prettier --write packages/*/src/**/*.js packages/*/*.js"
+  }
+}
