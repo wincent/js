@@ -8,10 +8,12 @@
     "@babel/core": "*",
     "@babel/preset-env": "*",
     "@babel/preset-flow": "*",
+    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "*",
     "eslint": "*",
     "eslint-plugin-flowtype": "*",
     "flow-bin": "*",
+    "jest": "24.0.0-alpha.12",
     "prettier": "*"
   },
   "scripts": {
@@ -20,7 +22,16 @@
     "fix": "eslint --fix packages/*/src/**/*.js",
     "format": "prettier --write packages/*/src/**/*.js packages/*/*.js",
     "lint": "eslint packages/*/src/**/*.js",
-    "prepublishOnly": "yarn checkFormat && yarn typecheck",
+    "prepublishOnly": "yarn checkFormat && yarn typecheck && yarn test",
+    "test": "jest",
     "typecheck": "flow"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/packages/[^/]+/lib/"
+    ],
+    "transform": {
+      "^.+\\.js$": "./support/babel-jest-wrapper.js"
+    }
   }
 }

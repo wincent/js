@@ -2,6 +2,6 @@ PACKAGES := $(wildcard packages/*)
 
 all: $(PACKAGES)
 $(PACKAGES):
-	babel --config-file ./.babelrc --source-root $@/src --relative -d ../lib $@/src
+	babel --root-mode upward --source-root $@/src --ignore '**/__tests__/**/*' --relative -d ../lib $@/src
 
 .PHONY: all $(PACKAGES)
