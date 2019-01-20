@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "Dedenting utility",
   "main": "lib/index.js",
-  "files": ["lib/index.js"],
+  "files": [
+    "lib/index.js"
+  ],
   "repository": "https://github.com/wincent/js/tree/master/packages/dedent",
   "author": "Greg Hurrell <greg@hurrell.net>",
   "license": "MIT",

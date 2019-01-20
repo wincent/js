@@ -18,9 +18,9 @@
   },
   "scripts": {
     "build": "make all",
-    "checkFormat": "prettier --list-different .*.js *.js packages/*/src/**/*.js packages/*/*.js",
+    "checkFormat": "prettier --list-different '*.{js,json,md}' 'packages/*/src/**/*.{js,json}' packages/*/*.{js,json,md}",
     "fix": "eslint --fix packages/*/src/**/*.js",
-    "format": "prettier --write .*.js *.js packages/*/src/**/*.js packages/*/*.js",
+    "format": "prettier --write '*.{js,json,md}' 'packages/*/src/**/*.{js,json}' packages/*/*.{js,json,md}",
     "lint": "eslint packages/*/src/**/*.js",
     "prepublishOnly": "yarn checkFormat && yarn typecheck && yarn test",
     "test": "jest",
