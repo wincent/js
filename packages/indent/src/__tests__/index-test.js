@@ -1,3 +1,7 @@
+/**
+ * @flow strict
+ */
+
 import indent from '..';
 
 describe('indent()', () => {

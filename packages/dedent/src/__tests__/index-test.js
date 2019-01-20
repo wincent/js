@@ -1,3 +1,7 @@
+/**
+ * @flow strict
+ */
+
 import dedent from '..';
 
 describe('dedent()', () => {

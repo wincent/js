@@ -1,10 +1,10 @@
 [ignore]
-.*/__tests__/.*
 .*/lib/.*
 
 [include]
 
 [libs]
+flow-typed
 
 [lints]
 all=warn
