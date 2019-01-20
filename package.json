@@ -27,6 +27,9 @@
     "typecheck": "flow"
   },
   "jest": {
+    "testMatch": [
+      "**/*-test.js"
+    ],
     "testPathIgnorePatterns": [
       "<rootDir>/packages/[^/]+/lib/"
     ],

@@ -1,0 +1,84 @@
+#!/bin/bash
+
+set -e
+
+if [ $# -ne 1 ]; then
+  echo "error: expected exactly 1 argument (package name)"
+  exit 1
+fi
+
+PACKAGE=$1
+PACKAGE_DIR="packages/$PACKAGE"
+
+mkdir -p "$PACKAGE_DIR"/{lib,src}
+mkdir -p "$PACKAGE_DIR"/src/__tests__
+
+if [ ! -e "$PACKAGE_DIR"/README.md ]; then
+  cat > "$PACKAGE_DIR"/README.md <<-HERE
+		# @wincent/$PACKAGE
+	HERE
+fi
+
+if [ ! -e "$PACKAGE_DIR"/lib/.gitignore ]; then
+  cat > "$PACKAGE_DIR"/lib/.gitignore <<-HERE
+		*
+		!/.gitignore
+	HERE
+fi
+
+if [ ! -e "$PACKAGE_DIR"/package.json ]; then
+  cat > "$PACKAGE_DIR"/package.json <<-HERE
+		{
+		  "name": "@wincent/$PACKAGE",
+		  "version": "0.0.1",
+		  "description": "A JavaScript package",
+		  "main": "lib/index.js",
+		  "files": [
+		    "lib/index.js"
+		  ],
+		  "repository": "https://github.com/wincent/js/tree/master/packages/$PACKAGE",
+		  "author": "Greg Hurrell <greg@hurrell.net>",
+		  "license": "MIT",
+		  "private": false
+		}
+	HERE
+fi
+
+NAME=$(echo "$PACKAGE" | sed -r 's/(-)(\w)/\U\2/g')
+if [ ! -e "$PACKAGE_DIR"/src/index.js ]; then
+  cat > "$PACKAGE_DIR"/src/index.js <<-HERE
+		/**
+		 * @flow strict
+		 */
+		
+		export default function $NAME() {
+		  // ...
+		}
+	HERE
+fi
+
+if [ ! -e "$PACKAGE_DIR"/src/__tests__/index-test.js ]; then
+  cat > "$PACKAGE_DIR"/src/__tests__/index-test.js <<-HERE
+		/**
+		 * @flow strict
+		 */
+		
+		import * as _ from '..';
+		
+		describe('', () => {
+		  it('', () => {
+		    expect(!!_).toBe(true);
+		  });
+		});
+	HERE
+fi
+
+if [ ! -e "$PACKAGE_DIR"/src/__tests__/.eslintrc.js ]; then
+  cat > "$PACKAGE_DIR"/src/__tests__/.eslintrc.js <<-HERE
+		module.exports = {
+		  env: {
+		    jest: true,
+		  },
+		};
+	HERE
+fi
