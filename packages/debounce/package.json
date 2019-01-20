@@ -1,0 +1,13 @@
+{
+  "name": "@wincent/debounce",
+  "version": "0.0.1",
+  "description": "Simple debounce implementation",
+  "main": "lib/index.js",
+  "files": [
+    "lib/index.js"
+  ],
+  "repository": "https://github.com/wincent/js/tree/master/packages/debounce",
+  "author": "Greg Hurrell <greg@hurrell.net>",
+  "license": "MIT",
+  "private": false
+}
