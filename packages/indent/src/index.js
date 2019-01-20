@@ -5,7 +5,7 @@
 /**
  * Indent every line (except for empty lines) by `count` spaces.
  */
-function indent(text: string, count: number = 2) {
+export default function indent(text: string, count: number = 2) {
   return text
     .split('\n')
     .map(line => {
@@ -17,5 +17,3 @@ function indent(text: string, count: number = 2) {
     })
     .join('\n');
 }
-
-module.exports = indent;
