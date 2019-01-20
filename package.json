@@ -7,12 +7,14 @@
     "@babel/cli": "7.2.3",
     "@babel/core": "7.2.2",
     "@babel/preset-env": "7.2.3",
+    "flow-bin": "*",
     "prettier": "*"
   },
   "scripts": {
     "build": "make all",
     "checkFormat": "prettier --list-different packages/*/src/**/*.js packages/*/*.js",
     "format": "prettier --write packages/*/src/**/*.js packages/*/*.js",
-    "prepublishOnly": "yarn checkFormat"
+    "prepublishOnly": "yarn checkFormat && yarn typecheck",
+    "typecheck": "flow"
   }
 }
