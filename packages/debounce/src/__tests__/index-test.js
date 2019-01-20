@@ -4,57 +4,50 @@
 
 import debounce from '..';
 
-describe.skip('debounce()', function() {
-  /*
-  var clock;
-  var spy;
+jest.useFakeTimers();
 
-  beforeEach(function () {
-    clock = sinon.useFakeTimers();
-    spy = sinon.spy();
+describe('debounce()', () => {
+  let spy;
+
+  beforeEach(() => {
+    spy = jest.fn();
   });
 
-  afterEach(function () {
-    clock.restore();
-  });
-
-  it('does nothing when the debounced function is not called', function () {
+  it('does nothing when the debounced function is not called', () => {
     debounce(spy, 100);
-    clock.tick(1000);
-    expect(spy.called).toBe(false);
+    jest.advanceTimersByTime(1000);
+    expect(spy).not.toBeCalled();
   });
 
-  it('calls the debounced function after an interval', function () {
-    var debounced = debounce(spy, 100);
+  it('calls the debounced function after an interval', () => {
+    const debounced = debounce(spy, 100);
     debounced();
-    clock.tick(50);
-    expect(spy.called).toBe(false);
-    clock.tick(50);
-    expect(spy.called).toBe(true);
+    jest.advanceTimersByTime(50);
+    expect(spy).not.toBeCalled();
+    jest.advanceTimersByTime(50);
+    expect(spy.mock.calls).toEqual([[]]);
   });
 
-  it('uses the last-passed arguments when debouncing multiple calls', function () {
-    var debounced = debounce(spy, 100);
+  it('uses the last-passed arguments when debouncing multiple calls', () => {
+    const debounced = debounce<[number]>(spy, 100);
     debounced(1);
     debounced(2);
-    clock.tick(50);
-    expect(spy.called).toBe(false);
-    clock.tick(50);
-    expect(spy.args.length).toBe(1);
-    expect(spy.args[0][0]).toBe(2);
+    jest.advanceTimersByTime(50);
+    expect(spy).not.toBeCalled();
+    jest.advanceTimersByTime(50);
+    expect(spy.mock.calls).toEqual([[2]]);
   });
 
-  it('uses the last-employed context when debouncing multiple calls', function () {
-    var context;
-    var debounced = debounce(function() {
+  it('uses the last-employed context when debouncing multiple calls', () => {
+    let context;
+    const debounced = debounce(function() {
       context = this;
     }, 100);
-    var context1 = {};
-    var context2 = {};
+    const context1 = {};
+    const context2 = {};
     debounced.call(context1);
     debounced.call(context2);
-    clock.tick(1000);
+    jest.advanceTimersByTime(1000);
     expect(context).toBe(context2);
   });
-  */
 });
