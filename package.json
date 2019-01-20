@@ -4,9 +4,9 @@
     "packages/*"
   ],
   "dependencies": {
-    "@babel/cli": "7.2.3",
-    "@babel/core": "7.2.2",
-    "@babel/preset-env": "7.2.3",
+    "@babel/cli": "*",
+    "@babel/core": "*",
+    "@babel/preset-env": "*",
     "flow-bin": "*",
     "prettier": "*"
   },
