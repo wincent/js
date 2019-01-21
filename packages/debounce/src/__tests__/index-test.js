@@ -7,35 +7,35 @@ import debounce from '..';
 jest.useFakeTimers();
 
 describe('debounce()', () => {
-  let spy;
+  let fn;
 
   beforeEach(() => {
-    spy = jest.fn();
+    fn = jest.fn();
   });
 
   it('does nothing when the debounced function is not called', () => {
-    debounce(spy, 100);
+    debounce(fn, 100);
     jest.advanceTimersByTime(1000);
-    expect(spy).not.toBeCalled();
+    expect(fn).not.toBeCalled();
   });
 
   it('calls the debounced function after an interval', () => {
-    const debounced = debounce(spy, 100);
+    const debounced = debounce(fn, 100);
     debounced();
     jest.advanceTimersByTime(50);
-    expect(spy).not.toBeCalled();
+    expect(fn).not.toBeCalled();
     jest.advanceTimersByTime(50);
-    expect(spy.mock.calls).toEqual([[]]);
+    expect(fn.mock.calls).toEqual([[]]);
   });
 
   it('uses the last-passed arguments when debouncing multiple calls', () => {
-    const debounced = debounce<[number]>(spy, 100);
+    const debounced = debounce<[number]>(fn, 100);
     debounced(1);
     debounced(2);
     jest.advanceTimersByTime(50);
-    expect(spy).not.toBeCalled();
+    expect(fn).not.toBeCalled();
     jest.advanceTimersByTime(50);
-    expect(spy.mock.calls).toEqual([[2]]);
+    expect(fn.mock.calls).toEqual([[2]]);
   });
 
   it('uses the last-employed context when debouncing multiple calls', () => {
