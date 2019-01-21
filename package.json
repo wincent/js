@@ -22,7 +22,7 @@
     "fix": "eslint --fix packages/*/src/**/*.js",
     "format": "prettier --write '*.{js,json,md}' 'packages/*/src/**/*.{js,json}' packages/*/*.{js,json,md}",
     "lint": "eslint packages/*/src/**/*.js",
-    "prepublishOnly": "yarn checkFormat && yarn typecheck && yarn test",
+    "prepublishOnly": "yarn checkFormat && yarn lint && yarn typecheck && yarn test",
     "test": "jest",
     "typecheck": "flow"
   },
