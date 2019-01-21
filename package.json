@@ -17,7 +17,7 @@
     "prettier": "*"
   },
   "scripts": {
-    "build": "make all",
+    "build": "make -j 4 all",
     "checkFormat": "prettier --list-different '*.{js,json,md}' 'packages/*/src/**/*.{js,json}' packages/*/*.{js,json,md}",
     "fix": "eslint --fix packages/*/src/**/*.js",
     "format": "prettier --write '*.{js,json,md}' 'packages/*/src/**/*.{js,json}' packages/*/*.{js,json,md}",
