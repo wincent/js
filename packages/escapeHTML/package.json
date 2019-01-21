@@ -1,0 +1,13 @@
+{
+  "name": "@wincent/escapeHTML",
+  "version": "0.0.1",
+  "description": "Escapes unsafe characters in HTML",
+  "main": "lib/index.js",
+  "files": [
+    "lib/index.js"
+  ],
+  "repository": "https://github.com/wincent/js/tree/master/packages/escapeHTML",
+  "author": "Greg Hurrell <greg@hurrell.net>",
+  "license": "MIT",
+  "private": false
+}
