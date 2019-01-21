@@ -1,0 +1,13 @@
+{
+  "name": "@wincent/isObject",
+  "version": "0.0.1",
+  "description": "Determines whether a value is an object",
+  "main": "lib/index.js",
+  "files": [
+    "lib/index.js"
+  ],
+  "repository": "https://github.com/wincent/js/tree/master/packages/isObject",
+  "author": "Greg Hurrell <greg@hurrell.net>",
+  "license": "MIT",
+  "private": false
+}
