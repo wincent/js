@@ -21,6 +21,9 @@ suppress_type=$FlowFixMe
 # Comment form of the above; requires a clarifying reason to be supplied.
 suppress_comment=\\(.\\|\n\\)*\\$\\(FlowFixMe\\|FlowIssue\\).+
 
+# Allow Flow to find scoped packages.
+module.name_mapper='^@wincent/\(.+\)$' -> '<PROJECT_ROOT>/packages/\1/src'
+
 [strict]
 nonstrict-import
 sketchy-null

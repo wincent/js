@@ -1,0 +1,16 @@
+{
+  "name": "@wincent/stableStringify",
+  "version": "0.0.1",
+  "description": "Like JSON.stringify but produces stable output regardless of insertion order",
+  "main": "lib/index.js",
+  "files": [
+    "lib/index.js"
+  ],
+  "repository": "https://github.com/wincent/js/tree/master/packages/stableStringify",
+  "author": "Greg Hurrell <greg@hurrell.net>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "@wincent/isObject": "0.0.1"
+  }
+}

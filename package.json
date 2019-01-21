@@ -27,6 +27,9 @@
     "typecheck": "flow"
   },
   "jest": {
+    "moduleNameMapper": {
+      "@wincent/(.+)$": "<rootDir>packages/$1/src"
+    },
     "testMatch": [
       "**/*-test.js"
     ],
