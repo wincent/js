@@ -12,8 +12,21 @@ module.exports = function(api) {
         targets: {node: 'current'},
       }
     : {};
-
+  const plugins = isJest()
+    ? []
+    : [
+        [
+          '@babel/plugin-transform-runtime',
+          {
+            corejs: 2,
+            helpers: true,
+            regenerator: true,
+            useESModules: false,
+          },
+        ],
+      ];
   return {
+    plugins,
     presets: [['@babel/preset-env', env], '@babel/preset-flow'],
   };
 };

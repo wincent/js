@@ -6,6 +6,7 @@
   "dependencies": {
     "@babel/cli": "*",
     "@babel/core": "*",
+    "@babel/plugin-transform-runtime": "*",
     "@babel/preset-env": "*",
     "@babel/preset-flow": "*",
     "babel-core": "7.0.0-bridge.0",
