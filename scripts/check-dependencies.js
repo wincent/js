@@ -20,7 +20,9 @@ async function forEachPackage(callback) {
   const packages = await readdirAsync('packages', {withFileTypes: true});
   for (const pkg of packages) {
     if (pkg.isDirectory()) {
-      await callback(pkg);
+      const name = pkg.name.toString();
+      const config = getPackageConfig(name);
+      await callback(name, config);
     }
   }
 }
@@ -45,8 +47,8 @@ function isJS(entry) {
   return extname(entry.name.toString()) === '.js';
 }
 
-async function forEachJSFile(pkg, callback) {
-  const directory = join('packages', pkg.name.toString(), 'lib');
+async function forEachJSFile(name, callback) {
+  const directory = join('packages', name, 'lib');
   for await (const file of walk(directory, isJS)) {
     await callback(file);
   }
@@ -81,24 +83,26 @@ function extractDependencyName(moduleName) {
   return match ? match[0] : null;
 }
 
-async function main() {
-  log('Scanning for undeclared package dependencies:\n\n');
+function recordDependency(moduleName, modules) {
+  const dependency = extractDependencyName(moduleName);
+  if (dependency) {
+    modules.add(dependency);
+  }
+}
+
+/**
+ * Make sure built code explcitly declares its dependencies.
+ */
+async function checkMissingDependencies() {
+  log('Checking for undeclared package dependencies:\n\n');
   const missing = {};
 
-  await forEachPackage(async pkg => {
-    const name = pkg.name.toString();
-    const config = getPackageConfig(name);
+  await forEachPackage(async (name, config) => {
     const modules = new Set();
-    const recordDependency = moduleName => {
-      const dependency = extractDependencyName(moduleName);
-      if (dependency) {
-        modules.add(dependency);
-      }
-    };
 
     log(basename(`  ${name}: `));
 
-    await forEachJSFile(pkg, async js => {
+    await forEachJSFile(name, async js => {
       const contents = await readFileAsync(js);
       const ast = parser.parse(contents.toString(), {
         sourceType: 'unambiguous',
@@ -110,7 +114,7 @@ async function main() {
           if (path.get('importKind').node === 'value') {
             const source = path.get('source');
             if (source.isStringLiteral()) {
-              recordDependency(source.node.value);
+              recordDependency(source.node.value, modules);
             }
           }
         },
@@ -119,7 +123,7 @@ async function main() {
           if (callee.isIdentifier({name: 'require'})) {
             const args = path.get('arguments');
             if (args.length && args[0].isStringLiteral()) {
-              recordDependency(args[0].node.value);
+              recordDependency(args[0].node.value, modules);
             }
           }
         },
@@ -148,15 +152,94 @@ async function main() {
   });
 
   log('\n');
-  const exitStatus = Object.keys(missing).length === 0 ? 0 : 1;
-  if (exitStatus) {
+  const success = Object.keys(missing).length === 0;
+  if (!success) {
     log('Add missing dependencies with:\n\n');
     Object.entries(missing).forEach(([name, dependencies]) => {
       log(`(cd packages/${name} && yarn add ${dependencies.join(' ')})\n`);
     });
     log('\n');
   }
-  process.exit(exitStatus);
+  return success;
+}
+
+/**
+ * Make sure packages require identical versions of common dependencies.
+ */
+async function checkDependencyVersions() {
+  log('Checking for mismatched dependency versions:\n\n');
+  const registry = {};
+
+  let success = true;
+  await forEachPackage((name, config) => {
+    const dependencies = [
+      ...Object.entries(config.dependencies || {}),
+      ...Object.entries(config.devDependencies || {}),
+      ...Object.entries(config.peerDependencies || {}),
+    ];
+    dependencies.forEach(([dependency, version]) => {
+      if (!registry[dependency]) {
+        registry[dependency] = {};
+      }
+      if (!registry[dependency][version]) {
+        registry[dependency][version] = new Set();
+      }
+      recordDependency(name, registry[dependency][version]);
+    });
+  });
+
+  for ([dependency, versions] of Object.entries(registry)) {
+    log(`  ${dependency}:  `);
+    if (Object.keys(versions).length === 1) {
+      log('OK\n');
+    } else {
+      success = false;
+      log('BAD\n');
+      for ([version, dependees] of Object.entries(versions)) {
+        for (const dependee of dependees) {
+          log(`    ${dependee} -> ${version}\n`);
+        }
+      }
+    }
+  }
+
+  log('\n');
+  return success;
+}
+
+/**
+ * Make sure devDependencies are only declared at the repository root.
+ */
+async function checkDevelopmentDependencies() {
+  log('Checking for development dependencies in individual packages:\n\n');
+  let success = true;
+  await forEachPackage((name, config) => {
+    log(`  ${name}: `);
+    if (config.devDependencies && Object.keys(config.devDependencies).length > 0) {
+      success = false;
+      log('BAD\n');
+      Object.keys(config.devDependencies).forEach(dependency => {
+        log(`    ${dependency}\n`);
+      });
+    } else {
+      log('OK\n');
+    }
+  });
+
+  log('\n');
+  if (!success) {
+    log('These dependencies should be migrated to the root-level package.json');
+    log('\n\n');
+  }
+
+  return success;
+}
+
+async function main() {
+  let success = await checkMissingDependencies();
+  success &= await checkDependencyVersions();
+  success &= await checkDevelopmentDependencies();
+  process.exit(success ? 0 : 1);
 }
 
 main();
