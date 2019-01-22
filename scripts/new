@@ -48,7 +48,9 @@ NAME=$(echo "$PACKAGE" | sed -r 's/(-)(\w)/\U\2/g')
 if [ ! -e "$PACKAGE_DIR"/src/index.js ]; then
   cat > "$PACKAGE_DIR"/src/index.js <<-HERE
 		/**
+		 * @copyright Copyright (c) $(date '+%Y')-present Greg Hurrell
 		 * @flow strict
+		 * @license MIT
 		 */
 		
 		export default function $NAME() {
@@ -60,8 +62,11 @@ fi
 if [ ! -e "$PACKAGE_DIR"/src/__tests__/index-test.js ]; then
   cat > "$PACKAGE_DIR"/src/__tests__/index-test.js <<-HERE
 		/**
+		 * @copyright Copyright (c) $(date '+%Y')-present Greg Hurrell
 		 * @flow strict
+		 * @license MIT
 		 */
+
 		
 		import * as _ from '..';
 		

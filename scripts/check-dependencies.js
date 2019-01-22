@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 
 /**
+ * @copyright Copyright (c) 2019-present Greg Hurrell
+ * @license MIT
+ */
+
+/**
  * Checks built packages prior to publishing to make sure their dependencies are
  * declared in their package.json files.
  */
@@ -215,7 +220,10 @@ async function checkDevelopmentDependencies() {
   let success = true;
   await forEachPackage((name, config) => {
     log(`  ${name}: `);
-    if (config.devDependencies && Object.keys(config.devDependencies).length > 0) {
+    if (
+      config.devDependencies &&
+      Object.keys(config.devDependencies).length > 0
+    ) {
       success = false;
       log('BAD\n');
       Object.keys(config.devDependencies).forEach(dependency => {

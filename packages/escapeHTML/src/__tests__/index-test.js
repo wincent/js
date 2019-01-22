@@ -1,5 +1,7 @@
 /**
+ * @copyright Copyright (c) 2019-present Greg Hurrell
  * @flow strict
+ * @license MIT
  */
 
 import escapeHTML from '..';
