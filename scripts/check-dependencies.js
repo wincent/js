@@ -188,14 +188,14 @@ async function checkDependencyVersions() {
     });
   });
 
-  for ([dependency, versions] of Object.entries(registry)) {
+  for (const [dependency, versions] of Object.entries(registry)) {
     log(`  ${dependency}:  `);
     if (Object.keys(versions).length === 1) {
       log('OK\n');
     } else {
       success = false;
       log('BAD\n');
-      for ([version, dependees] of Object.entries(versions)) {
+      for (const [version, dependees] of Object.entries(versions)) {
         for (const dependee of dependees) {
           log(`    ${dependee} -> ${version}\n`);
         }
