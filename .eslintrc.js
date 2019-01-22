@@ -13,7 +13,9 @@ module.exports = {
   },
   plugins: ['flowtype'],
   rules: {
+    'flowtype/define-flow-type': 1,
     'linebreak-style': ['error', 'unix'],
+    'no-unused-vars': ['error', {argsIgnorePattern: '^_'}],
     quotes: ['error', 'single', {avoidEscape: true}],
     semi: ['error', 'always'],
   },

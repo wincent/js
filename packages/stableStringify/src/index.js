@@ -27,10 +27,10 @@ export default function stableStringify(input: mixed): string | void {
       return (
         '{' +
         Object.entries(mixed)
-          .sort(([aKey, aValue], [bKey, bValue]) => {
+          .sort(([aKey, _aValue], [bKey, _bValue]) => {
             return aKey < bKey ? -1 : aKey > bKey ? 1 : 0;
           })
-          .filter(([key, value]) => value !== undefined)
+          .filter(([_key, value]) => value !== undefined)
           .map(([key, value]) => {
             // We know value !== undefined here,
             // so stringify will return a string.

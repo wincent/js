@@ -22,9 +22,9 @@
   "scripts": {
     "build": "make -j 4 all",
     "checkFormat": "prettier --list-different '*.{js,json,md}' 'packages/*/src/**/*.{js,json}' 'packages/*/*.{js,json,md}' 'scripts/*.js'",
-    "fix": "eslint --fix packages/*/src/**/*.js",
+    "fix": "eslint --fix 'packages/*/src/**/*.js' 'scripts/*.js'",
     "format": "prettier --write '*.{js,json,md}' 'packages/*/src/**/*.{js,json}' 'packages/*/*.{js,json,md}' 'scripts/*.js'",
-    "lint": "eslint packages/*/src/**/*.js",
+    "lint": "eslint 'packages/*/src/**/*.js' 'scripts/*.js'",
     "prepublishOnly": "yarn checkFormat && yarn lint && yarn typecheck && yarn test && scripts/check-dependencies.js",
     "test": "jest",
     "typecheck": "flow"

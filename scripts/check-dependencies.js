@@ -18,9 +18,9 @@ const log = process.stdout.write.bind(process.stdout);
 
 async function forEachPackage(callback) {
   const packages = await readdirAsync('packages', {withFileTypes: true});
-  for (const package of packages) {
-    if (package.isDirectory()) {
-      await callback(package);
+  for (const pkg of packages) {
+    if (pkg.isDirectory()) {
+      await callback(pkg);
     }
   }
 }
@@ -45,8 +45,8 @@ function isJS(entry) {
   return extname(entry.name.toString()) === '.js';
 }
 
-async function forEachJSFile(package, callback) {
-  const directory = join('packages', package.name.toString(), 'lib');
+async function forEachJSFile(pkg, callback) {
+  const directory = join('packages', pkg.name.toString(), 'lib');
   for await (const file of walk(directory, isJS)) {
     await callback(file);
   }
@@ -85,8 +85,8 @@ async function main() {
   log('Scanning for undeclared package dependencies:\n\n');
   const missing = {};
 
-  await forEachPackage(async package => {
-    const name = package.name.toString();
+  await forEachPackage(async pkg => {
+    const name = pkg.name.toString();
     const config = getPackageConfig(name);
     const modules = new Set();
     const recordDependency = moduleName => {
@@ -98,7 +98,7 @@ async function main() {
 
     log(basename(`  ${name}: `));
 
-    await forEachJSFile(package, async js => {
+    await forEachJSFile(pkg, async js => {
       const contents = await readFileAsync(js);
       const ast = parser.parse(contents.toString(), {
         sourceType: 'unambiguous',
