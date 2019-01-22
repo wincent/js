@@ -11,6 +11,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "@babel/runtime-corejs2": "7.3.1",
     "@wincent/isObject": "0.0.1"
   }
 }
