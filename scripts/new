@@ -33,6 +33,7 @@ if [ ! -e "$PACKAGE_DIR"/package.json ]; then
 		  "version": "0.0.1",
 		  "description": "A JavaScript package",
 		  "main": "lib/index.js",
+		  "module": "lib/index.mjs",
 		  "files": [
 		    "lib/index.js"
 		  ],

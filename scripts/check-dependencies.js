@@ -48,13 +48,13 @@ async function* walk(directory, predicate = () => true) {
   }
 }
 
-function isJS(entry) {
-  return extname(entry.name.toString()) === '.js';
+function isSourceFile(entry) {
+  return ['.js', '.mjs'].includes(extname(entry.name.toString()));
 }
 
-async function forEachJSFile(name, callback) {
+async function forEachSourceFile(name, callback) {
   const directory = join('packages', name, 'lib');
-  for await (const file of walk(directory, isJS)) {
+  for await (const file of walk(directory, isSourceFile)) {
     await callback(file);
   }
 }
@@ -107,8 +107,8 @@ async function checkMissingDependencies() {
 
     log(basename(`  ${name}: `));
 
-    await forEachJSFile(name, async js => {
-      const contents = await readFileAsync(js);
+    await forEachSourceFile(name, async source => {
+      const contents = await readFileAsync(source);
       const ast = parser.parse(contents.toString(), {
         sourceType: 'unambiguous',
         plugins: ['flow'],

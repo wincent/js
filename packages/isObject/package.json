@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Determines whether a value is an object",
   "main": "lib/index.js",
+  "module": "lib/index.mjs",
   "files": [
     "lib/index.js"
   ],

@@ -22,26 +22,12 @@
   },
   "scripts": {
     "build": "make -j 4 all",
-    "checkFormat": "prettier --list-different '.*.{js,json}' '*.{js,json,md}' 'packages/*/src/**/*.{js,json}' 'packages/*/*.{js,json,md}' 'scripts/*.js'",
-    "fix": "eslint --fix 'packages/*/src/**/*.js' 'scripts/*.js'",
-    "format": "prettier --write '.*.{js,json}' '*.{js,json,md}' 'packages/*/src/**/*.{js,json}' 'packages/*/*.{js,json,md}' 'scripts/*.js'",
-    "lint": "eslint 'packages/*/src/**/*.js' 'scripts/*.js'",
+    "checkFormat": "prettier --list-different '.*.{js,json}' '*.{js,json,md}' 'packages/*/src/**/*.{js,json,mjs}' 'packages/*/*.{js,json,md}' 'scripts/*.js'",
+    "fix": "eslint --fix 'packages/*/src/**/*.{js,mjs}' 'scripts/*.js'",
+    "format": "prettier --write '.*.{js,json}' '*.{js,json,md}' 'packages/*/src/**/*.{js,json,mjs}' 'packages/*/*.{js,json,md}' 'scripts/*.js'",
+    "lint": "eslint 'packages/*/src/**/*.{js,mjs}' 'scripts/*.js'",
     "prepublishOnly": "yarn checkFormat && yarn lint && yarn typecheck && yarn test && scripts/check-dependencies.js",
-    "test": "jest",
+    "test": "env BABEL_ENV=jest jest",
     "typecheck": "flow"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "@wincent/(.+)$": "<rootDir>packages/$1/src"
-    },
-    "testMatch": [
-      "**/*-test.js"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/packages/[^/]+/lib/"
-    ],
-    "transform": {
-      "^.+\\.js$": "./support/babel-jest-wrapper.js"
-    }
   }
 }

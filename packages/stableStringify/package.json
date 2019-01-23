@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Like JSON.stringify but produces stable output regardless of insertion order",
   "main": "lib/index.js",
+  "module": "lib/index.mjs",
   "files": [
     "lib/index.js"
   ],

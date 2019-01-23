@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Fail fast in the face of an unexpected null value",
   "main": "lib/index.js",
+  "module": "lib/index.mjs",
   "files": [
     "lib/index.js"
   ],

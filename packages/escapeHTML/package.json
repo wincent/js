@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Escapes unsafe characters in HTML",
   "main": "lib/index.js",
+  "module": "lib/index.mjs",
   "files": [
     "lib/index.js"
   ],
