@@ -6,28 +6,28 @@ This is an experiment aimed at exploring the trade-offs involved in moving a bun
 
 ## Advantages
 
-* No need to create mirrors at git.wincent.com, github.com, gitlab.com and bitbucket.org every time I want to extract a tiny package containing a handful of lines of functionalitly.
-* Shared development dependencies provide a single place to keep Babel, Flow, Prettier, ESLint, Jest etc configured and up-to-date.
-* Using scoped package names makes it easy to allocate names that are both unique and descriptive.
-* Colocation of packages makes some types of cross-package verification easy (a couple of early examples: [missing dependency check](https://github.com/wincent/js/commit/02e2eb280db050e523d2a3e065a93f0ef221fb82), [mismatched version check, unwanted dev dependency check](https://github.com/wincent/js/commit/c7147c86b055ab1ecc57a24b29cb7ef274dc69de)).
+- No need to create mirrors at git.wincent.com, github.com, gitlab.com and bitbucket.org every time I want to extract a tiny package containing a handful of lines of functionalitly.
+- Shared development dependencies provide a single place to keep Babel, Flow, Prettier, ESLint, Jest etc configured and up-to-date.
+- Using scoped package names makes it easy to allocate names that are both unique and descriptive.
+- Colocation of packages makes some types of cross-package verification easy (a couple of early examples: [missing dependency check](https://github.com/wincent/js/commit/02e2eb280db050e523d2a3e065a93f0ef221fb82), [mismatched version check, unwanted dev dependency check](https://github.com/wincent/js/commit/c7147c86b055ab1ecc57a24b29cb7ef274dc69de)).
 
 ## Disadvantages
 
-* No separate issue tracker per package (will use labels instead).
-* Packages don't have a strong connection that ties them together into a cohesive whole.
-* May be some kinks to iron out with respect to using Flow, Jest, and other tools that may not expect to be in monorepo (example: [module resolution tweaks](https://github.com/wincent/js/commit/fe2d7318dc94354306331eb9f5b0d191a831fd9a)).
+- No separate issue tracker per package (will use labels instead).
+- Packages don't have a strong connection that ties them together into a cohesive whole.
+- May be some kinks to iron out with respect to using Flow, Jest, and other tools that may not expect to be in monorepo (example: [module resolution tweaks](https://github.com/wincent/js/commit/fe2d7318dc94354306331eb9f5b0d191a831fd9a)).
 
 ## Package listing
 
-| Package       | Description |
-| ------------- | ------------- |
-| [@wincent/debounce](https://github.com/wincent/js/tree/master/packages/debounce) | Simple debounce implementation |
-| [@wincent/dedent](https://github.com/wincent/js/tree/master/packages/dedent) | Dedenting utility |
-| [@wincent/delay](https://github.com/wincent/js/tree/master/packages/delay) | A function that returns a promise that resolves after a delay |
-| [@wincent/escapeHTML](https://github.com/wincent/js/tree/master/packages/escapeHTML) | Escapes unsafe characters in HTML |
-| [@wincent/indent](https://github.com/wincent/js/tree/master/packages/indent) | Indenting utility |
-| [@wincent/isObject](https://github.com/wincent/js/tree/master/packages/isObject) | Determines whether a value is an object |
-| [@wincent/nullthrows](https://github.com/wincent/js/tree/master/packages/nullthrows) | Fail fast in the face of an unexpected null value |
+| Package                                                                                        | Description                                                                  |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| [@wincent/debounce](https://github.com/wincent/js/tree/master/packages/debounce)               | Simple debounce implementation                                               |
+| [@wincent/dedent](https://github.com/wincent/js/tree/master/packages/dedent)                   | Dedenting utility                                                            |
+| [@wincent/delay](https://github.com/wincent/js/tree/master/packages/delay)                     | A function that returns a promise that resolves after a delay                |
+| [@wincent/escapeHTML](https://github.com/wincent/js/tree/master/packages/escapeHTML)           | Escapes unsafe characters in HTML                                            |
+| [@wincent/indent](https://github.com/wincent/js/tree/master/packages/indent)                   | Indenting utility                                                            |
+| [@wincent/isObject](https://github.com/wincent/js/tree/master/packages/isObject)               | Determines whether a value is an object                                      |
+| [@wincent/nullthrows](https://github.com/wincent/js/tree/master/packages/nullthrows)           | Fail fast in the face of an unexpected null value                            |
 | [@wincent/stableStringify](https://github.com/wincent/js/tree/master/packages/stableStringify) | Like JSON.stringify but produces stable output regardless of insertion order |
 
 This table may not necessarily stay up to date, so please check [the packages directory](https://github.com/wincent/js/tree/master/packages).
