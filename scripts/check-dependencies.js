@@ -7,7 +7,7 @@
 
 /**
  * Checks built packages prior to publishing to make sure their dependencies are
- * declared in their package.json files.
+ * correctly declared in their package.json files.
  */
 
 const fs = require('fs');
