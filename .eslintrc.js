@@ -6,16 +6,16 @@ module.exports = {
     node: true,
   },
   extends: 'eslint:recommended',
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaFeatures: {modules: true},
+    project: './tsconfig.json',
     sourceType: 'module',
   },
-  plugins: ['flowtype', 'notice'],
+  plugins: ['notice', '@typescript-eslint'],
   rules: {
-    'flowtype/define-flow-type': 1,
     'linebreak-style': ['error', 'unix'],
-    'no-unused-vars': ['error', {argsIgnorePattern: '^_'}],
+    'no-unused-vars': ['error', {argsIgnorePattern: '(^_)|^this$'}],
     'notice/notice': [
       'error',
       {
@@ -24,7 +24,7 @@ module.exports = {
         },
         mustMatch: 'Copyright \\(c\\) 20[1-9][0-9]-present Greg Hurrell',
         template:
-          '/**\n * @copyright Copyright (c) <%= YEAR %>-present Greg Hurrell\n * @flow strict\n * @license MIT\n */\n',
+          '/**\n * @copyright Copyright (c) <%= YEAR %>-present Greg Hurrell\n * @license MIT\n */\n',
       },
     ],
     quotes: ['error', 'single', {avoidEscape: true}],

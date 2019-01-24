@@ -1,6 +1,5 @@
 /**
  * @copyright Copyright (c) 2019-present Greg Hurrell
- * @flow strict
  * @license MIT
  */
 
@@ -79,7 +78,7 @@ it('omits object slots with undefined values', () => {
 });
 
 it('throws given a circular references', () => {
-  const circular = {a: {b: {c: {d: {}}}}};
+  const circular: any = {a: {b: {c: {d: {}}}}};
   circular.a.b.c.d.e = circular;
   expect(() => stableStringify(circular)).toThrow(TypeError);
 });

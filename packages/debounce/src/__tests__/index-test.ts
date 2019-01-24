@@ -1,6 +1,5 @@
 /**
  * @copyright Copyright (c) 2019-present Greg Hurrell
- * @flow strict
  * @license MIT
  */
 
@@ -9,7 +8,7 @@ import debounce from '..';
 jest.useFakeTimers();
 
 describe('debounce()', () => {
-  let fn;
+  let fn: ReturnType<typeof jest.fn>;
 
   beforeEach(() => {
     fn = jest.fn();
@@ -42,7 +41,7 @@ describe('debounce()', () => {
 
   it('uses the last-employed context when debouncing multiple calls', () => {
     let context;
-    const debounced = debounce(function() {
+    const debounced = debounce(function(this: {}) {
       context = this;
     }, 100);
     const context1 = {};

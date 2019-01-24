@@ -1,6 +1,5 @@
 /**
  * @copyright Copyright (c) 2019-present Greg Hurrell
- * @flow strict
  * @license MIT
  */
 
@@ -9,8 +8,8 @@
  * and reduces the indent level back to column 0.
  */
 export default function dedent(
-  strings: Array<string>,
-  ...interpolations: Array<mixed>
+  strings: TemplateStringsArray,
+  ...interpolations: unknown[]
 ) {
   // Insert interpolations in template.
   const output = strings.reduce((acc, string, i) => {

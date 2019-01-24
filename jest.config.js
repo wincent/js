@@ -1,16 +1,16 @@
 const {defaults} = require('jest-config');
 
 module.exports = {
-  moduleFileExtensions: [...defaults.moduleFileExtensions, 'mjs'],
+  moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts'],
   moduleNameMapper: {
     '@wincent/(.+)$': '<rootDir>packages/$1/src',
   },
-  testMatch: ['**/*-test.js', '**/*-test.mjs'],
+  testMatch: ['**/*-test.js', '**/*-test.ts'],
   testPathIgnorePatterns: [
     '<rootDir>/packages/[^/]+/lib/',
     '<rootDir>/packages/[^/]+/node_modules/',
   ],
   transform: {
-    '^.+\\.m?js$': './support/babel-jest-wrapper.js',
+    '^.+\\.[jt]s$': './support/babel-jest-wrapper.js',
   },
 };

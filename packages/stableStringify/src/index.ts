@@ -1,6 +1,5 @@
 /**
  * @copyright Copyright (c) 2019-present Greg Hurrell
- * @flow strict
  * @license MIT
  */
 
@@ -10,10 +9,10 @@ import isObject from '@wincent/isObject';
  * JSON.stringify output is dependent on insertion order, so we use this function
  * to ensure consistent output irrespective of insertion order.
  */
-export default function stableStringify(input: mixed): string | void {
+export default function stableStringify(input: unknown): string | void {
   const seen = new Set();
 
-  function stringify(mixed: mixed): string | void {
+  function stringify(mixed: unknown): string | void {
     if (seen.has(mixed)) {
       throw new TypeError('Converting circular structure to JSON');
     }
@@ -34,9 +33,10 @@ export default function stableStringify(input: mixed): string | void {
           })
           .filter(([_key, value]) => value !== undefined)
           .map(([key, value]) => {
-            // We know value !== undefined here,
-            // so stringify will return a string.
-            return JSON.stringify(key) + ':' + (stringify(value): $FlowIssue);
+            // We know value !== undefined here, so stringify will
+            // return a string.
+            const suffix = stringify(value) as string;
+            return JSON.stringify(key) + ':' + suffix;
           })
           .join(',') +
         '}'

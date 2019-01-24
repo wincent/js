@@ -9,7 +9,7 @@ module.exports = function(api) {
           // Avoid "ReferenceError: regeneratorRuntime is not defined"
           // in Jest runs that use async functions.
           ['@babel/preset-env', {targets: {node: 'current'}}],
-          '@babel/preset-flow',
+          ['@babel/preset-typescript', {isTSX: true, allExtensions: true}],
         ],
       },
       development: {
@@ -24,7 +24,10 @@ module.exports = function(api) {
             },
           ],
         ],
-        presets: [['@babel/preset-env', {}], '@babel/preset-flow'],
+        presets: [
+          ['@babel/preset-env', {}],
+          ['@babel/preset-typescript', {isTSX: true, allExtensions: true}],
+        ],
       },
       es: {
         plugins: [
@@ -40,7 +43,7 @@ module.exports = function(api) {
         ],
         presets: [
           ['@babel/preset-env', {modules: false, targets: {esmodules: true}}],
-          '@babel/preset-flow',
+          ['@babel/preset-typescript', {isTSX: true, allExtensions: true}],
         ],
       },
     },

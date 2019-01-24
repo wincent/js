@@ -9,25 +9,26 @@
     "@babel/parser": "*",
     "@babel/plugin-transform-runtime": "*",
     "@babel/preset-env": "*",
-    "@babel/preset-flow": "*",
+    "@babel/preset-typescript": "*",
     "@babel/traverse": "*",
+    "@types/jest": "23.3.13",
+    "@typescript-eslint/eslint-plugin": "*",
+    "@typescript-eslint/parser": "*",
     "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "*",
     "eslint": "*",
-    "eslint-plugin-flowtype": "*",
     "eslint-plugin-notice": "*",
-    "flow-bin": "*",
     "jest": "24.0.0-alpha.12",
-    "prettier": "*"
+    "prettier": "*",
+    "typescript": "3.2.4"
   },
   "scripts": {
     "build": "make -j 4 all",
-    "checkFormat": "prettier --list-different '.*.{js,json}' '*.{js,json,md}' 'packages/*/src/**/*.{js,json,mjs}' 'packages/*/*.{js,json,md}' 'scripts/*.js'",
-    "fix": "eslint --fix 'packages/*/src/**/*.{js,mjs}' 'scripts/*.js'",
-    "format": "prettier --write '.*.{js,json}' '*.{js,json,md}' 'packages/*/src/**/*.{js,json,mjs}' 'packages/*/*.{js,json,md}' 'scripts/*.js'",
-    "lint": "eslint 'packages/*/src/**/*.{js,mjs}' 'scripts/*.js'",
+    "checkFormat": "prettier --list-different '.*.{js,json}' '*.{js,json,md}' 'packages/*/src/**/*.{js,json,ts}' 'packages/*/*.{js,json,md}' 'scripts/*.js'",
+    "fix": "eslint --fix 'packages/*/src/**/*.{js,ts}' 'scripts/*.js'",
+    "format": "prettier --write '.*.{js,json}' '*.{js,json,md}' 'packages/*/src/**/*.{js,json,ts}' 'packages/*/*.{js,json,md}' 'scripts/*.js'",
+    "lint": "eslint 'packages/*/src/**/*.{js,ts}' 'scripts/*.js'",
     "prepublishOnly": "yarn checkFormat && yarn lint && yarn typecheck && yarn test && scripts/check-dependencies.js",
     "test": "env BABEL_ENV=jest jest",
-    "typecheck": "flow"
+    "typecheck": "tsc"
   }
 }
