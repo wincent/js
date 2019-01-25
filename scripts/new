@@ -50,11 +50,10 @@ if [ ! -e "$PACKAGE_DIR"/package.json ]; then
 fi
 
 NAME=$(echo "$PACKAGE" | sed -r 's/(-)(\w)/\U\2/g')
-if [ ! -e "$PACKAGE_DIR"/src/index.js ]; then
-  cat > "$PACKAGE_DIR"/src/index.js <<-HERE
+if [ ! -e "$PACKAGE_DIR"/src/index.ts ]; then
+  cat > "$PACKAGE_DIR"/src/index.ts <<-HERE
 		/**
 		 * @copyright Copyright (c) $(date '+%Y')-present Greg Hurrell
-		 * @flow strict
 		 * @license MIT
 		 */
 		
@@ -64,11 +63,22 @@ if [ ! -e "$PACKAGE_DIR"/src/index.js ]; then
 	HERE
 fi
 
-if [ ! -e "$PACKAGE_DIR"/src/__tests__/index-test.js ]; then
-  cat > "$PACKAGE_DIR"/src/__tests__/index-test.js <<-HERE
+if [ ! -e "$PACKAGE_DIR"/src/index.js.flow ]; then
+  cat > "$PACKAGE_DIR"/src/index.js.flow <<-HERE
 		/**
 		 * @copyright Copyright (c) $(date '+%Y')-present Greg Hurrell
 		 * @flow strict
+		 * @license MIT
+		 */
+		
+		declare export default function $NAME(t: T): T;
+	HERE
+fi
+
+if [ ! -e "$PACKAGE_DIR"/src/__tests__/index-test.ts ]; then
+  cat > "$PACKAGE_DIR"/src/__tests__/index-test.ts <<-HERE
+		/**
+		 * @copyright Copyright (c) $(date '+%Y')-present Greg Hurrell
 		 * @license MIT
 		 */
 
