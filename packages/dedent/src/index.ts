@@ -10,7 +10,7 @@
 export default function dedent(
   strings: TemplateStringsArray,
   ...interpolations: unknown[]
-) {
+): string {
   // Insert interpolations in template.
   const output = strings.reduce((acc, string, i) => {
     if (i < interpolations.length) {
