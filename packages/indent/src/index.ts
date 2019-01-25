@@ -6,7 +6,7 @@
 /**
  * Indent every line (except for empty lines) by `count` spaces.
  */
-export default function indent(text: string, count: number = 2) {
+export default function indent(text: string, count: number = 2): string {
   return text
     .split('\n')
     .map(line => {
