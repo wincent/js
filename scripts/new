@@ -81,7 +81,6 @@ if [ ! -e "$PACKAGE_DIR"/src/__tests__/index-test.ts ]; then
 		 * @copyright Copyright (c) $(date '+%Y')-present Greg Hurrell
 		 * @license MIT
 		 */
-
 		
 		import * as _ from '..';
 		
