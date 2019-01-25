@@ -4,7 +4,9 @@
   "description": "Fail fast in the face of an unexpected null value",
   "main": "lib/index.js",
   "module": "lib/index.mjs",
+  "types": "lib/index.d.ts",
   "files": [
+    "lib/index.d.ts",
     "lib/index.js",
     "lib/index.js.flow",
     "lib/index.mjs"

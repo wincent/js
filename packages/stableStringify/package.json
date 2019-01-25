@@ -4,7 +4,9 @@
   "description": "Like JSON.stringify but produces stable output regardless of insertion order",
   "main": "lib/index.js",
   "module": "lib/index.mjs",
+  "types": "lib/index.d.ts",
   "files": [
+    "lib/index.d.ts",
     "lib/index.js",
     "lib/index.js.flow",
     "lib/index.mjs"

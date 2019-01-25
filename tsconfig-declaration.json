@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "noEmit": false,
+    "isolatedModules": false
+  },
+  "extends": "./tsconfig",
+  "exclude": ["packages/*/src/**/__tests__/**/*.ts"]
+}
