@@ -1,0 +1,10 @@
+/**
+ * @copyright Copyright (c) 2019-present Greg Hurrell
+ * @flow strict
+ * @license MIT
+ */
+
+declare export default function debounce<T: Iterable<mixed>>(
+  fn: (...T) => void,
+  interval: number,
+): (...T) => void;

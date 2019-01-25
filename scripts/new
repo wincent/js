@@ -35,7 +35,9 @@ if [ ! -e "$PACKAGE_DIR"/package.json ]; then
 		  "main": "lib/index.js",
 		  "module": "lib/index.mjs",
 		  "files": [
-		    "lib/index.js"
+		    "lib/index.js",
+		    "lib/index.js.flow",
+		    "lib/index.mjs"
 		  ],
 		  "repository": "https://github.com/wincent/js/tree/master/packages/$PACKAGE",
 		  "author": "Greg Hurrell <greg@hurrell.net>",

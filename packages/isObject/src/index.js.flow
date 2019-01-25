@@ -1,0 +1,9 @@
+/**
+ * @copyright Copyright (c) 2019-present Greg Hurrell
+ * @flow strict
+ * @license MIT
+ */
+
+// This should be have a %checks predicate but I don't know how to make it work
+// for this case.
+declare export default function isObject(value: mixed): boolean;
