@@ -1,3 +1,8 @@
+/**
+ * @copyright Copyright (c) 2019-present Greg Hurrell
+ * @license MIT
+ */
+
 const {defaults} = require('jest-config');
 
 module.exports = {
