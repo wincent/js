@@ -4,24 +4,45 @@
  */
 
 /**
+ * Trims leading and trailing whitespace from the `input` string and
+ * reduces the indent level back to column 0.
+ *
+ * @overload
+ */
+export default function dedent(input: string): string;
+
+/**
  * Tagged template literal function that trims leading and trailing whitespace
  * and reduces the indent level back to column 0.
+ *
+ * @overload
  */
 export default function dedent(
   strings: TemplateStringsArray,
   ...interpolations: unknown[]
-): string {
-  // Insert interpolations in template.
-  const output = strings.reduce((acc, string, i) => {
-    if (i < interpolations.length) {
-      return acc + string + String(interpolations[i]);
-    } else {
-      return acc + string;
-    }
-  }, '');
+): string;
+
+export default function dedent(
+  stringOrStrings: any,
+  ...maybeInterpolations: any
+) {
+  let input;
+
+  if (Array.isArray(stringOrStrings)) {
+    // Insert interpolations in template.
+    input = stringOrStrings.reduce((acc, string, i) => {
+      if (i < maybeInterpolations.length) {
+        return acc + string + String(maybeInterpolations[i]);
+      } else {
+        return acc + string;
+      }
+    }, '');
+  } else {
+    input = stringOrStrings;
+  }
 
   // Collapse totally blank lines to empty strings.
-  const lines = output.split('\n').map(line => {
+  const lines = input.split('\n').map((line: string) => {
     if (line.match(/^\s+$/)) {
       return '';
     } else {
@@ -30,7 +51,7 @@ export default function dedent(
   });
 
   // Find minimum indent (ignoring empty lines).
-  const minimum = lines.reduce((acc, line) => {
+  const minimum = lines.reduce((acc: number, line: string) => {
     const indent = line.match(/^\s+/);
     if (indent) {
       const length = indent[0].length;
@@ -41,7 +62,7 @@ export default function dedent(
 
   // Strip out minimum indent from every line.
   const dedented = isFinite(minimum)
-    ? lines.map(line =>
+    ? lines.map((line: string) =>
         line.replace(new RegExp(`^${' '.repeat(minimum)}`, 'g'), ''),
       )
     : lines;
