@@ -2,6 +2,9 @@ PACKAGES := $(wildcard packages/*)
 
 all: $(PACKAGES) declarations
 
+clean:
+	rm -rf packages/*/lib/*
+
 declarations:
 	tsc --emitDeclarationOnly --declaration --project tsconfig-declaration.json
 	find packages -path 'packages/*/src/*' -and -name '*.d.ts' -and -not -path '*/node_modules/*' -exec bash -c 'mv "$$0" "$${0/\/src\///lib//}"' {} \;
