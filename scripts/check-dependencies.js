@@ -16,11 +16,10 @@ const {promisify} = require('util');
 const parser = require('@babel/parser');
 const traverse = require('@babel/traverse').default;
 const forEachPackage = require('./support/forEachPackage');
+const log = require('./support/log');
 
 const readdirAsync = promisify(fs.readdir);
 const readFileAsync = promisify(fs.readFile);
-
-const log = process.stdout.write.bind(process.stdout);
 
 async function* walk(directory, predicate = () => true) {
   const entries = await readdirAsync(directory, {withFileTypes: true});

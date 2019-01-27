@@ -11,6 +11,7 @@
 
 const {basename} = require('path');
 const forEachPackage = require('./support/forEachPackage');
+const log = require('./support/log');
 
 const graph = {};
 
@@ -21,7 +22,7 @@ async function main() {
       Object.entries(config.dependencies).forEach(([dependency, version]) => {
         if (dependency.startsWith('@wincent')) {
           const package = basename(dependency);
-          console.log(`${name} depends on ${package} v${version}`);
+          log(`${name} depends on ${package} v${version}`);
         }
       });
     }
