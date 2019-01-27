@@ -11,26 +11,16 @@
  */
 
 const fs = require('fs');
-const {basename, extname, join, resolve} = require('path');
+const {basename, extname, join} = require('path');
 const {promisify} = require('util');
 const parser = require('@babel/parser');
 const traverse = require('@babel/traverse').default;
+const forEachPackage = require('./support/forEachPackage');
 
 const readdirAsync = promisify(fs.readdir);
 const readFileAsync = promisify(fs.readFile);
 
 const log = process.stdout.write.bind(process.stdout);
-
-async function forEachPackage(callback) {
-  const packages = await readdirAsync('packages', {withFileTypes: true});
-  for (const pkg of packages) {
-    if (pkg.isDirectory()) {
-      const name = pkg.name.toString();
-      const config = getPackageConfig(name);
-      await callback(name, config);
-    }
-  }
-}
 
 async function* walk(directory, predicate = () => true) {
   const entries = await readdirAsync(directory, {withFileTypes: true});
@@ -57,10 +47,6 @@ async function forEachSourceFile(name, callback) {
   for await (const file of walk(directory, isSourceFile)) {
     await callback(file);
   }
-}
-
-function getPackageConfig(name) {
-  return require(resolve(join('packages', name, 'package.json')));
 }
 
 /**
