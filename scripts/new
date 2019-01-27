@@ -104,3 +104,13 @@ if [ ! -e "$PACKAGE_DIR"/src/__tests__/.eslintrc.js ]; then
 		};
 	HERE
 fi
+
+if [ ! -e "$PACKAGE_DIR"/CHANGELOG.md ]; then
+  cat > "$PACKAGE_DIR"/CHANGELOG.md <<-HERE
+		# Changes
+		
+		## 0.0.1 (master)
+		
+		- Initial release.
+	HERE
+fi
