@@ -14,5 +14,8 @@
   "repository": "https://github.com/wincent/js/tree/master/packages/nullthrows",
   "author": "Greg Hurrell <greg@hurrell.net>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "scripts": {
+    "prepublishOnly": "echo 'Run `yarn run publish nullthrows` from top-level'; echo; false"
+  }
 }

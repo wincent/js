@@ -15,6 +15,9 @@
   "author": "Greg Hurrell <greg@hurrell.net>",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "prepublishOnly": "echo 'Run `yarn run publish dedent` from top-level'; echo; false"
+  },
   "dependencies": {
     "@babel/runtime-corejs2": "7.3.1"
   }

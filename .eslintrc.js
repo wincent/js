@@ -15,7 +15,13 @@ module.exports = {
   plugins: ['notice', '@typescript-eslint'],
   rules: {
     'linebreak-style': ['error', 'unix'],
-    'no-unused-vars': ['error', {argsIgnorePattern: '(^_)|^this$'}],
+    'no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: '^_|^this$',
+        varsIgnorePattern: '^_',
+      },
+    ],
     'notice/notice': [
       'error',
       {

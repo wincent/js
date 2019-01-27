@@ -4,14 +4,10 @@
  */
 
 const fs = require('fs');
-const {join, resolve} = require('path');
 const {promisify} = require('util');
+const getPackageConfig = require('./getPackageConfig');
 
 const readdirAsync = promisify(fs.readdir);
-
-function getPackageConfig(name) {
-  return require(resolve(join('packages', name, 'package.json')));
-}
 
 /**
  * Execute `callback` in the context of each package in the monorepo.
