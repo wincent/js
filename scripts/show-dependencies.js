@@ -23,7 +23,7 @@ main(async () => {
       Object.entries(config.dependencies).forEach(([dependency, version]) => {
         if (dependency.startsWith('@wincent')) {
           const package = basename(dependency);
-          print(`${name} depends on ${package} v${version}\n`);
+          print.line(`${name} depends on ${package} v${version}`);
         }
       });
     }

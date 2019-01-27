@@ -3,6 +3,10 @@
  * @license MIT
  */
 
-const print = process.stdout.write.bind(process.stdout);
+function print(message) {
+  process.stdout.write(message != null ? message : '\n');
+}
+
+print.line = message => (message != null ? print(`${message}\n`) : print());
 
 module.exports = print;
