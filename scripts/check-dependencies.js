@@ -16,6 +16,7 @@ const {promisify} = require('util');
 const parser = require('@babel/parser');
 const traverse = require('@babel/traverse').default;
 const forEachPackage = require('./support/forEachPackage');
+const main = require('./support/main');
 const print = require('./support/print');
 
 const readdirAsync = promisify(fs.readdir);
@@ -228,11 +229,10 @@ async function checkDevelopmentDependencies() {
   return success;
 }
 
-async function main() {
+main(async () => {
   let success = await checkMissingDependencies();
   success &= await checkDependencyVersions();
   success &= await checkDevelopmentDependencies();
-  process.exit(success ? 0 : 1);
-}
 
-main();
+  return success ? 0 : 1;
+});

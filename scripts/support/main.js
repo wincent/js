@@ -1,0 +1,18 @@
+/**
+ * @copyright Copyright (c) 2019-present Greg Hurrell
+ * @license MIT
+ */
+
+const print = require('./print');
+
+process.on('unhandledRejection', error => {
+  print(`\nerror: ${error.message}\n`);
+  process.exit(1);
+});
+
+async function main(callback) {
+  const status = await callback();
+  process.exit(+status);
+}
+
+module.exports = main;

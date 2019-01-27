@@ -11,22 +11,21 @@
 
 const {basename} = require('path');
 const forEachPackage = require('./support/forEachPackage');
+const main = require('./support/main');
 const print = require('./support/print');
 
 const graph = {};
 
-async function main() {
+main(async () => {
   await forEachPackage(async (name, config) => {
     graph[name] = [];
     if (config.dependencies) {
       Object.entries(config.dependencies).forEach(([dependency, version]) => {
         if (dependency.startsWith('@wincent')) {
           const package = basename(dependency);
-          print(`${name} depends on ${package} v${version}`);
+          print(`${name} depends on ${package} v${version}\n`);
         }
       });
     }
   });
-}
-
-main();
+});
