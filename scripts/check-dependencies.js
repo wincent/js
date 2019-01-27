@@ -16,7 +16,7 @@ const {promisify} = require('util');
 const parser = require('@babel/parser');
 const traverse = require('@babel/traverse').default;
 const forEachPackage = require('./support/forEachPackage');
-const log = require('./support/log');
+const print = require('./support/print');
 
 const readdirAsync = promisify(fs.readdir);
 const readFileAsync = promisify(fs.readFile);
@@ -84,13 +84,13 @@ function recordDependency(moduleName, modules) {
  * Make sure built code explcitly declares its dependencies.
  */
 async function checkMissingDependencies() {
-  log('Checking for undeclared package dependencies:\n\n');
+  print('Checking for undeclared package dependencies:\n\n');
   const missing = {};
 
   await forEachPackage(async (name, config) => {
     const modules = new Set();
 
-    log(basename(`  ${name}: `));
+    print(basename(`  ${name}: `));
 
     await forEachSourceFile(name, async source => {
       const contents = await readFileAsync(source);
@@ -134,21 +134,21 @@ async function checkMissingDependencies() {
     }
 
     if (missing[name] && missing[name].length) {
-      log('MISSING\n');
-      missing[name].forEach(dependency => log(`    ${dependency}\n`));
+      print('MISSING\n');
+      missing[name].forEach(dependency => print(`    ${dependency}\n`));
     } else {
-      log('OK\n');
+      print('OK\n');
     }
   });
 
-  log('\n');
+  print('\n');
   const success = Object.keys(missing).length === 0;
   if (!success) {
-    log('Add missing dependencies with:\n\n');
+    print('Add missing dependencies with:\n\n');
     Object.entries(missing).forEach(([name, dependencies]) => {
-      log(`(cd packages/${name} && yarn add ${dependencies.join(' ')})\n`);
+      print(`(cd packages/${name} && yarn add ${dependencies.join(' ')})\n`);
     });
-    log('\n');
+    print('\n');
   }
   return success;
 }
@@ -157,7 +157,7 @@ async function checkMissingDependencies() {
  * Make sure packages require identical versions of common dependencies.
  */
 async function checkDependencyVersions() {
-  log('Checking for mismatched dependency versions:\n\n');
+  print('Checking for mismatched dependency versions:\n\n');
   const registry = {};
 
   let success = true;
@@ -179,21 +179,21 @@ async function checkDependencyVersions() {
   });
 
   for (const [dependency, versions] of Object.entries(registry)) {
-    log(`  ${dependency}:  `);
+    print(`  ${dependency}:  `);
     if (Object.keys(versions).length === 1) {
-      log('OK\n');
+      print('OK\n');
     } else {
       success = false;
-      log('BAD\n');
+      print('BAD\n');
       for (const [version, dependees] of Object.entries(versions)) {
         for (const dependee of dependees) {
-          log(`    ${dependee} -> ${version}\n`);
+          print(`    ${dependee} -> ${version}\n`);
         }
       }
     }
   }
 
-  log('\n');
+  print('\n');
   return success;
 }
 
@@ -201,28 +201,28 @@ async function checkDependencyVersions() {
  * Make sure devDependencies are only declared at the repository root.
  */
 async function checkDevelopmentDependencies() {
-  log('Checking for development dependencies in individual packages:\n\n');
+  print('Checking for development dependencies in individual packages:\n\n');
   let success = true;
   await forEachPackage((name, config) => {
-    log(`  ${name}: `);
+    print(`  ${name}: `);
     if (
       config.devDependencies &&
       Object.keys(config.devDependencies).length > 0
     ) {
       success = false;
-      log('BAD\n');
+      print('BAD\n');
       Object.keys(config.devDependencies).forEach(dependency => {
-        log(`    ${dependency}\n`);
+        print(`    ${dependency}\n`);
       });
     } else {
-      log('OK\n');
+      print('OK\n');
     }
   });
 
-  log('\n');
+  print('\n');
   if (!success) {
-    log('These dependencies should be migrated to the root-level package.json');
-    log('\n\n');
+    print('These dependencies should be migrated to the root-level package.json');
+    print('\n\n');
   }
 
   return success;
