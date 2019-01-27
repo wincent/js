@@ -10,9 +10,9 @@
  */
 
 const {basename} = require('path');
-const forEachPackage = require('./support/forEachPackage');
-const main = require('./support/main');
-const print = require('./support/print');
+const forEachPackage = require('./lib/forEachPackage');
+const main = require('./lib/main');
+const print = require('./lib/print');
 
 const graph = {};
 

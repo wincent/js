@@ -15,9 +15,9 @@ const {basename, extname, join} = require('path');
 const {promisify} = require('util');
 const parser = require('@babel/parser');
 const traverse = require('@babel/traverse').default;
-const forEachPackage = require('./support/forEachPackage');
-const main = require('./support/main');
-const print = require('./support/print');
+const forEachPackage = require('./lib/forEachPackage');
+const main = require('./lib/main');
+const print = require('./lib/print');
 
 const readdirAsync = promisify(fs.readdir);
 const readFileAsync = promisify(fs.readFile);
