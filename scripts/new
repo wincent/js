@@ -26,7 +26,12 @@ if [ ! -e "$PACKAGE_DIR"/lib/.gitignore ]; then
   cat > "$PACKAGE_DIR"/lib/.gitignore <<-HERE
 		*
 		!/.gitignore
+		!/.npmignore
 	HERE
+fi
+
+if [ ! -e "$PACKAGE_DIR"/lib/.npmignore ]; then
+  touch "$PACKAGE_DIR"/lib/.npmignore
 fi
 
 if [ ! -e "$PACKAGE_DIR"/package.json ]; then
