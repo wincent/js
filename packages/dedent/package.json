@@ -14,5 +14,8 @@
   "repository": "https://github.com/wincent/js/tree/master/packages/dedent",
   "author": "Greg Hurrell <greg@hurrell.net>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "@babel/runtime-corejs2": "7.3.1"
+  }
 }
