@@ -66,6 +66,18 @@ function withTemporaryDirectory(callback) {
   return callback(directory);
 }
 
+function input(prompt, initial = '') {
+  const promise = new Promise((resolve, _reject) => {
+    rl.question(`${prompt} `, resolve);
+  });
+  if (initial) {
+    rl.write(initial);
+  }
+  return promise;
+}
+
+let otp = '';
+
 main(async () => {
   const [_executable, _script, ...packages] = process.argv;
   if (!packages.length) {
@@ -98,9 +110,7 @@ main(async () => {
 
       print.line(`Publising version ${config.version}`);
 
-      const otp = await new Promise((resolve, _reject) => {
-        rl.question('Please enter a OTP token [up to recall prior]: ', resolve);
-      });
+      otp = await input('Please enter a OTP token:', otp);
       const stdout = run(
         'npm',
         ['publish', '--access', 'public', '--otp', otp],
@@ -109,6 +119,11 @@ main(async () => {
         },
       );
       print.line(stdout);
+      const tag = `${name}-${config.version}x`;
+      const yes = await input(`Create tag ${tag}? [y/n]`, 'y');
+      if (yes.match(/^\s*y(es?)?\s*/i)) {
+        run('git', ['tag', '-s', '-m', `${name} ${config.version} release`, tag]);
+      }
     });
   }
 
