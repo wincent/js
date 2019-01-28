@@ -8,6 +8,7 @@
 const {spawn, spawnSync} = require('child_process');
 const {writeFile} = require('fs');
 const {basename, join} = require('path');
+const readline = require('readline');
 const {promisify} = require('util');
 const getPackageConfig = require('./lib/getPackageConfig');
 const forEachPackage = require('./lib/forEachPackage');
@@ -15,6 +16,11 @@ const main = require('./lib/main');
 const print = require('./lib/print');
 
 const writeFileAsync = promisify(writeFile);
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
 async function getPackageNames() {
   const names = [];
@@ -70,7 +76,9 @@ main(async () => {
     return 1;
   }
 
-  await runPrepublishChecks();
+  if (!process.env.SKIP_CHECKS) {
+    await runPrepublishChecks();
+  }
 
   for (const name of packages) {
     await withTemporaryDirectory(async dirname => {
@@ -89,9 +97,29 @@ main(async () => {
       );
 
       print.line(`Publising version ${config.version}`);
-      run('npm', ['publish', '--access', 'public'], {
-        cwd: join(dirname, name),
+
+      const otp = await new Promise((resolve, _reject) => {
+        rl.question('Please enter a OTP token [up to recall prior]: ', resolve);
       });
+      const stdout = run(
+        'npm',
+        ['publish', '--access', 'public', '--otp', otp],
+        {
+          cwd: join(dirname, name),
+        },
+      );
+      print.line(stdout);
     });
   }
+
+  const summary = packages.length === 1 ? 'this one' : 'these';
+  const hyphens = '-'.repeat(summary.length);
+  print.line(
+    '\n' +
+      `---------------------------------------------------${hyphens}-\n` +
+      `Done. Publishing another package immediately after ${summary}?\n` +
+      'Run with `env SKIP_CHECKS=1`.\n' +
+      `---------------------------------------------------${hyphens}-\n`,
+  );
+  rl.close();
 });
