@@ -81,10 +81,18 @@ function recordDependency(moduleName, modules) {
   }
 }
 
+function getDependencies(config) {
+  return [
+    ...Object.entries(config.dependencies || {}),
+    ...Object.entries(config.devDependencies || {}),
+    ...Object.entries(config.peerDependencies || {}),
+  ];
+}
+
 /**
  * Make sure built code explcitly declares its dependencies.
  */
-async function checkMissingDependencies() {
+async function checkForMissingDependencies() {
   print.line('Checking for undeclared package dependencies:\n');
   const missing = {};
 
@@ -157,17 +165,13 @@ async function checkMissingDependencies() {
 /**
  * Make sure packages require identical versions of common dependencies.
  */
-async function checkDependencyVersions() {
+async function checkForMismatchedDependencyVersions() {
   print.line('Checking for mismatched dependency versions:\n');
   const registry = {};
 
   let success = true;
   await forEachPackage((name, config) => {
-    const dependencies = [
-      ...Object.entries(config.dependencies || {}),
-      ...Object.entries(config.devDependencies || {}),
-      ...Object.entries(config.peerDependencies || {}),
-    ];
+    const dependencies = getDependencies(config);
     dependencies.forEach(([dependency, version]) => {
       if (!registry[dependency]) {
         registry[dependency] = {};
@@ -201,7 +205,7 @@ async function checkDependencyVersions() {
 /**
  * Make sure devDependencies are only declared at the repository root.
  */
-async function checkDevelopmentDependencies() {
+async function checkForDevelopmentDependencies() {
   print.line('Checking for development dependencies in individual packages:\n');
   let success = true;
   await forEachPackage((name, config) => {
@@ -231,10 +235,56 @@ async function checkDevelopmentDependencies() {
   return success;
 }
 
-main(async () => {
-  let success = await checkMissingDependencies();
-  success &= await checkDependencyVersions();
-  success &= await checkDevelopmentDependencies();
+/**
+ * Make sure internal dependencies always use the current (latest) versions.
+ */
+async function checkForNonCurrentInternalDependencies() {
+  print.line('Checking for non-current internal dependencies:\n');
+  const packages = {};
+  await forEachPackage((name, config) => {
+    const dependencies = getDependencies(config);
+    packages[name] = {
+      dependencies,
+      version: config.version,
+    };
+  });
 
+  const internalPackagePrefix = '@wincent/';
+  let success = true;
+
+  Object.entries(packages).forEach(([name, {dependencies}]) => {
+    print(`  ${name}: `);
+    const outdated = [];
+    dependencies.forEach(([dependency, version]) => {
+      const name = extractDependencyName(dependency);
+      if (name) {
+        if (name.startsWith(internalPackagePrefix)) {
+          const suffix = name.slice(internalPackagePrefix.length);
+          if (version !== packages[suffix].version) {
+            outdated.push([suffix, version, packages[suffix].version]);
+          }
+        }
+      }
+    });
+    if (outdated.length) {
+      success = false;
+      print.line('BAD');
+      for (const [dependency, actual, desired] of outdated) {
+        print.line(`    ${dependency}: ${actual} != ${desired}`);
+      }
+    } else {
+      print.line('OK');
+    }
+  });
+
+  print();
+  return success;
+}
+
+main(async () => {
+  let success = await checkForMissingDependencies();
+  success &= await checkForMismatchedDependencyVersions();
+  success &= await checkForDevelopmentDependencies();
+  success &= await checkForNonCurrentInternalDependencies();
   return success ? 0 : 1;
 });
