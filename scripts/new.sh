@@ -10,6 +10,11 @@ if [ $# -ne 1 ]; then
   exit 1
 fi
 
+if [[ $1 =~ [A-Z] ]]; then
+  echo "error: NPM packages may not contain uppercase letters"
+  exit 1
+fi
+
 PACKAGE=$1
 PACKAGE_DIR="packages/$PACKAGE"
 
