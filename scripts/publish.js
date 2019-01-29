@@ -122,7 +122,13 @@ main(async () => {
       const tag = `${name}-${config.version}x`;
       const yes = await input(`Create tag ${tag}? [y/n]`, 'y');
       if (yes.match(/^\s*y(es?)?\s*/i)) {
-        run('git', ['tag', '-s', '-m', `${name} ${config.version} release`, tag]);
+        run('git', [
+          'tag',
+          '-s',
+          '-m',
+          `${name} ${config.version} release`,
+          tag,
+        ]);
       }
     });
   }
