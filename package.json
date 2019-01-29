@@ -28,7 +28,7 @@
     "fix": "eslint --fix 'packages/*/src/**/*.{js,ts}' 'scripts/**/*.js'",
     "format": "prettier --write '.*.{js,json}' '*.{js,json,md}' 'packages/*/src/**/*.{js,js.flow,json,ts}' 'packages/*/*.{js,json,md}' 'scripts/**/*.js'",
     "lint": "eslint 'packages/*/src/**/*.{js,ts}' 'scripts/**/*.js'",
-    "prepublishOnly": "yarn checkFormat && yarn lint && yarn typecheck && yarn test && scripts/check-dependencies.js && yarn build && git diff --quiet",
+    "prepublishOnly": "yarn checkFormat && yarn lint && yarn typecheck && yarn test && scripts/check-dependencies.js && yarn build && scripts/check-changelogs.js && git diff --quiet",
     "publish": "scripts/publish.js",
     "test": "env BABEL_ENV=jest jest",
     "typecheck": "tsc && flow"
