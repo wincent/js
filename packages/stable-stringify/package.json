@@ -1,5 +1,5 @@
 {
-  "name": "@wincent/stableStringify",
+  "name": "@wincent/stable-stringify",
   "version": "0.0.1",
   "description": "Like JSON.stringify but produces stable output regardless of insertion order",
   "main": "lib/index.js",
@@ -11,15 +11,15 @@
     "lib/index.js.flow",
     "lib/index.mjs"
   ],
-  "repository": "https://github.com/wincent/js/tree/master/packages/stableStringify",
+  "repository": "https://github.com/wincent/js/tree/master/packages/stable-stringify",
   "author": "Greg Hurrell <greg@hurrell.net>",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "prepublishOnly": "echo 'Run `yarn run publish stableStringify` from top-level'; echo; false"
+    "prepublishOnly": "echo 'Run `yarn run publish stable-stringify` from top-level'; echo; false"
   },
   "dependencies": {
     "@babel/runtime-corejs2": "7.3.1",
-    "@wincent/isObject": "0.0.1"
+    "@wincent/is-object": "0.0.1"
   }
 }

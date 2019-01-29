@@ -19,16 +19,16 @@ This is an experiment aimed at exploring the trade-offs involved in moving a bun
 
 ## Package listing
 
-| Package                                                                                        | Description                                                                  |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| [@wincent/debounce](https://github.com/wincent/js/tree/master/packages/debounce)               | Simple debounce implementation                                               |
-| [@wincent/dedent](https://github.com/wincent/js/tree/master/packages/dedent)                   | Dedenting utility                                                            |
-| [@wincent/delay](https://github.com/wincent/js/tree/master/packages/delay)                     | A function that returns a promise that resolves after a delay                |
-| [@wincent/escapeHTML](https://github.com/wincent/js/tree/master/packages/escapeHTML)           | Escapes unsafe characters in HTML                                            |
-| [@wincent/indent](https://github.com/wincent/js/tree/master/packages/indent)                   | Indenting utility                                                            |
-| [@wincent/isObject](https://github.com/wincent/js/tree/master/packages/isObject)               | Determines whether a value is an object                                      |
-| [@wincent/nullthrows](https://github.com/wincent/js/tree/master/packages/nullthrows)           | Fail fast in the face of an unexpected null value                            |
-| [@wincent/stableStringify](https://github.com/wincent/js/tree/master/packages/stableStringify) | Like JSON.stringify but produces stable output regardless of insertion order |
+| Package                                                                                          | Description                                                                  |
+| ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| [@wincent/debounce](https://github.com/wincent/js/tree/master/packages/debounce)                 | Simple debounce implementation                                               |
+| [@wincent/dedent](https://github.com/wincent/js/tree/master/packages/dedent)                     | Dedenting utility                                                            |
+| [@wincent/delay](https://github.com/wincent/js/tree/master/packages/delay)                       | A function that returns a promise that resolves after a delay                |
+| [@wincent/escape-html](https://github.com/wincent/js/tree/master/packages/escape-html)           | Escapes unsafe characters in HTML                                            |
+| [@wincent/indent](https://github.com/wincent/js/tree/master/packages/indent)                     | Indenting utility                                                            |
+| [@wincent/is-object](https://github.com/wincent/js/tree/master/packages/is-object)               | Determines whether a value is an object                                      |
+| [@wincent/nullthrows](https://github.com/wincent/js/tree/master/packages/nullthrows)             | Fail fast in the face of an unexpected null value                            |
+| [@wincent/stable-stringify](https://github.com/wincent/js/tree/master/packages/stable-stringify) | Like JSON.stringify but produces stable output regardless of insertion order |
 
 This table may not necessarily stay up to date, so please check [the packages directory](https://github.com/wincent/js/tree/master/packages).
 

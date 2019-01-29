@@ -3,7 +3,7 @@
  * @license MIT
  */
 
-import isObject from '@wincent/isObject';
+import isObject from '@wincent/is-object';
 
 /**
  * JSON.stringify output is dependent on insertion order, so we use this function
