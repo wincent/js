@@ -1,0 +1,21 @@
+{
+  "name": "@wincent/clamp",
+  "version": "0.0.1",
+  "description": "Clamps a numerical value between a minimum and a maximum",
+  "main": "lib/index.js",
+  "module": "lib/index.mjs",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/index.js",
+    "lib/index.js.flow",
+    "lib/index.mjs",
+    "lib/index.ts"
+  ],
+  "repository": "https://github.com/wincent/js/tree/master/packages/clamp",
+  "author": "Greg Hurrell <greg@hurrell.net>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "prepublishOnly": "echo 'Run `yarn publish clamp` from top-level'; false"
+  }
+}
