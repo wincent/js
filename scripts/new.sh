@@ -59,7 +59,7 @@ if [ ! -e "$PACKAGE_DIR"/package.json ]; then
 		  "license": "MIT",
 		  "private": false,
 		  "scripts": {
-		    "prepublishOnly": "echo 'Run `yarn publish $PACKAGE` from top-level'; false"
+		    "prepublishOnly": "echo 'Run \`yarn publish $PACKAGE\` from top-level'; false"
 		  }
 		}
 	HERE
