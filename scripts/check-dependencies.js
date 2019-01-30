@@ -286,5 +286,5 @@ main(async () => {
   success &= await checkForMismatchedDependencyVersions();
   success &= await checkForDevelopmentDependencies();
   success &= await checkForNonCurrentInternalDependencies();
-  return success;
+  return !!success;
 });
