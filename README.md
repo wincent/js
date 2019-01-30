@@ -21,7 +21,8 @@ This is an experiment aimed at exploring the trade-offs involved in moving a bun
 
 | Package                                                                                          | Description                                                                  |
 | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
-| [@wincent/debounce](https://github.com/wincent/js/tree/master/packages/debounce)                 | Simple debounce implementation                                               |
+| [@wincent/clamp](https://github.com/wincent/js/tree/master/packages/clamp)                       | Simple debounce implementation                                               |
+| [@wincent/debounce](https://github.com/wincent/js/tree/master/packages/debounce)                 | Clamps a numerical value between a minimum and a maximum                     |
 | [@wincent/dedent](https://github.com/wincent/js/tree/master/packages/dedent)                     | Dedenting utility                                                            |
 | [@wincent/delay](https://github.com/wincent/js/tree/master/packages/delay)                       | A function that returns a promise that resolves after a delay                |
 | [@wincent/escape-html](https://github.com/wincent/js/tree/master/packages/escape-html)           | Escapes unsafe characters in HTML                                            |
