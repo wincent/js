@@ -46,5 +46,6 @@ main(async () => {
       );
     }
   });
+  print();
   return success;
 });

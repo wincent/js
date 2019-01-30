@@ -12,7 +12,13 @@ process.on('unhandledRejection', error => {
 
 async function main(callback) {
   const status = await callback();
-  process.exit(+status);
+  if (typeof status === 'number') {
+    process.exit(status);
+  } else if (status == null) {
+    process.exit(0);
+  } else {
+    process.exit(status ? 0 : 1);
+  }
 }
 
 module.exports = main;
