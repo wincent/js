@@ -17,4 +17,4 @@ declare export default class EventEmitter {
   once(event: string, callback: EventEmitterCallback): Subscription;
 
   removeAllListeners(event: string): void;
-};
+}
