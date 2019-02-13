@@ -22,11 +22,13 @@ export default function dedent(
   ...interpolations: unknown[]
 ): string;
 
+export default function dedent(string: string): string;
+
 export default function dedent(
   stringOrStrings: any,
-  ...maybeInterpolations: any
+  ...maybeInterpolations: unknown[]
 ) {
-  let input;
+  let input: string;
 
   if (Array.isArray(stringOrStrings)) {
     // Insert interpolations in template.
