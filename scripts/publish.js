@@ -140,6 +140,16 @@ main(async () => {
       `---------------------------------------------------${hyphens}-\n` +
       `Done. Publishing another package immediately after ${summary}?\n` +
       'Run with `env SKIP_CHECKS=1`.\n' +
+      '\n' +
+      'If you have finished, run:\n' +
+      '\n' +
+      '    git push origin --follow-tags\n' +
+      '    git push github --follow-tags\n' +
+      '\n' +
+      'And edit the release notes at:\n' +
+      '\n' +
+      '    https://github.com/wincent/js/releases\n' +
+      '\n' +
       `---------------------------------------------------${hyphens}-\n`,
   );
   rl.close();
