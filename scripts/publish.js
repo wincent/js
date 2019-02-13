@@ -112,7 +112,7 @@ main(async () => {
 
       otp = await input('Please enter a OTP token:', otp);
       const stdout = run(
-        'npm',
+        'yarn',
         ['publish', '--access', 'public', '--otp', otp],
         {
           cwd: join(dirname, name),
