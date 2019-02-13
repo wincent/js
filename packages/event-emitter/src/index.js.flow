@@ -1,0 +1,20 @@
+/**
+ * @copyright Copyright (c) 2019-present Greg Hurrell
+ * @flow strict
+ * @license MIT
+ */
+
+type EventEmitterCallback = (string, ...Iterable<mixed>) => void;
+type Subscription = {|
+  +release: () => void,
+|};
+
+declare export default class EventEmitter {
+  emit(event: string, ...args: Array<mixed>): void;
+
+  on(event: string, callback: EventEmitterCallback): Subscription;
+
+  once(event: string, callback: EventEmitterCallback): Subscription;
+
+  removeAllListeners(event: string): void;
+};
