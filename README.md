@@ -26,6 +26,7 @@ This is an experiment aimed at exploring the trade-offs involved in moving a bun
 | [@wincent/dedent](https://github.com/wincent/js/tree/master/packages/dedent)                     | Dedenting utility                                                            |
 | [@wincent/delay](https://github.com/wincent/js/tree/master/packages/delay)                       | A function that returns a promise that resolves after a delay                |
 | [@wincent/escape-html](https://github.com/wincent/js/tree/master/packages/escape-html)           | Escapes unsafe characters in HTML                                            |
+| [@wincent/event-emitter](https://github.com/wincent/js/tree/master/packages/event-emitter)       | Simple event emitter                                                         |
 | [@wincent/indent](https://github.com/wincent/js/tree/master/packages/indent)                     | Indenting utility                                                            |
 | [@wincent/is-object](https://github.com/wincent/js/tree/master/packages/is-object)               | Determines whether a value is an object                                      |
 | [@wincent/nullthrows](https://github.com/wincent/js/tree/master/packages/nullthrows)             | Fail fast in the face of an unexpected null value                            |
