@@ -11,16 +11,16 @@
     "@babel/preset-env": "*",
     "@babel/preset-typescript": "*",
     "@babel/traverse": "*",
-    "@types/jest": "23.3.13",
+    "@types/jest": "*",
+    "@types/jest-diff": "*",
     "@typescript-eslint/eslint-plugin": "*",
     "@typescript-eslint/parser": "*",
-    "babel-core": "7.0.0-bridge.0",
     "eslint": "*",
     "eslint-plugin-notice": "*",
     "flow-bin": "*",
-    "jest": "24.0.0-alpha.12",
+    "jest": "*",
     "prettier": "*",
-    "typescript": "3.2.4"
+    "typescript": "*"
   },
   "scripts": {
     "build": "make -j 4 all",
