@@ -8,7 +8,7 @@ type CallbackMap = Map<number, EventEmitterCallback>;
 type EventMap = Map<string, CallbackMap>;
 
 type Subscription = {
-  release: () => void;
+  readonly release: () => void;
 };
 
 /**
