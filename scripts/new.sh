@@ -133,7 +133,16 @@ if [ ! -e "$PACKAGE_DIR"/package.json ]; then
 		  "license": "MIT",
 		  "private": false,
 		  "scripts": {
+		    "format": "workspace-scripts format invariant",
+		    "format:check": "workspace-scripts format:check invariant",
+		    "lint": "workspace-scripts lint invariant",
+		    "lint:fix": "workspace-scripts lint:fix:check invariant",
 		    "prepublishOnly": "echo 'Run \`yarn publish $PACKAGE\` from top-level'; false"
+		    "test": "workspace-scripts test invariant",
+		    "test:watch": "workspace-scripts test invariant",
+		    "typecheck": "workspace-scripts typecheck",
+		    "typecheck:flow": "workspace-scripts typecheck:flow",
+		    "typecheck:ts": "workspace-scripts typecheck:ts"
 		  }
 		}
 	HERE
