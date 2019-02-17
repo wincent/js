@@ -78,11 +78,7 @@ function extractDependencyName(moduleName) {
  * Dependencies that don't need to be explicited recorded because they are
  * implicit. Basically, that means NodeJS built-in modules.
  */
-const BUILT_IN_DEPENDENCY_WHITELIST = new Set([
-  'child_process',
-  'fs',
-  'path',
-]);
+const BUILT_IN_DEPENDENCY_WHITELIST = new Set(['child_process', 'fs', 'path']);
 
 function recordDependency(moduleName, modules) {
   const dependency = extractDependencyName(moduleName);
