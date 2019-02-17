@@ -145,7 +145,7 @@ if [ ! -e "$PACKAGE_DIR"/package.json ]; then
 		    "typecheck:ts": "workspace-scripts typecheck:ts"
 		  },
 		  "devDependencies": {
-		    "@wincent/workspace-scripts": "*"
+		    "@wincent/workspace-scripts": "0.0.1"
 		  },
 		}
 	HERE

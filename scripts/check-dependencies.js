@@ -74,9 +74,19 @@ function extractDependencyName(moduleName) {
   return match ? match[0] : null;
 }
 
+/**
+ * Dependencies that don't need to be explicited recorded because they are
+ * implicit. Basically, that means NodeJS built-in modules.
+ */
+const BUILT_IN_DEPENDENCY_WHITELIST = new Set([
+  'child_process',
+  'fs',
+  'path',
+]);
+
 function recordDependency(moduleName, modules) {
   const dependency = extractDependencyName(moduleName);
-  if (dependency) {
+  if (dependency && !BUILT_IN_DEPENDENCY_WHITELIST.has(dependency)) {
     modules.add(dependency);
   }
 }
@@ -202,6 +212,8 @@ async function checkForMismatchedDependencyVersions() {
   return success;
 }
 
+const DEV_DEPENDENCY_WHITELIST = new Set(['@wincent/workspace-scripts']);
+
 /**
  * Make sure devDependencies are only declared at the repository root.
  */
@@ -210,13 +222,13 @@ async function checkForDevelopmentDependencies() {
   let success = true;
   await forEachPackage((name, config) => {
     print(`  ${name}: `);
-    if (
-      config.devDependencies &&
-      Object.keys(config.devDependencies).length > 0
-    ) {
+    const devDependencies = Object.keys(config.devDependencies || {}).filter(
+      dependency => !DEV_DEPENDENCY_WHITELIST.has(dependency),
+    );
+    if (devDependencies.length) {
       success = false;
       print.line('BAD');
-      Object.keys(config.devDependencies).forEach(dependency => {
+      devDependencies.forEach(dependency => {
         print.line(`    ${dependency}`);
       });
     } else {

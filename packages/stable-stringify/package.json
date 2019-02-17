@@ -32,6 +32,6 @@
     "@wincent/is-object": "0.0.1"
   },
   "devDependencies": {
-    "@wincent/workspace-scripts": "*"
+    "@wincent/workspace-scripts": "0.0.1"
   }
 }

@@ -30,5 +30,8 @@
     "typecheck": "./bin/index.js typecheck",
     "typecheck:flow": "./bin/index.js typecheck:flow",
     "typecheck:ts": "./bin/index.js typecheck:ts"
+  },
+  "dependencies": {
+    "@babel/runtime-corejs2": "7.3.1"
   }
 }
