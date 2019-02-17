@@ -236,20 +236,11 @@ function getLintGlobs(packages: string[]) {
 }
 
 function lint(packages: string[], extraArgs: string[]) {
-  return run(
-    'eslint',
-    ...extraArgs,
-    ...getLintGlobs(packages),
-  );
+  return run('eslint', ...extraArgs, ...getLintGlobs(packages));
 }
 
 function lintFix(packages: string[], extraArgs: string[]) {
-  return run(
-    'eslint',
-    '--fix',
-    ...extraArgs,
-    ...getLintGlobs(packages),
-  );
+  return run('eslint', '--fix', ...extraArgs, ...getLintGlobs(packages));
 }
 
 function test(packages: string[], extraArgs: string[]) {}
@@ -261,9 +252,25 @@ async function typecheck(packages: string[], extraArgs: string[]) {
   await typecheckFlow(packages, extraArgs);
 }
 
-function typecheckFlow(packages: string[], extraArgs: string[]) {}
+function typecheckFlow(packages: string[], extraArgs: string[]) {
+  checkTypecheckPackages(packages);
+  return run('flow', ...extraArgs);
+}
 
-function typecheckTS(packages: string[], extraArgs: string[]) {}
+function typecheckTS(packages: string[], extraArgs: string[]) {
+  return run('tsc', ...extraArgs);
+}
+
+function checkTypecheckPackages(packages: string[]) {
+  const {length} = packages;
+  if (length) {
+    print(
+      `info: ignoring package argument${length > 1 ? 's' : ''} (${packages.join(
+        ', ',
+      )}) - typechecking cannot be scoped to individual packages`,
+    );
+  }
+}
 
 export async function main() {
   const {subcommands, packages, extraArgs, root} = parseArgs(process.argv);
