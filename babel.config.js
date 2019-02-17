@@ -33,6 +33,10 @@ function getMinifyReplaceConfig(environment) {
   ];
 }
 
+const commentOptions = {
+  shouldPrintComment: value => /@license|@preserve/.test(value),
+};
+
 module.exports = function(api) {
   api.cache(false);
 
@@ -48,6 +52,7 @@ module.exports = function(api) {
         ],
       },
       development: {
+        ...commentOptions,
         plugins: [
           getMinifyReplaceConfig('development'),
           [
@@ -66,6 +71,7 @@ module.exports = function(api) {
         ],
       },
       production: {
+        ...commentOptions,
         plugins: [
           getMinifyReplaceConfig('production'),
           [
@@ -85,6 +91,7 @@ module.exports = function(api) {
         ],
       },
       es: {
+        ...commentOptions,
         plugins: [
           getMinifyReplaceConfig('production'),
           [
