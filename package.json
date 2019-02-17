@@ -16,6 +16,7 @@
     "@typescript-eslint/eslint-plugin": "*",
     "@typescript-eslint/parser": "*",
     "eslint": "*",
+    "eslint-plugin-node": "*",
     "eslint-plugin-notice": "*",
     "flow-bin": "*",
     "jest": "*",

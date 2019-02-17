@@ -76,6 +76,34 @@ if [ "$BIN" = "true" ]; then
 			require('../lib').main();
 		HERE
   fi
+
+  if [ ! -e "$PACKAGE_DIR"/bin/.eslintrc.js ]; then
+    cat > "$PACKAGE_DIR"/bin/.eslintrc.js <<-HERE
+			module.exports = {
+			  env: {
+			    browser: false,
+			    commonjs: false,
+			    es6: false,
+			    node: true,
+			  },
+			  extends: ['eslint:recommended', 'plugin:node/recommended'],
+			  parserOptions: {
+			    ecmaVersion: 5,
+			    ecmaFeatures: {modules: false},
+			    sourceType: 'script',
+			  },
+			  rules: {
+			    'node/no-unsupported-features/es-syntax': [
+			      'error',
+			      {
+			        version: '>=6.0.0',
+			        ignores: [],
+			      },
+			    ],
+			  },
+			};
+		HERE
+  fi
 else
   set +e
   read -r -d '' BINARIES <<-HERE
