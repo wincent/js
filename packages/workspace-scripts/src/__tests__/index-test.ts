@@ -3,10 +3,10 @@
  * @license MIT
  */
 
-import * as _ from '..';
+import {main} from '..';
 
-describe('', () => {
-  it('', () => {
-    expect(!!_).toBe(true);
+describe('main()', () => {
+  it('is a function', () => {
+    expect(typeof main).toBe('function');
   });
 });
