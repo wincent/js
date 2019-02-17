@@ -15,8 +15,10 @@ if [[ $1 =~ [A-Z] ]]; then
   exit 1
 fi
 
+BOOL=true
 PACKAGE=$1
 PACKAGE_DIR="packages/$PACKAGE"
+COPYRIGHT_YEAR=$(date '+%Y')
 
 mkdir -p "$PACKAGE_DIR"/{lib,src}
 mkdir -p "$PACKAGE_DIR"/src/__tests__
@@ -39,12 +41,56 @@ if [ ! -e "$PACKAGE_DIR"/lib/.npmignore ]; then
   touch "$PACKAGE_DIR"/lib/.npmignore
 fi
 
+if [ ! -d "$PACKAGE_DIR/bin" ]; then
+  read -p 'Add a "bin" executable? (y/n) [n] ' BIN
+fi
+
+case "${BIN:-n}" in
+  y|ye|yes|Y|YE|YES)
+    BIN=true
+    ;;
+  *)
+    BIN=false
+    ;;
+esac
+
+if [ "$BIN" = "true" ]; then
+  set +e
+  read -r -d '' BINARIES <<-HERE
+	  "bin": {
+	    "$PACKAGE": "bin/index.js"
+	  },
+	HERE
+  set -e
+
+  mkdir -p "$PACKAGE_DIR/bin"
+  if [ ! -e "$PACKAGE_DIR"/bin/index.js ]; then
+    cat > "$PACKAGE_DIR"/bin/index.js <<-HERE
+			#!/usr/bin/env node
+			
+			/**
+			 * @copyright Copyright (c) 2019-present Greg Hurrell
+			 * @license MIT
+			 */
+			
+			require('../lib').main();
+		HERE
+  fi
+else
+  set +e
+  read -r -d '' BINARIES <<-HERE
+	  "bin": {},
+	HERE
+  set -e
+fi
+
 if [ ! -e "$PACKAGE_DIR"/package.json ]; then
   cat > "$PACKAGE_DIR"/package.json <<-HERE
 		{
 		  "name": "@wincent/$PACKAGE",
 		  "version": "0.0.1",
 		  "description": "A JavaScript package",
+		  $BINARIES
 		  "main": "lib/index.js",
 		  "module": "lib/index.mjs",
 		  "types": "lib/index.d.ts",
@@ -69,7 +115,7 @@ NAME=$(echo "$PACKAGE" | sed -r 's/(-)(\w)/\U\2/g')
 if [ ! -e "$PACKAGE_DIR"/src/index.ts ]; then
   cat > "$PACKAGE_DIR"/src/index.ts <<-HERE
 		/**
-		 * @copyright Copyright (c) $(date '+%Y')-present Greg Hurrell
+		 * @copyright Copyright (c) $COPYRIGHT_YEAR-present Greg Hurrell
 		 * @license MIT
 		 */
 		
@@ -82,7 +128,7 @@ fi
 if [ ! -e "$PACKAGE_DIR"/src/index.js.flow ]; then
   cat > "$PACKAGE_DIR"/src/index.js.flow <<-HERE
 		/**
-		 * @copyright Copyright (c) $(date '+%Y')-present Greg Hurrell
+		 * @copyright Copyright (c) $COPYRIGHT_YEAR-present Greg Hurrell
 		 * @flow strict
 		 * @license MIT
 		 */
@@ -94,7 +140,7 @@ fi
 if [ ! -e "$PACKAGE_DIR"/src/__tests__/index-test.ts ]; then
   cat > "$PACKAGE_DIR"/src/__tests__/index-test.ts <<-HERE
 		/**
-		 * @copyright Copyright (c) $(date '+%Y')-present Greg Hurrell
+		 * @copyright Copyright (c) $COPYRIGHT_YEAR-present Greg Hurrell
 		 * @license MIT
 		 */
 		
