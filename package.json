@@ -11,11 +11,16 @@
     "@babel/preset-env": "*",
     "@babel/preset-typescript": "*",
     "@babel/traverse": "*",
+    "@types/babel__core": "*",
+    "@types/babel__traverse": "*",
     "@types/jest": "*",
     "@types/jest-diff": "*",
     "@types/node": "*",
     "@typescript-eslint/eslint-plugin": "*",
     "@typescript-eslint/parser": "*",
+    "babel-jest": "*",
+    "babel-plugin-minify-replace": "*",
+    "babel-preset-minify": "*",
     "eslint": "*",
     "eslint-plugin-node": "*",
     "eslint-plugin-notice": "*",
@@ -38,10 +43,5 @@
     "typecheck": "workspace-scripts typecheck",
     "typecheck:flow": "workspace-scripts typecheck:flow",
     "typecheck:ts": "workspace-scripts typecheck:ts"
-  },
-  "devDependencies": {
-    "babel-jest": "*",
-    "babel-plugin-minify-replace": "*",
-    "babel-preset-minify": "*"
   }
 }
