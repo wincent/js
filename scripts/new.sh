@@ -113,6 +113,11 @@ else
 fi
 
 if [ ! -e "$PACKAGE_DIR"/package.json ]; then
+  if command -v jq; then
+    SCRIPTS_VERSION=$(jq .version packages/workspace-scripts/package.json)
+  else
+    SCRIPTS_VERSION='*'
+  fi
   cat > "$PACKAGE_DIR"/package.json <<-HERE
 		{
 		  "name": "@wincent/$PACKAGE",
@@ -146,7 +151,7 @@ if [ ! -e "$PACKAGE_DIR"/package.json ]; then
 		    "typecheck:ts": "workspace-scripts typecheck:ts"
 		  },
 		  "devDependencies": {
-		    "@wincent/workspace-scripts": "0.0.1"
+		    "@wincent/workspace-scripts": "$SCRIPTS_VERSION"
 		  },
 		}
 	HERE
