@@ -12,5 +12,6 @@
       "@wincent/*": ["*/src"]
     }
   },
+  "files": ["types/global.d.ts"],
   "include": ["packages/*/src/**/*.ts"]
 }

@@ -1,0 +1,11 @@
+/**
+ * @copyright Copyright (c) 2019-present Greg Hurrell
+ * @flow strict
+ * @license MIT
+ */
+
+declare export default function invariant(
+  condition: mixed,
+  format?: string,
+  ...args: Array<mixed>
+): void;

@@ -1,0 +1,34 @@
+{
+  "name": "@wincent/invariant",
+  "version": "0.0.1",
+  "description": "Enforces an invariant",
+  "main": "lib/index.js",
+  "module": "lib/index.mjs",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/index.js",
+    "lib/index.js.flow",
+    "lib/index.mjs",
+    "lib/index.ts"
+  ],
+  "repository": "https://github.com/wincent/js/tree/master/packages/invariant",
+  "author": "Greg Hurrell <greg@hurrell.net>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "cd ../.. && make -j 4 all PACKAGES=packages/invariant",
+    "format": "workspace-scripts format invariant",
+    "format:check": "workspace-scripts format:check invariant",
+    "lint": "workspace-scripts lint invariant",
+    "lint:fix": "workspace-scripts lint:fix:check invariant",
+    "prepublishOnly": "echo 'Run `yarn publish invariant` from top-level'; false",
+    "test": "workspace-scripts test invariant",
+    "test:watch": "workspace-scripts test invariant",
+    "typecheck": "workspace-scripts typecheck",
+    "typecheck:flow": "workspace-scripts typecheck:flow",
+    "typecheck:ts": "workspace-scripts typecheck:ts"
+  },
+  "devDependencies": {
+    "@wincent/workspace-scripts": "0.0.1"
+  }
+}

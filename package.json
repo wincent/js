@@ -37,5 +37,10 @@
     "typecheck": "workspace-scripts typecheck",
     "typecheck:flow": "workspace-scripts typecheck:flow",
     "typecheck:ts": "workspace-scripts typecheck:ts"
+  },
+  "devDependencies": {
+    "babel-jest": "*",
+    "babel-plugin-minify-replace": "*",
+    "babel-preset-minify": "*"
   }
 }
