@@ -39,13 +39,13 @@ const print = Object.assign(
   {
     red(output: string) {
       print(RED + output + RESET);
-    }
+    },
   },
   {
     yellow(output: string) {
       print(YELLOW + output + RESET);
-    }
-  }
+    },
+  },
 );
 
 function usage() {
@@ -259,9 +259,34 @@ function lintFix(packages: string[], extraArgs: string[]) {
   return run('eslint', '--fix', ...extraArgs, ...getLintGlobs(packages));
 }
 
-function test(packages: string[], extraArgs: string[]) {}
+function getTestPathPattern(packages: string[]): string[] {
+  if (packages.length) {
+    return [`--testPathPattern`, `packages/(${packages.join('|')})`];
+  } else {
+    return [];
+  }
+}
 
-function testWatch(packages: string[], extraArgs: string[]) {}
+function test(packages: string[], extraArgs: string[]) {
+  return run(
+    'env',
+    'BABEL_ENV=jest',
+    'jest',
+    ...getTestPathPattern(packages),
+    ...extraArgs,
+  );
+}
+
+function testWatch(packages: string[], extraArgs: string[]) {
+  return run(
+    'env',
+    'BABEL_ENV=jest',
+    'jest',
+    '--watch',
+    ...getTestPathPattern(packages),
+    ...extraArgs,
+  );
+}
 
 async function typecheck(packages: string[], extraArgs: string[]) {
   await typecheckTS(packages, extraArgs);
