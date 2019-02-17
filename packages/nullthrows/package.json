@@ -16,6 +16,18 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "prepublishOnly": "echo 'Run `yarn run publish nullthrows` from top-level'; echo; false"
+    "format": "workspace-scripts format nullthrows",
+    "format:check": "workspace-scripts format:check nullthrows",
+    "lint": "workspace-scripts lint nullthrows",
+    "lint:fix": "workspace-scripts lint:fix:check nullthrows",
+    "prepublishOnly": "echo 'Run `yarn run publish nullthrows` from top-level'; echo; false",
+    "test": "workspace-scripts test nullthrows",
+    "test:watch": "workspace-scripts test nullthrows",
+    "typecheck": "workspace-scripts typecheck",
+    "typecheck:flow": "workspace-scripts typecheck:flow",
+    "typecheck:ts": "workspace-scripts typecheck:ts"
+  },
+  "devDependencies": {
+    "@wincent/workspace-scripts": "*"
   }
 }

@@ -16,6 +16,18 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "prepublishOnly": "echo 'Run `yarn run publish indent` from top-level'; echo; false"
+    "format": "workspace-scripts format indent",
+    "format:check": "workspace-scripts format:check indent",
+    "lint": "workspace-scripts lint indent",
+    "lint:fix": "workspace-scripts lint:fix:check indent",
+    "prepublishOnly": "echo 'Run `yarn run publish indent` from top-level'; echo; false",
+    "test": "workspace-scripts test indent",
+    "test:watch": "workspace-scripts test indent",
+    "typecheck": "workspace-scripts typecheck",
+    "typecheck:flow": "workspace-scripts typecheck:flow",
+    "typecheck:ts": "workspace-scripts typecheck:ts"
+  },
+  "devDependencies": {
+    "@wincent/workspace-scripts": "*"
   }
 }

@@ -20,6 +20,15 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "prepublishOnly": "echo 'Run `yarn publish workspace-scripts` from top-level'; false"
+    "format": "./bin/index.js format workspace-scripts",
+    "format:check": "./bin/index.js format:check workspace-scripts",
+    "lint": "./bin/index.js lint workspace-scripts",
+    "lint:fix": "./bin/index.js lint:fix:check workspace-scripts",
+    "prepublishOnly": "echo 'Run `yarn publish ./bin/index.js` from top-level'; false",
+    "test": "./bin/index.js test workspace-scripts",
+    "test:watch": "./bin/index.js test workspace-scripts",
+    "typecheck": "./bin/index.js typecheck",
+    "typecheck:flow": "./bin/index.js typecheck:flow",
+    "typecheck:ts": "./bin/index.js typecheck:ts"
   }
 }

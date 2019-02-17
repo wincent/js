@@ -16,6 +16,18 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "prepublishOnly": "echo 'Run `yarn run publish escape-html` from top-level'; echo; false"
+    "format": "workspace-scripts format escape-html",
+    "format:check": "workspace-scripts format:check escape-html",
+    "lint": "workspace-scripts lint escape-html",
+    "lint:fix": "workspace-scripts lint:fix:check escape-html",
+    "prepublishOnly": "echo 'Run `yarn run publish escape-html` from top-level'; echo; false",
+    "test": "workspace-scripts test escape-html",
+    "test:watch": "workspace-scripts test escape-html",
+    "typecheck": "workspace-scripts typecheck",
+    "typecheck:flow": "workspace-scripts typecheck:flow",
+    "typecheck:ts": "workspace-scripts typecheck:ts"
+  },
+  "devDependencies": {
+    "@wincent/workspace-scripts": "*"
   }
 }

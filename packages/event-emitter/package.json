@@ -16,9 +16,21 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "prepublishOnly": "echo 'Run `yarn publish event-emitter` from top-level'; false"
+    "format": "workspace-scripts format event-emitter",
+    "format:check": "workspace-scripts format:check event-emitter",
+    "lint": "workspace-scripts lint event-emitter",
+    "lint:fix": "workspace-scripts lint:fix:check event-emitter",
+    "prepublishOnly": "echo 'Run `yarn publish event-emitter` from top-level'; false",
+    "test": "workspace-scripts test event-emitter",
+    "test:watch": "workspace-scripts test event-emitter",
+    "typecheck": "workspace-scripts typecheck",
+    "typecheck:flow": "workspace-scripts typecheck:flow",
+    "typecheck:ts": "workspace-scripts typecheck:ts"
   },
   "dependencies": {
     "@babel/runtime-corejs2": "7.3.1"
+  },
+  "devDependencies": {
+    "@wincent/workspace-scripts": "*"
   }
 }

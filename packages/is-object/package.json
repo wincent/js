@@ -16,6 +16,18 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "prepublishOnly": "echo 'Run `yarn run publish is-object` from top-level'; echo; false"
+    "format": "workspace-scripts format is-object",
+    "format:check": "workspace-scripts format:check is-object",
+    "lint": "workspace-scripts lint is-object",
+    "lint:fix": "workspace-scripts lint:fix:check is-object",
+    "prepublishOnly": "echo 'Run `yarn run publish is-object` from top-level'; echo; false",
+    "test": "workspace-scripts test is-object",
+    "test:watch": "workspace-scripts test is-object",
+    "typecheck": "workspace-scripts typecheck",
+    "typecheck:flow": "workspace-scripts typecheck:flow",
+    "typecheck:ts": "workspace-scripts typecheck:ts"
+  },
+  "devDependencies": {
+    "@wincent/workspace-scripts": "*"
   }
 }

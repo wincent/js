@@ -143,7 +143,10 @@ if [ ! -e "$PACKAGE_DIR"/package.json ]; then
 		    "typecheck": "workspace-scripts typecheck",
 		    "typecheck:flow": "workspace-scripts typecheck:flow",
 		    "typecheck:ts": "workspace-scripts typecheck:ts"
-		  }
+		  },
+		  "devDependencies": {
+		    "@wincent/workspace-scripts": "*"
+		  },
 		}
 	HERE
 fi
