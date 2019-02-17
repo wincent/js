@@ -149,7 +149,7 @@ function getCommandString(command: string, args: string[]): string {
 }
 
 function run(command: string, ...args: string[]) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, _reject) => {
     const child = spawn(command, args, {stdio: 'inherit'});
     child.on('error', error => {
       bail(`Failed to spawn ${getCommandString(command, args)}: ${error}`);
@@ -177,15 +177,15 @@ function run(command: string, ...args: string[]) {
   });
 }
 
-const FORMAT_ALL_ARGS = ['.*.{js,json}', '*.{js,json,md}', 'scripts/**/*.js'];
+const FORMAT_ALL_GLOBS = ['.*.{js,json}', '*.{js,json,md}', 'scripts/**/*.js'];
 
-const FORMAT_PACKAGE_ARGS = [
+const FORMAT_PACKAGE_GLOBS = [
   'packages/${PACKAGE}/{bin,src}/**/*.{js,js.flow,json,ts}',
   'packages/${PACKAGE}/*.{js,json,md}',
 ];
 
-function getFormatPackageArgs(pkgPattern: string): string[] {
-  return FORMAT_PACKAGE_ARGS.map(glob =>
+function getFormatPackageGlobs(pkgPattern: string): string[] {
+  return FORMAT_PACKAGE_GLOBS.map(glob =>
     glob.replace('${PACKAGE}', pkgPattern),
   );
 }
@@ -194,10 +194,10 @@ function getFormatGlobs(packages: string[]): string[] {
   const globs: string[] = [];
   if (packages.length) {
     packages.forEach(pkg => {
-      globs.push(...getFormatPackageArgs(pkg));
+      globs.push(...getFormatPackageGlobs(pkg));
     });
   } else {
-    globs.push(...FORMAT_ALL_ARGS, ...getFormatPackageArgs('*'));
+    globs.push(...FORMAT_ALL_GLOBS, ...getFormatPackageGlobs('*'));
   }
   return globs;
 }
@@ -215,9 +215,42 @@ function formatCheck(packages: string[], extraArgs: string[]) {
   );
 }
 
-function lint(packages: string[], extraArgs: string[]) {}
+const LINT_ALL_GLOB = 'scripts/**/*.js';
 
-function lintFix(packages: string[], extraArgs: string[]) {}
+const LINT_PACKAGE_GLOB = 'packages/${PACKAGE}/{bin,src}/**/*.{js,ts}';
+
+function getLintPackageGlob(pkgPattern: string): string {
+  return LINT_PACKAGE_GLOB.replace('${PACKAGE}', pkgPattern);
+}
+
+function getLintGlobs(packages: string[]) {
+  const globs: string[] = [];
+  if (packages.length) {
+    packages.forEach(pkg => {
+      globs.push(getLintPackageGlob(pkg));
+    });
+  } else {
+    globs.push(LINT_ALL_GLOB);
+  }
+  return globs;
+}
+
+function lint(packages: string[], extraArgs: string[]) {
+  return run(
+    'eslint',
+    ...extraArgs,
+    ...getLintGlobs(packages),
+  );
+}
+
+function lintFix(packages: string[], extraArgs: string[]) {
+  return run(
+    'eslint',
+    '--fix',
+    ...extraArgs,
+    ...getLintGlobs(packages),
+  );
+}
 
 function test(packages: string[], extraArgs: string[]) {}
 
