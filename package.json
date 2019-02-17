@@ -13,6 +13,7 @@
     "@babel/traverse": "*",
     "@types/jest": "*",
     "@types/jest-diff": "*",
+    "@types/node": "*",
     "@typescript-eslint/eslint-plugin": "*",
     "@typescript-eslint/parser": "*",
     "eslint": "*",
