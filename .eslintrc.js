@@ -6,6 +6,9 @@ module.exports = {
     node: true,
   },
   extends: 'eslint:recommended',
+  globals: {
+    __DEV__: 'readonly',
+  },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {modules: true},

@@ -254,7 +254,7 @@ function getLintGlobs(packages: string[]) {
       globs.push(getLintPackageGlob(pkg));
     });
   } else {
-    globs.push(LINT_ALL_GLOB);
+    globs.push(...[LINT_ALL_GLOB, getLintPackageGlob('*')]);
   }
   return globs;
 }
@@ -269,7 +269,7 @@ function lintFix(packages: string[], extraArgs: string[]) {
 
 function getTestPathPattern(packages: string[]): string[] {
   if (packages.length) {
-    return [`--testPathPattern`, `packages/(${packages.join('|')})`];
+    return ['--testPathPattern', `packages/(${packages.join('|')})`];
   } else {
     return [];
   }

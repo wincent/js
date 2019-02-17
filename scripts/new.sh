@@ -100,6 +100,7 @@ if [ "$BIN" = "true" ]; then
 			        ignores: [],
 			      },
 			    ],
+			    'no-process-exit': 'off',
 			  },
 			};
 		HERE
