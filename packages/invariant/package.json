@@ -16,7 +16,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "cd ../.. && make -j 4 all PACKAGES=packages/invariant",
+    "build": "workspace-scripts build invariant",
     "format": "workspace-scripts format invariant",
     "format:check": "workspace-scripts format:check invariant",
     "lint": "workspace-scripts lint invariant",

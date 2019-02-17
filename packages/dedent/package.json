@@ -16,7 +16,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "cd ../.. && make -j 4 all PACKAGES=packages/dedent",
+    "build": "workspace-scripts build dedent",
     "format": "workspace-scripts format dedent",
     "format:check": "workspace-scripts format:check dedent",
     "lint": "workspace-scripts lint dedent",

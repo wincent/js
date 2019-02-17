@@ -25,7 +25,7 @@
     "typescript": "*"
   },
   "scripts": {
-    "build": "make -j 4 all",
+    "build": "workspace-scripts build || make -j 4 all",
     "format": "workspace-scripts format",
     "format:check": "workspace-scripts format:check",
     "lint": "workspace-scripts lint",

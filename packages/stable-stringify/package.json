@@ -16,7 +16,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "cd ../.. && make -j 4 all PACKAGES=packages/stable-stringify",
+    "build": "workspace-scripts build stable-stringify",
     "format": "workspace-scripts format stable-stringify",
     "format:check": "workspace-scripts format:check stable-stringify",
     "lint": "workspace-scripts lint stable-stringify",

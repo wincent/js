@@ -17,6 +17,7 @@ type Args = {
 };
 
 const SUBCOMMANDS = {
+  build,
   'format:check': formatCheck,
   'lint:fix': lintFix,
   'test:watch': testWatch,
@@ -191,6 +192,13 @@ function run(command: string, ...args: string[]) {
       }
     });
   });
+}
+
+function build(packages: string[], extraArgs: string[]) {
+  const packageArgs = packages.length ?
+    [`PACKAGES=${packages.map(pkg => join('packages', pkg)).join(' ')}`] :
+    [];
+  return run('make', '-j', '4', 'all', ...packageArgs, ...extraArgs);
 }
 
 const FORMAT_ALL_GLOBS = ['.*.{js,json}', '*.{js,json,md}', 'scripts/**/*.js'];

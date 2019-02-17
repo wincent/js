@@ -16,7 +16,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "cd ../.. && make -j 4 all PACKAGES=packages/delay",
+    "build": "workspace-scripts build delay",
     "format": "workspace-scripts format delay",
     "format:check": "workspace-scripts format:check delay",
     "lint": "workspace-scripts lint delay",

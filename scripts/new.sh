@@ -138,14 +138,14 @@ if [ ! -e "$PACKAGE_DIR"/package.json ]; then
 		  "license": "MIT",
 		  "private": false,
 		  "scripts": {
-		    "build": "cd ../.. && make -j 4 all PACKAGES=packages/$PACKAGE",
-		    "format": "workspace-scripts format invariant",
-		    "format:check": "workspace-scripts format:check invariant",
-		    "lint": "workspace-scripts lint invariant",
-		    "lint:fix": "workspace-scripts lint:fix:check invariant",
+		    "build": "workspace-scripts build $PACKAGE",
+		    "format": "workspace-scripts format $PACKAGE",
+		    "format:check": "workspace-scripts format:check $PACKAGE",
+		    "lint": "workspace-scripts lint $PACKAGE",
+		    "lint:fix": "workspace-scripts lint:fix:check $PACKAGE",
 		    "prepublishOnly": "echo 'Run \`yarn publish $PACKAGE\` from top-level'; false"
-		    "test": "workspace-scripts test invariant",
-		    "test:watch": "workspace-scripts test invariant",
+		    "test": "workspace-scripts test $PACKAGE",
+		    "test:watch": "workspace-scripts test $PACKAGE",
 		    "typecheck": "workspace-scripts typecheck",
 		    "typecheck:flow": "workspace-scripts typecheck:flow",
 		    "typecheck:ts": "workspace-scripts typecheck:ts"

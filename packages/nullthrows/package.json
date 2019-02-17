@@ -16,7 +16,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "cd ../.. && make -j 4 all PACKAGES=packages/nullthrows",
+    "build": "workspace-scripts build nullthrows",
     "format": "workspace-scripts format nullthrows",
     "format:check": "workspace-scripts format:check nullthrows",
     "lint": "workspace-scripts lint nullthrows",

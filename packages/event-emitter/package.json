@@ -16,7 +16,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "cd ../.. && make -j 4 all PACKAGES=packages/event-emitter",
+    "build": "workspace-scripts build event-emitter",
     "format": "workspace-scripts format event-emitter",
     "format:check": "workspace-scripts format:check event-emitter",
     "lint": "workspace-scripts lint event-emitter",
