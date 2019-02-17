@@ -20,6 +20,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "build": "cd ../.. && make -j 4 all PACKAGES=packages/workspace-scripts",
     "format": "./bin/index.js format workspace-scripts",
     "format:check": "./bin/index.js format:check workspace-scripts",
     "lint": "./bin/index.js lint workspace-scripts",

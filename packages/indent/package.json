@@ -16,6 +16,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "build": "cd ../.. && make -j 4 all PACKAGES=packages/indent",
     "format": "workspace-scripts format indent",
     "format:check": "workspace-scripts format:check indent",
     "lint": "workspace-scripts lint indent",

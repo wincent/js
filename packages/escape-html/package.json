@@ -16,6 +16,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "build": "cd ../.. && make -j 4 all PACKAGES=packages/escape-html",
     "format": "workspace-scripts format escape-html",
     "format:check": "workspace-scripts format:check escape-html",
     "lint": "workspace-scripts lint escape-html",

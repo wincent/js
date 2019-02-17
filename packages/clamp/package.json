@@ -16,6 +16,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "build": "cd ../.. && make -j 4 all PACKAGES=packages/clamp",
     "format": "workspace-scripts format clamp",
     "format:check": "workspace-scripts format:check clamp",
     "lint": "workspace-scripts lint clamp",

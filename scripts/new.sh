@@ -133,6 +133,7 @@ if [ ! -e "$PACKAGE_DIR"/package.json ]; then
 		  "license": "MIT",
 		  "private": false,
 		  "scripts": {
+		    "build": "cd ../.. && make -j 4 all PACKAGES=packages/$PACKAGE",
 		    "format": "workspace-scripts format invariant",
 		    "format:check": "workspace-scripts format:check invariant",
 		    "lint": "workspace-scripts lint invariant",

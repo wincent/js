@@ -16,6 +16,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "build": "cd ../.. && make -j 4 all PACKAGES=packages/is-object",
     "format": "workspace-scripts format is-object",
     "format:check": "workspace-scripts format:check is-object",
     "lint": "workspace-scripts lint is-object",

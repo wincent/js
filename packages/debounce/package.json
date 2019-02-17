@@ -16,6 +16,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "build": "cd ../.. && make -j 4 all PACKAGES=packages/debounce",
     "format": "workspace-scripts format debounce",
     "format:check": "workspace-scripts format:check debounce",
     "lint": "workspace-scripts lint debounce",
