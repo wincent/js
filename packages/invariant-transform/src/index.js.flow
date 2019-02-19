@@ -1,0 +1,8 @@
+/**
+ * @copyright Copyright (c) 2019-present Greg Hurrell
+ * @flow strict
+ * @license MIT
+ */
+
+// Too lazy to provide detailed type information here.
+declare export default function transform(): {visitor: {}};

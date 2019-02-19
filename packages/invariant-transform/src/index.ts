@@ -10,10 +10,12 @@ import {types, PluginObj, Visitor} from 'babel__core';
 
 type CallExpression = types.CallExpression;
 
+export type Options = {
+  strip?: boolean;
+};
+
 type VisitorState = {
-  opts: {
-    strip?: boolean,
-  },
+  opts: Options;
 };
 
 /**
@@ -91,4 +93,4 @@ export default function transform(): PluginObj<VisitorState> {
     },
   };
   return {visitor};
-};
+}

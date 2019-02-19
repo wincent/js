@@ -1,0 +1,35 @@
+{
+  "name": "@wincent/invariant-transform",
+  "version": "0.0.1",
+  "description": "Transforms invariant() calls for development and production",
+  "bin": {},
+  "main": "lib/index.js",
+  "module": "lib/index.mjs",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/index.js",
+    "lib/index.js.flow",
+    "lib/index.mjs",
+    "lib/index.ts"
+  ],
+  "repository": "https://github.com/wincent/js/tree/master/packages/invariant-transform",
+  "author": "Greg Hurrell <greg@hurrell.net>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "workspace-scripts build invariant-transform",
+    "format": "workspace-scripts format invariant-transform",
+    "format:check": "workspace-scripts format:check invariant-transform",
+    "lint": "workspace-scripts lint invariant-transform",
+    "lint:fix": "workspace-scripts lint:fix:check invariant-transform",
+    "prepublishOnly": "echo 'Run `yarn publish invariant-transform` from top-level'; false",
+    "test": "workspace-scripts test invariant-transform",
+    "test:watch": "workspace-scripts test invariant-transform",
+    "typecheck": "workspace-scripts typecheck",
+    "typecheck:flow": "workspace-scripts typecheck:flow",
+    "typecheck:ts": "workspace-scripts typecheck:ts"
+  },
+  "devDependencies": {
+    "@wincent/workspace-scripts": "0.0.1"
+  }
+}
