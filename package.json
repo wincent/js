@@ -18,6 +18,7 @@
     "@types/node": "*",
     "@typescript-eslint/eslint-plugin": "*",
     "@typescript-eslint/parser": "*",
+    "@wincent/babel-plugin-invariant-transform": "*",
     "babel-jest": "*",
     "babel-plugin-minify-replace": "*",
     "babel-preset-minify": "*",

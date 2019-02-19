@@ -43,7 +43,10 @@ module.exports = function(api) {
   return {
     env: {
       jest: {
-        plugins: [getMinifyReplaceConfig('development')],
+        plugins: [
+          getMinifyReplaceConfig('development'),
+          '@wincent/invariant-transform',
+        ],
         presets: [
           // Avoid "ReferenceError: regeneratorRuntime is not defined"
           // in Jest runs that use async functions.
@@ -55,6 +58,7 @@ module.exports = function(api) {
         ...commentOptions,
         plugins: [
           getMinifyReplaceConfig('development'),
+          '@wincent/invariant-transform',
           [
             '@babel/plugin-transform-runtime',
             {
@@ -74,6 +78,7 @@ module.exports = function(api) {
         ...commentOptions,
         plugins: [
           getMinifyReplaceConfig('production'),
+          ['@wincent/invariant-transform', {strip: true}],
           [
             '@babel/plugin-transform-runtime',
             {
@@ -94,6 +99,7 @@ module.exports = function(api) {
         ...commentOptions,
         plugins: [
           getMinifyReplaceConfig('production'),
+          ['@wincent/invariant-transform', {strip: true}],
           [
             '@babel/plugin-transform-runtime',
             {

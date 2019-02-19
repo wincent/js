@@ -1,0 +1,35 @@
+{
+  "name": "@wincent/babel-plugin-invariant-transform",
+  "version": "0.0.1",
+  "description": "Transforms invariant() calls for development and production",
+  "bin": {},
+  "main": "lib/index.js",
+  "module": "lib/index.mjs",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/index.js",
+    "lib/index.js.flow",
+    "lib/index.mjs",
+    "lib/index.ts"
+  ],
+  "repository": "https://github.com/wincent/js/tree/master/packages/babel-plugin-invariant-transform",
+  "author": "Greg Hurrell <greg@hurrell.net>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "workspace-scripts build babel-plugin-invariant-transform",
+    "format": "workspace-scripts format babel-plugin-invariant-transform",
+    "format:check": "workspace-scripts format:check babel-plugin-invariant-transform",
+    "lint": "workspace-scripts lint babel-plugin-invariant-transform",
+    "lint:fix": "workspace-scripts lint:fix:check babel-plugin-invariant-transform",
+    "prepublishOnly": "echo 'Run `yarn publish babel-plugin-invariant-transform` from top-level'; false",
+    "test": "workspace-scripts test babel-plugin-invariant-transform",
+    "test:watch": "workspace-scripts test babel-plugin-invariant-transform",
+    "typecheck": "workspace-scripts typecheck",
+    "typecheck:flow": "workspace-scripts typecheck:flow",
+    "typecheck:ts": "workspace-scripts typecheck:ts"
+  },
+  "devDependencies": {
+    "@wincent/workspace-scripts": "0.0.1"
+  }
+}

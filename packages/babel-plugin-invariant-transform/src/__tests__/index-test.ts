@@ -8,7 +8,7 @@ import {default as transform, Options} from '..';
 
 import nullthrows from '@wincent/nullthrows';
 
-describe('invariant-transform', () => {
+describe('babel-plugin-invariant-transform', () => {
   let code: string | null | undefined;
 
   async function runTransform(source: string, options: Options = {}) {
