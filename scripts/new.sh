@@ -93,7 +93,7 @@ else
 fi
 
 if [ ! -e "$PACKAGE_DIR"/package.json ]; then
-  if command -v jq; then
+  if command -v jq &> /dev/null; then
     SCRIPTS_VERSION=$(jq .version packages/workspace-scripts/package.json)
   else
     SCRIPTS_VERSION='*'
