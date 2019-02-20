@@ -52,8 +52,8 @@ function printFallbackMessage(error) {
   const reset = isTTY ? '\x1b[0m' : '';
   console.log(
     `${yellow}Falling back to no-op transform` +
-    (error ? `: ${error.message}` : '.') +
-    reset
+      (error ? `: ${error.message}` : '.') +
+      reset,
   );
 }
 

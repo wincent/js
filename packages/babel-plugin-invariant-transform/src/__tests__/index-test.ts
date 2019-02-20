@@ -37,7 +37,7 @@ describe('babel-plugin-invariant-transform', () => {
 
   describe('when "strip" is true', () => {
     beforeEach(async () => {
-      code = await runTransform('invariant(x, \'message\');', {strip: true});
+      code = await runTransform("invariant(x, 'message');", {strip: true});
     });
 
     it('hoists the conditional into an `if` statement', () => {
@@ -55,7 +55,7 @@ describe('babel-plugin-invariant-transform', () => {
 
   describe('when "strip" is not true', () => {
     beforeEach(async () => {
-      code = await runTransform('invariant(x, \'message\');');
+      code = await runTransform("invariant(x, 'message');");
     });
 
     it('hoists the conditional into an `if` statement', () => {
@@ -63,7 +63,7 @@ describe('babel-plugin-invariant-transform', () => {
     });
 
     it('calls the invariant() function with `false`', () => {
-      expect(code).toContain('invariant(false, \'message\')');
+      expect(code).toContain("invariant(false, 'message')");
     });
   });
 });
