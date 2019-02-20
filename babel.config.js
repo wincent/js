@@ -37,6 +37,42 @@ const commentOptions = {
   shouldPrintComment: value => /@license|@preserve/.test(value),
 };
 
+/**
+ * No-op Babel transform used as a fallback.
+ */
+function noopTransform() {
+  return {
+    visitor: {},
+  };
+}
+
+/**
+ * Instead of trying to use local Babel plug-ins directly, wrap them so that
+ * they degrade gracefully when not-yet-built. This allows us to avoid the
+ * chicken-and-egg problem stemming from using transforms from this repo to
+ * build things in this repo.
+ */
+function wrapLocal(plugin) {
+  if (typeof plugin === 'string') {
+    try {
+      return [require(plugin).default, {}, plugin];
+    } catch (error) {
+      console.log(error && error.message);
+      return [noopTransform, {}, plugin];
+    }
+  } else {
+    const [name, options] = plugin;
+    let instance;
+    try {
+      instance = require(name).default;
+      return [instance, options, name];
+    } catch (error) {
+      console.log(error && error.message);
+      return [noopTransform, options, name];
+    }
+  }
+}
+
 module.exports = function(api) {
   api.cache(false);
 
@@ -45,7 +81,7 @@ module.exports = function(api) {
       jest: {
         plugins: [
           getMinifyReplaceConfig('development'),
-          '@wincent/invariant-transform',
+          wrapLocal('@wincent/babel-plugin-invariant-transform'),
         ],
         presets: [
           // Avoid "ReferenceError: regeneratorRuntime is not defined"
@@ -58,7 +94,7 @@ module.exports = function(api) {
         ...commentOptions,
         plugins: [
           getMinifyReplaceConfig('development'),
-          '@wincent/invariant-transform',
+          wrapLocal('@wincent/babel-plugin-invariant-transform'),
           [
             '@babel/plugin-transform-runtime',
             {
@@ -78,7 +114,10 @@ module.exports = function(api) {
         ...commentOptions,
         plugins: [
           getMinifyReplaceConfig('production'),
-          ['@wincent/invariant-transform', {strip: true}],
+          wrapLocal([
+            '@wincent/babel-plugin-invariant-transform',
+            {strip: true},
+          ]),
           [
             '@babel/plugin-transform-runtime',
             {
@@ -99,7 +138,10 @@ module.exports = function(api) {
         ...commentOptions,
         plugins: [
           getMinifyReplaceConfig('production'),
-          ['@wincent/invariant-transform', {strip: true}],
+          wrapLocal([
+            '@wincent/babel-plugin-invariant-transform',
+            {strip: true},
+          ]),
           [
             '@babel/plugin-transform-runtime',
             {
@@ -117,5 +159,13 @@ module.exports = function(api) {
         ],
       },
     },
+    overrides: [
+      {
+        test: new RegExp('\bbabel-plugin-invariant-transform\b'),
+        plugins: [
+          wrapLocal(['@wincent/babel-plugin-invariant-transform', false]),
+        ],
+      },
+    ],
   };
 };

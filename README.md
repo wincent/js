@@ -19,21 +19,21 @@ This is an experiment aimed at exploring the trade-offs involved in moving a bun
 
 ## Package listing
 
-| Package                                                                                                | Description                                                                  |
-| ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
-| [@wincent/clamp](https://github.com/wincent/js/tree/master/packages/clamp)                             | Simple debounce implementation                                               |
-| [@wincent/debounce](https://github.com/wincent/js/tree/master/packages/debounce)                       | Clamps a numerical value between a minimum and a maximum                     |
-| [@wincent/dedent](https://github.com/wincent/js/tree/master/packages/dedent)                           | Dedenting utility                                                            |
-| [@wincent/delay](https://github.com/wincent/js/tree/master/packages/delay)                             | A function that returns a promise that resolves after a delay                |
-| [@wincent/escape-html](https://github.com/wincent/js/tree/master/packages/escape-html)                 | Escapes unsafe characters in HTML                                            |
-| [@wincent/event-emitter](https://github.com/wincent/js/tree/master/packages/event-emitter)             | Simple event emitter                                                         |
-| [@wincent/indent](https://github.com/wincent/js/tree/master/packages/indent)                           | Indenting utility                                                            |
-| [@wincent/invariant](https://github.com/wincent/js/tree/master/packages/invariant)                     | Enforces an invariant                                                        |
+| Package                                                                                                                          | Description                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| [@wincent/clamp](https://github.com/wincent/js/tree/master/packages/clamp)                                                       | Simple debounce implementation                                               |
+| [@wincent/debounce](https://github.com/wincent/js/tree/master/packages/debounce)                                                 | Clamps a numerical value between a minimum and a maximum                     |
+| [@wincent/dedent](https://github.com/wincent/js/tree/master/packages/dedent)                                                     | Dedenting utility                                                            |
+| [@wincent/delay](https://github.com/wincent/js/tree/master/packages/delay)                                                       | A function that returns a promise that resolves after a delay                |
+| [@wincent/escape-html](https://github.com/wincent/js/tree/master/packages/escape-html)                                           | Escapes unsafe characters in HTML                                            |
+| [@wincent/event-emitter](https://github.com/wincent/js/tree/master/packages/event-emitter)                                       | Simple event emitter                                                         |
+| [@wincent/indent](https://github.com/wincent/js/tree/master/packages/indent)                                                     | Indenting utility                                                            |
+| [@wincent/invariant](https://github.com/wincent/js/tree/master/packages/invariant)                                               | Enforces an invariant                                                        |
 | [@wincent/babel-plugin-invariant-transform](https://github.com/wincent/js/tree/master/packages/babel-plugin-invariant-transform) | Transforms invariant() calls for development and production                  |
-| [@wincent/is-object](https://github.com/wincent/js/tree/master/packages/is-object)                     | Determines whether a value is an object                                      |
-| [@wincent/nullthrows](https://github.com/wincent/js/tree/master/packages/nullthrows)                   | Fail fast in the face of an unexpected null value                            |
-| [@wincent/stable-stringify](https://github.com/wincent/js/tree/master/packages/stable-stringify)       | Like JSON.stringify but produces stable output regardless of insertion order |
-| [@wincent/workspace-scripts](https://github.com/wincent/js/tree/master/packages/workspace-scripts)     | Helper scripts for working within Yarn workspaces                            |
+| [@wincent/is-object](https://github.com/wincent/js/tree/master/packages/is-object)                                               | Determines whether a value is an object                                      |
+| [@wincent/nullthrows](https://github.com/wincent/js/tree/master/packages/nullthrows)                                             | Fail fast in the face of an unexpected null value                            |
+| [@wincent/stable-stringify](https://github.com/wincent/js/tree/master/packages/stable-stringify)                                 | Like JSON.stringify but produces stable output regardless of insertion order |
+| [@wincent/workspace-scripts](https://github.com/wincent/js/tree/master/packages/workspace-scripts)                               | Helper scripts for working within Yarn workspaces                            |
 
 This table may not necessarily stay up to date, so please check [the packages directory](https://github.com/wincent/js/tree/master/packages).
 
