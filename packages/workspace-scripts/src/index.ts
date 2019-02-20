@@ -7,7 +7,6 @@ import {existsSync} from 'fs';
 import {dirname, join, resolve} from 'path';
 
 import bail from './bail';
-import run from './run';
 import print from './print';
 
 type Subcommand = keyof typeof SUBCOMMANDS;
