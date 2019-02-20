@@ -23,21 +23,27 @@ const SUBCOMMANDS = {
   build,
   'format:check': formatCheck,
   'lint:fix': lintFix,
-  'test:watch': testWatch,
+  'test:watch': async (packages: string[], extraArgs: string[]) => {
+    const {testWatch} = await import('./test');
+    return testWatch(packages, extraArgs);
+  },
   'typecheck:flow': async (packages: string[], extraArgs: string[]) => {
     const {typecheckFlow} = await import('./typecheck');
-    typecheckFlow(packages, extraArgs);
+    return typecheckFlow(packages, extraArgs);
   },
   'typecheck:ts': async (packages: string[], extraArgs: string[]) => {
     const {typecheckTS} = await import('./typecheck');
-    typecheckTS(packages, extraArgs);
+    return typecheckTS(packages, extraArgs);
   },
   format,
   lint,
-  test,
+  test: async (packages: string[], extraArgs: string[]) => {
+    const {test} = await import('./test');
+    return test(packages, extraArgs);
+  },
   typecheck: async (packages: string[], extraArgs: string[]) => {
     const {typecheck} = await import('./typecheck');
-    typecheck(packages, extraArgs);
+    return typecheck(packages, extraArgs);
   },
 };
 
@@ -213,35 +219,6 @@ function lint(packages: string[], extraArgs: string[]) {
 
 function lintFix(packages: string[], extraArgs: string[]) {
   return run('eslint', '--fix', ...extraArgs, ...getLintGlobs(packages));
-}
-
-function getTestPathPattern(packages: string[]): string[] {
-  if (packages.length) {
-    return ['--testPathPattern', `packages/(${packages.join('|')})`];
-  } else {
-    return [];
-  }
-}
-
-function test(packages: string[], extraArgs: string[]) {
-  return run(
-    'env',
-    'BABEL_ENV=jest',
-    'jest',
-    ...getTestPathPattern(packages),
-    ...extraArgs,
-  );
-}
-
-function testWatch(packages: string[], extraArgs: string[]) {
-  return run(
-    'env',
-    'BABEL_ENV=jest',
-    'jest',
-    '--watch',
-    ...getTestPathPattern(packages),
-    ...extraArgs,
-  );
 }
 
 export async function main() {
