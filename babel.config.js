@@ -88,6 +88,10 @@ module.exports = function(api) {
   api.cache(false);
 
   return {
+    babelrcRoots: [
+      '.',
+      './packages/*',
+    ],
     env: {
       jest: {
         plugins: [
