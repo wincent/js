@@ -35,9 +35,11 @@ function dispatcher(
 }
 
 const SUBCOMMANDS = {
-  build,
-  'format:check': formatCheck,
-  'lint:fix': lintFix,
+  build: dispatcher(async () => (await import('./build')).build),
+  'format:check': dispatcher(
+    async () => (await import('./format')).formatCheck,
+  ),
+  'lint:fix': dispatcher(async () => (await import('./lint')).lintFix),
   'test:watch': dispatcher(async () => (await import('./test')).testWatch),
   'typecheck:flow': dispatcher(
     async () => (await import('./typecheck')).typecheckFlow,
@@ -45,8 +47,8 @@ const SUBCOMMANDS = {
   'typecheck:ts': dispatcher(
     async () => (await import('./typecheck')).typecheckTS,
   ),
-  format,
-  lint,
+  format: dispatcher(async () => (await import('./format')).format),
+  lint: dispatcher(async () => (await import('./lint')).lint),
   test: dispatcher(async () => (await import('./test')).test),
   typecheck: dispatcher(async () => (await import('./typecheck')).typecheck),
 };
@@ -150,13 +152,6 @@ function parseArgs(args: string[]): Args {
     extraArgs: rest,
     root,
   };
-}
-
-function build(packages: string[], extraArgs: string[]) {
-  const packageArgs = packages.length
-    ? [`PACKAGES=${packages.map(pkg => join('packages', pkg)).join(' ')}`]
-    : [];
-  return run('make', '-j', '4', 'all', ...packageArgs, ...extraArgs);
 }
 
 const FORMAT_ALL_GLOBS = ['.*.{js,json}', '*.{js,json,md}', 'scripts/**/*.js'];
