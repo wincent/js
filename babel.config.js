@@ -172,7 +172,7 @@ module.exports = function(api) {
     },
     overrides: [
       {
-        test: new RegExp('\bbabel-plugin-invariant-transform\b'),
+        test: './packages/babel-plugin-invariant-transform/src/**/*.ts',
         plugins: [
           wrapLocal(['@wincent/babel-plugin-invariant-transform', false]),
         ],
