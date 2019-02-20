@@ -46,6 +46,17 @@ function noopTransform() {
   };
 }
 
+function printFallbackMessage(error) {
+  const isTTY = process.stdout.isTTY;
+  const yellow = isTTY ? '\x1b[33m' : '';
+  const reset = isTTY ? '\x1b[0m' : '';
+  console.log(
+    `${yellow}Falling back to no-op transform` +
+    (error ? `: ${error.message}` : '.') +
+    reset
+  );
+}
+
 /**
  * Instead of trying to use local Babel plug-ins directly, wrap them so that
  * they degrade gracefully when not-yet-built. This allows us to avoid the
@@ -57,7 +68,7 @@ function wrapLocal(plugin) {
     try {
       return [require(plugin).default, {}, plugin];
     } catch (error) {
-      console.log(error && error.message);
+      printFallbackMessage(error);
       return [noopTransform, {}, plugin];
     }
   } else {
@@ -67,7 +78,7 @@ function wrapLocal(plugin) {
       instance = require(name).default;
       return [instance, options, name];
     } catch (error) {
-      console.log(error && error.message);
+      printFallbackMessage(error);
       return [noopTransform, options, name];
     }
   }

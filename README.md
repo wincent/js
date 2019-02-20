@@ -37,6 +37,23 @@ This is an experiment aimed at exploring the trade-offs involved in moving a bun
 
 This table may not necessarily stay up to date, so please check [the packages directory](https://github.com/wincent/js/tree/master/packages).
 
+## Installation
+
+```shell
+# Clone the repo:
+git clone https://github.com/wincent/js.git
+cd js
+
+# Install dependencies:
+yarn
+
+# Perform first-time-only set-up:
+yarn bootstrap
+
+# Build:
+yarn build
+```
+
 ## License
 
 Copyright (c) 2019-present Greg Hurrell
