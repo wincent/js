@@ -19,38 +19,17 @@ type Args = {
   root: string;
 };
 
-/**
- * Helper function that enables us to concisely prepare the SUBCOMMANDS
- * look-up that follows.
- */
-function dispatcher(
-  loader: () => Promise<
-    (packages: string[], extraArgs: string[]) => Promise<void>
-  >,
-) {
-  return async (packages: string[], extraArgs: string[]) => {
-    const fn = await loader();
-    return fn(packages, extraArgs);
-  };
-}
-
 const SUBCOMMANDS = {
-  build: dispatcher(async () => (await import('./build')).build),
-  'format:check': dispatcher(
-    async () => (await import('./format')).formatCheck,
-  ),
-  'lint:fix': dispatcher(async () => (await import('./lint')).lintFix),
-  'test:watch': dispatcher(async () => (await import('./test')).testWatch),
-  'typecheck:flow': dispatcher(
-    async () => (await import('./typecheck')).typecheckFlow,
-  ),
-  'typecheck:ts': dispatcher(
-    async () => (await import('./typecheck')).typecheckTS,
-  ),
-  format: dispatcher(async () => (await import('./format')).format),
-  lint: dispatcher(async () => (await import('./lint')).lint),
-  test: dispatcher(async () => (await import('./test')).test),
-  typecheck: dispatcher(async () => (await import('./typecheck')).typecheck),
+  build: async () => (await import('./build')).build,
+  'format:check': async () => (await import('./format')).formatCheck,
+  'lint:fix': async () => (await import('./lint')).lintFix,
+  'test:watch': async () => (await import('./test')).testWatch,
+  'typecheck:flow': async () => (await import('./typecheck')).typecheckFlow,
+  'typecheck:ts': async () => (await import('./typecheck')).typecheckTS,
+  format: async () => (await import('./format')).format,
+  lint: async () => (await import('./lint')).lint,
+  test: async () => (await import('./test')).test,
+  typecheck: async () => (await import('./typecheck')).typecheck,
 };
 
 function usage() {
@@ -224,6 +203,7 @@ export async function main() {
   const {subcommands, packages, extraArgs, root} = parseArgs(process.argv);
   process.chdir(root);
   for (let subcommand of subcommands) {
-    await SUBCOMMANDS[subcommand](packages, extraArgs);
+    const fn = await SUBCOMMANDS[subcommand]();
+    await fn(packages, extraArgs);
   }
 }
