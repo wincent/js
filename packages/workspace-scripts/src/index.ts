@@ -3,9 +3,12 @@
  * @license MIT
  */
 
-import {spawn} from 'child_process';
 import {existsSync} from 'fs';
 import {dirname, join, resolve} from 'path';
+
+import bail from './bail';
+import run from './run';
+import print from './print';
 
 type Subcommand = keyof typeof SUBCOMMANDS;
 
@@ -21,33 +24,22 @@ const SUBCOMMANDS = {
   'format:check': formatCheck,
   'lint:fix': lintFix,
   'test:watch': testWatch,
-  'typecheck:flow': typecheckFlow,
-  'typecheck:ts': typecheckTS,
+  'typecheck:flow': async (packages: string[], extraArgs: string[]) => {
+    const {typecheckFlow} = await import('./typecheck');
+    typecheckFlow(packages, extraArgs);
+  },
+  'typecheck:ts': async (packages: string[], extraArgs: string[]) => {
+    const {typecheckTS} = await import('./typecheck');
+    typecheckTS(packages, extraArgs);
+  },
   format,
   lint,
   test,
-  typecheck,
+  typecheck: async (packages: string[], extraArgs: string[]) => {
+    const {typecheck} = await import('./typecheck');
+    typecheck(packages, extraArgs);
+  },
 };
-
-const RED = '\x1b[31m';
-const RESET = '\x1b[0m';
-const YELLOW = '\x1b[33m';
-
-const print = Object.assign(
-  (output: string) => {
-    process.stdout.write(`${output}\n`);
-  },
-  {
-    red(output: string) {
-      print(RED + output + RESET);
-    },
-  },
-  {
-    yellow(output: string) {
-      print(YELLOW + output + RESET);
-    },
-  },
-);
 
 function usage() {
   print('Usage: workspace-scripts SUBCOMMAND... [PACKAGE...] [[--] ARG...]');
@@ -56,13 +48,6 @@ function usage() {
     .forEach(subcommand => {
       print(`       workspace-scripts ${subcommand}`);
     });
-}
-
-function bail(message?: string): never {
-  if (message) {
-    print.red(message);
-  }
-  return process.exit(1);
 }
 
 function detectWorkspace(directory: string): boolean {
@@ -155,43 +140,6 @@ function parseArgs(args: string[]): Args {
     extraArgs: rest,
     root,
   };
-}
-
-function getCommandString(command: string, args: string[]): string {
-  if (args.length) {
-    return `${command} ${args.join(' ')}`;
-  } else {
-    return command;
-  }
-}
-
-function run(command: string, ...args: string[]) {
-  return new Promise((resolve, _reject) => {
-    const child = spawn(command, args, {stdio: 'inherit'});
-    child.on('error', error => {
-      bail(`Failed to spawn ${getCommandString(command, args)}: ${error}`);
-    });
-
-    child.on('exit', (code, signal) => {
-      if (code === 0) {
-        resolve();
-      } else if (code !== null) {
-        bail(
-          `Spawned command ${getCommandString(
-            command,
-            args,
-          )} exited with status ${code}`,
-        );
-      } else {
-        bail(
-          `Spawned command ${getCommandString(
-            command,
-            args,
-          )} received signal ${signal}`,
-        );
-      }
-    });
-  });
 }
 
 function build(packages: string[], extraArgs: string[]) {
@@ -294,37 +242,6 @@ function testWatch(packages: string[], extraArgs: string[]) {
     ...getTestPathPattern(packages),
     ...extraArgs,
   );
-}
-
-let typecheckWarningCount = 0;
-
-async function typecheck(packages: string[], extraArgs: string[]) {
-  await typecheckTS(packages, extraArgs);
-  await typecheckFlow(packages, extraArgs);
-}
-
-function typecheckFlow(packages: string[], extraArgs: string[]) {
-  checkTypecheckPackages(packages);
-  return run('flow', ...extraArgs);
-}
-
-function typecheckTS(packages: string[], extraArgs: string[]) {
-  checkTypecheckPackages(packages);
-  return run('tsc', ...extraArgs);
-}
-
-function checkTypecheckPackages(packages: string[]) {
-  if (typecheckWarningCount++) {
-    return;
-  }
-  const {length} = packages;
-  if (length) {
-    print.yellow(
-      `info: ignoring package argument${length > 1 ? 's' : ''} (${packages.join(
-        ', ',
-      )}) - typechecking cannot be scoped to individual packages`,
-    );
-  }
 }
 
 export async function main() {

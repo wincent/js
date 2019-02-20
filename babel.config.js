@@ -177,6 +177,13 @@ module.exports = function(api) {
           wrapLocal(['@wincent/babel-plugin-invariant-transform', false]),
         ],
       },
+      {
+        test: './packages/workspace-scripts/src/*.ts',
+        plugins: [
+          '@babel/syntax-dynamic-import',
+          'dynamic-import-node',
+        ],
+      }
     ],
   };
 };
