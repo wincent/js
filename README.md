@@ -7,7 +7,7 @@ This is an experiment aimed at exploring the trade-offs involved in moving a bun
 ## Advantages
 
 - No need to create mirrors at git.wincent.com, github.com, gitlab.com and bitbucket.org every time I want to extract a tiny package containing a handful of lines of functionalitly.
-- Shared development dependencies provide a single place to keep Babel, Flow, Prettier, ESLint, Jest etc configured and up-to-date.
+- Shared development dependencies provide a single place to keep Babel, ESLint, Flow, Jest, Prettier, TypeScript etc configured and up-to-date.
 - Using scoped package names makes it easy to allocate names that are both unique and descriptive.
 - Colocation of packages makes some types of cross-package verification easy (a couple of early examples: [missing dependency check](https://github.com/wincent/js/commit/02e2eb280db050e523d2a3e065a93f0ef221fb82), [mismatched version check, unwanted dev dependency check](https://github.com/wincent/js/commit/c7147c86b055ab1ecc57a24b29cb7ef274dc69de)).
 
@@ -15,7 +15,7 @@ This is an experiment aimed at exploring the trade-offs involved in moving a bun
 
 - No separate issue tracker per package (will use labels instead).
 - Packages don't have a strong connection that ties them together into a cohesive whole.
-- May be some kinks to iron out with respect to using Flow, Jest, and other tools that may not expect to be in monorepo (example: [module resolution tweaks](https://github.com/wincent/js/commit/fe2d7318dc94354306331eb9f5b0d191a831fd9a)).
+- May be some kinks to iron out with respect to using Flow, Jest, TypeScript and other tools that may not expect to be in monorepo (example: [module resolution tweaks](https://github.com/wincent/js/commit/fe2d7318dc94354306331eb9f5b0d191a831fd9a)).
 
 ## Package listing
 
