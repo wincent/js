@@ -296,6 +296,8 @@ function testWatch(packages: string[], extraArgs: string[]) {
   );
 }
 
+let typecheckWarningCount = 0;
+
 async function typecheck(packages: string[], extraArgs: string[]) {
   await typecheckTS(packages, extraArgs);
   await typecheckFlow(packages, extraArgs);
@@ -307,10 +309,14 @@ function typecheckFlow(packages: string[], extraArgs: string[]) {
 }
 
 function typecheckTS(packages: string[], extraArgs: string[]) {
+  checkTypecheckPackages(packages);
   return run('tsc', ...extraArgs);
 }
 
 function checkTypecheckPackages(packages: string[]) {
+  if (typecheckWarningCount++) {
+    return;
+  }
   const {length} = packages;
   if (length) {
     print.yellow(
