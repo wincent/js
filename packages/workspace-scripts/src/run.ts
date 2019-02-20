@@ -14,7 +14,7 @@ function getCommandString(command: string, args: string[]): string {
   }
 }
 
-export default function run(command: string, ...args: string[]) {
+export default function run(command: string, ...args: string[]): Promise<void> {
   return new Promise((resolve, _reject) => {
     const child = spawn(command, args, {stdio: 'inherit'});
     child.on('error', error => {

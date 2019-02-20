@@ -19,32 +19,36 @@ type Args = {
   root: string;
 };
 
+/**
+ * Helper function that enables us to concisely prepare the SUBCOMMANDS
+ * look-up that follows.
+ */
+function dispatcher(
+  loader: () => Promise<
+    (packages: string[], extraArgs: string[]) => Promise<void>
+  >,
+) {
+  return async (packages: string[], extraArgs: string[]) => {
+    const fn = await loader();
+    return fn(packages, extraArgs);
+  };
+}
+
 const SUBCOMMANDS = {
   build,
   'format:check': formatCheck,
   'lint:fix': lintFix,
-  'test:watch': async (packages: string[], extraArgs: string[]) => {
-    const {testWatch} = await import('./test');
-    return testWatch(packages, extraArgs);
-  },
-  'typecheck:flow': async (packages: string[], extraArgs: string[]) => {
-    const {typecheckFlow} = await import('./typecheck');
-    return typecheckFlow(packages, extraArgs);
-  },
-  'typecheck:ts': async (packages: string[], extraArgs: string[]) => {
-    const {typecheckTS} = await import('./typecheck');
-    return typecheckTS(packages, extraArgs);
-  },
+  'test:watch': dispatcher(async () => (await import('./test')).testWatch),
+  'typecheck:flow': dispatcher(
+    async () => (await import('./typecheck')).typecheckFlow,
+  ),
+  'typecheck:ts': dispatcher(
+    async () => (await import('./typecheck')).typecheckTS,
+  ),
   format,
   lint,
-  test: async (packages: string[], extraArgs: string[]) => {
-    const {test} = await import('./test');
-    return test(packages, extraArgs);
-  },
-  typecheck: async (packages: string[], extraArgs: string[]) => {
-    const {typecheck} = await import('./typecheck');
-    return typecheck(packages, extraArgs);
-  },
+  test: dispatcher(async () => (await import('./test')).test),
+  typecheck: dispatcher(async () => (await import('./typecheck')).typecheck),
 };
 
 function usage() {
