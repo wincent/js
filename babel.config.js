@@ -88,10 +88,7 @@ module.exports = function(api) {
   api.cache(false);
 
   return {
-    babelrcRoots: [
-      '.',
-      './packages/*',
-    ],
+    babelrcRoots: ['.', './packages/*'],
     env: {
       jest: {
         plugins: [
@@ -183,11 +180,8 @@ module.exports = function(api) {
       },
       {
         test: './packages/workspace-scripts/src/*.ts',
-        plugins: [
-          '@babel/syntax-dynamic-import',
-          'dynamic-import-node',
-        ],
-      }
+        plugins: ['@babel/syntax-dynamic-import', 'dynamic-import-node'],
+      },
     ],
   };
 };
