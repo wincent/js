@@ -27,6 +27,7 @@ const SUBCOMMANDS = {
   'typecheck:ts': async () => (await import('./typecheck')).typecheckTS,
   format: async () => (await import('./format')).format,
   lint: async () => (await import('./lint')).lint,
+  prepublish: async () => (await import('./prepublish')).prepublish,
   test: async () => (await import('./test')).test,
   typecheck: async () => (await import('./typecheck')).typecheck,
 };

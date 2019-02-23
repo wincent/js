@@ -40,7 +40,7 @@
     "format:check": "workspace-scripts format:check",
     "lint": "workspace-scripts lint",
     "lint:fix": "workspace-scripts lint:fix",
-    "prepublishOnly": "yarn format:check && yarn lint && yarn typecheck && yarn test && yarn build && scripts/check-dependencies.js && scripts/check-changelogs.js && git diff --quiet",
+    "prepublishOnly": "workspace-scripts prepublish",
     "publish": "scripts/publish.js",
     "test": "workspace-scripts test",
     "test:watch": "workspace-scripts test:watch",
