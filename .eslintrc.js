@@ -38,6 +38,13 @@ module.exports = {
     ],
     quotes: ['error', 'single', {avoidEscape: true}],
     semi: ['error', 'always'],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: '^_|^this$',
+        varsIgnorePattern: '^_',
+      },
+    ],
   },
   root: true,
 };
