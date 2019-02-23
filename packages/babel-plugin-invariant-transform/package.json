@@ -31,5 +31,9 @@
   },
   "devDependencies": {
     "@wincent/workspace-scripts": "0.0.1"
+  },
+  "dependencies": {
+    "@babel/core": "*",
+    "@babel/runtime-corejs2": "7.3.1"
   }
 }
