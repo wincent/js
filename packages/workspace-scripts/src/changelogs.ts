@@ -25,23 +25,28 @@ function escapeForRegExp(string: string) {
 
 export async function check(packages: string[], extraArgs: string[]) {
   let success = true;
+  const packageSet = new Set(packages);
   print.line.yellow('Checking changelogs are up-to-date:');
   await forEachPackage(async (name, config) => {
     print(`  ${name}: `);
-    const changelog = (await readFileAsync(
-      join('packages', name, 'CHANGELOG.md'),
-    )).toString();
-    const version = escapeForRegExp(config.version);
-    const pattern = `^## ${version} \\(\\d{1,2} \\w+ 20\\d{2}\\)$`;
-    if (changelog.match(new RegExp(pattern, 'm'))) {
-      print.line.green('OK');
+    if (!packageSet.size || packageSet.has(name)) {
+      const changelog = (await readFileAsync(
+        join('packages', name, 'CHANGELOG.md'),
+      )).toString();
+      const version = escapeForRegExp(config.version);
+      const pattern = `^## ${version} \\(\\d{1,2} \\w+ 20\\d{2}\\)$`;
+      if (changelog.match(new RegExp(pattern, 'm'))) {
+        print.line.green('OK');
+      } else {
+        success = false;
+        print.line.red(
+          `BAD [Expected line matching: "## ${
+            config.version
+          } ($DAY $MONTH $YEAR)"]`,
+        );
+      }
     } else {
-      success = false;
-      print.line.red(
-        `BAD [Expected line matching: "## ${
-          config.version
-        } ($DAY $MONTH $YEAR)"]`,
-      );
+      print.line('SKIPPING');
     }
   });
   print();
