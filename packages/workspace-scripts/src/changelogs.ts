@@ -10,6 +10,7 @@
 import {readFile} from 'fs';
 import {join} from 'path';
 import {promisify} from 'util';
+import bail from './bail';
 import forEachPackage from './forEachPackage';
 import print from './print';
 
@@ -44,5 +45,8 @@ export async function check(packages: string[], extraArgs: string[]) {
     }
   });
   print();
-  return success;
+
+  if (!success) {
+    bail();
+  }
 }

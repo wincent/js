@@ -37,6 +37,7 @@
     "build": "workspace-scripts build || yarn bootstrap",
     "changelogs:check": "workspace-scripts changelogs:check",
     "clean": "make clean",
+    "dependencies:check": "workspace-scripts dependencies:check",
     "format": "workspace-scripts format",
     "format:check": "workspace-scripts format:check",
     "lint": "workspace-scripts lint",
