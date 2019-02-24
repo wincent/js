@@ -7,7 +7,7 @@ import print from './print';
 
 export default function bail(message?: string): never {
   if (message) {
-    print.red(message);
+    print.line.red(message);
   }
   return process.exit(1);
 }

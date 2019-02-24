@@ -20,6 +20,7 @@ type Args = {
 
 const SUBCOMMANDS = {
   build: async () => (await import('./build')).build,
+  'changelogs:check': async () => (await import('./changelogs')).check,
   'format:check': async () => (await import('./format')).formatCheck,
   'lint:fix': async () => (await import('./lint')).lintFix,
   'test:watch': async () => (await import('./test')).testWatch,
@@ -33,11 +34,13 @@ const SUBCOMMANDS = {
 };
 
 function usage() {
-  print('Usage: workspace-scripts SUBCOMMAND... [PACKAGE...] [[--] ARG...]');
+  print.line(
+    'Usage: workspace-scripts SUBCOMMAND... [PACKAGE...] [[--] ARG...]',
+  );
   Object.keys(SUBCOMMANDS)
     .sort()
     .forEach(subcommand => {
-      print(`       workspace-scripts ${subcommand}`);
+      print.line(`       workspace-scripts ${subcommand}`);
     });
 }
 
@@ -88,7 +91,7 @@ function validatePackages(packages: string[], root: string): void {
   });
 
   if (badPackages.length) {
-    badPackages.forEach(pkg => print.red(`Package ${pkg} does not exist`));
+    badPackages.forEach(pkg => print.line.red(`Package ${pkg} does not exist`));
     bail();
   }
 }

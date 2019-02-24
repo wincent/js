@@ -35,6 +35,7 @@
   "scripts": {
     "bootstrap": "make -j 4 all",
     "build": "workspace-scripts build || yarn bootstrap",
+    "changelogs:check": "workspace-scripts changelogs:check",
     "clean": "make clean",
     "format": "workspace-scripts format",
     "format:check": "workspace-scripts format:check",

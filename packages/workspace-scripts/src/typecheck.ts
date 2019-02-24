@@ -17,7 +17,7 @@ function checkTypecheckPackages(packages: string[]) {
   }
   const {length} = packages;
   if (length) {
-    print.yellow(
+    print.line.yellow(
       `info: ignoring package argument${length > 1 ? 's' : ''} (${packages.join(
         ', ',
       )}) - typechecking cannot be scoped to individual packages`,

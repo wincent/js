@@ -3,11 +3,14 @@
  * @license MIT
  */
 
-const fs = require('fs');
-const {promisify} = require('util');
-const getPackageConfig = require('./getPackageConfig');
+import {readdir} from 'fs';
+import {promisify} from 'util';
+import getPackageConfig, {Config} from './getPackageConfig';
+//import {default as getPackageConfig, Config} from './getPackageConfig';
 
-const readdirAsync = promisify(fs.readdir);
+const readdirAsync = promisify(readdir);
+
+type Callback = (name: string, config: Config) => void;
 
 /**
  * Execute `callback` in the context of each package in the monorepo.
@@ -15,7 +18,7 @@ const readdirAsync = promisify(fs.readdir);
  * `callback` will be invoked with the package name and its config (as read from
  * the "package.json" file).
  */
-async function forEachPackage(callback) {
+export default async function forEachPackage(callback: Callback) {
   const packages = await readdirAsync('packages', {withFileTypes: true});
   for (const pkg of packages) {
     if (pkg.isDirectory()) {
@@ -25,5 +28,3 @@ async function forEachPackage(callback) {
     }
   }
 }
-
-module.exports = forEachPackage;
