@@ -31,8 +31,8 @@ export async function checkChangelogs(
   const packageSet = new Set(packages);
   print.line.yellow('Checking changelogs are up-to-date:');
   await forEachPackage(async (name, config) => {
-    print(`  ${name}: `);
     if (!packageSet.size || packageSet.has(name)) {
+      print(`  ${name}: `);
       const changelog = (await readFileAsync(
         join('packages', name, 'CHANGELOG.md'),
       )).toString();
@@ -48,8 +48,6 @@ export async function checkChangelogs(
           } ($DAY $MONTH $YEAR)"]`,
         );
       }
-    } else {
-      print.line('SKIPPING');
     }
   });
   print();
