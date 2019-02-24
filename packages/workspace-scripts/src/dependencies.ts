@@ -95,6 +95,7 @@ const BUILT_IN_DEPENDENCY_WHITELIST = new Set([
   'child_process',
   'fs',
   'path',
+  'readline',
   'util',
 ]);
 
@@ -313,8 +314,11 @@ async function checkForNonCurrentInternalDependencies() {
   return success;
 }
 
-export async function check(packages: string[], extraArgs: string[]) {
-  // TODO: deal with args, maybe...
+export async function checkDependencies(
+  _packages: string[],
+  _extraArgs: string[],
+) {
+  // TODO: consider scoping based on packages here.
   let success = await checkForMissingDependencies();
   success = (await checkForMismatchedDependencyVersions()) && success;
   success = (await checkForDevelopmentDependencies()) && success;
@@ -325,7 +329,10 @@ export async function check(packages: string[], extraArgs: string[]) {
   }
 }
 
-export async function show(packages: string[], extraArgs: string[]) {
+export async function showDependencies(
+  _packages: string[],
+  _extraArgs: string[],
+) {
   await forEachPackage(async (name, config) => {
     if (config.dependencies) {
       Object.entries(config.dependencies).forEach(([dependency, version]) => {

@@ -20,9 +20,12 @@ type Args = {
 
 const SUBCOMMANDS = {
   build: async () => (await import('./build')).build,
-  'changelogs:check': async () => (await import('./changelogs')).check,
-  'dependencies:check': async () => (await import('./dependencies')).check,
-  'dependencies:show': async () => (await import('./dependencies')).show,
+  'changelogs:check': async () =>
+    (await import('./changelogs')).checkChangelogs,
+  'dependencies:check': async () =>
+    (await import('./dependencies')).checkDependencies,
+  'dependencies:show': async () =>
+    (await import('./dependencies')).showDependencies,
   'format:check': async () => (await import('./format')).formatCheck,
   'lint:fix': async () => (await import('./lint')).lintFix,
   'test:watch': async () => (await import('./test')).testWatch,
@@ -31,6 +34,7 @@ const SUBCOMMANDS = {
   format: async () => (await import('./format')).format,
   lint: async () => (await import('./lint')).lint,
   prepublish: async () => (await import('./prepublish')).prepublish,
+  publish: async () => (await import('./publish')).publish,
   test: async () => (await import('./test')).test,
   typecheck: async () => (await import('./typecheck')).typecheck,
 };
@@ -139,10 +143,15 @@ function parseArgs(args: string[]): Args {
 }
 
 export async function main() {
-  const {subcommands, packages, extraArgs, root} = parseArgs(process.argv);
-  process.chdir(root);
-  for (let subcommand of subcommands) {
-    const fn = await SUBCOMMANDS[subcommand]();
-    await fn(packages, extraArgs);
+  try {
+    const {subcommands, packages, extraArgs, root} = parseArgs(process.argv);
+    process.chdir(root);
+    for (let subcommand of subcommands) {
+      const fn = await SUBCOMMANDS[subcommand]();
+      await fn(packages, extraArgs);
+    }
+  } catch (error) {
+    print.line(error);
+    process.exit(1);
   }
 }

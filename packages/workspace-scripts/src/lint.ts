@@ -5,8 +5,6 @@
 
 import run from './run';
 
-const LINT_ALL_GLOB = 'scripts/**/*.js';
-
 const LINT_PACKAGE_GLOB = 'packages/${PACKAGE}/{bin,src}/**/*.{js,ts}';
 
 function getLintPackageGlob(pkgPattern: string): string {
@@ -20,7 +18,7 @@ function getLintGlobs(packages: string[]) {
       globs.push(getLintPackageGlob(pkg));
     });
   } else {
-    globs.push(...[LINT_ALL_GLOB, getLintPackageGlob('*')]);
+    globs.push(getLintPackageGlob('*'));
   }
   return globs;
 }

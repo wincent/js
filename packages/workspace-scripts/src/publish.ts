@@ -1,29 +1,27 @@
-#!/usr/bin/env node
-
 /**
  * @copyright Copyright (c) 2019-present Greg Hurrell
  * @license MIT
  */
 
-const {spawn, spawnSync} = require('child_process');
-const {writeFile} = require('fs');
-const {basename, join} = require('path');
-const readline = require('readline');
-const {promisify} = require('util');
-const getPackageConfig = require('./lib/getPackageConfig');
-const forEachPackage = require('./lib/forEachPackage');
-const main = require('./lib/main');
-const print = require('./lib/print');
+import {spawn, spawnSync} from 'child_process';
+import {writeFile} from 'fs';
+import {basename, join} from 'path';
+import {createInterface} from 'readline';
+import {promisify} from 'util';
+import bail from './bail';
+import getPackageConfig from './getPackageConfig';
+import forEachPackage from './forEachPackage';
+import print from './print';
 
 const writeFileAsync = promisify(writeFile);
 
-const rl = readline.createInterface({
+const rl = createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
 async function getPackageNames() {
-  const names = [];
+  const names: string[] = [];
   await forEachPackage((_, config) => {
     names.push(config.name);
   });
@@ -32,9 +30,13 @@ async function getPackageNames() {
 
 function runPrepublishChecks() {
   return new Promise((resolve, reject) => {
-    const yarn = spawn('yarn', ['prepublishOnly']);
+    const yarn = spawn('yarn', ['run', 'prepublish']);
     let stdout = '';
-    yarn.stderr.on('data', () => print('.'));
+    let stderr = '';
+    yarn.stderr.on('data', data => {
+      stderr += data;
+      print('.');
+    });
     yarn.stdout.on('data', data => {
       stdout += data;
       print('.');
@@ -42,6 +44,7 @@ function runPrepublishChecks() {
     yarn.on('close', code => {
       if (code) {
         print.line(`\n${stdout}`);
+        print.line(`\n${stderr}`);
         reject(new Error('yarn prepublishOnly failed'));
       } else {
         print();
@@ -51,23 +54,23 @@ function runPrepublishChecks() {
   });
 }
 
-function run(command, ...args) {
-  const {status, stderr, stdout} = spawnSync(command, ...args);
+function capture(command: string, args: string[], options: object = {}) {
+  const {status, stderr, stdout} = spawnSync(command, args, options);
   if (status) {
-    print.line(stdout);
-    print.line(stderr);
+    print.line(stdout.toString());
+    print.line(stderr.toString());
     throw new Error(`${command} failed`);
   }
   return stdout.toString().trim();
 }
 
-function withTemporaryDirectory(callback) {
-  const directory = run('mktemp', ['-d']);
+function withTemporaryDirectory(callback: (dirname: string) => void) {
+  const directory = capture('mktemp', ['-d']);
   return callback(directory);
 }
 
-function input(prompt, initial = '') {
-  const promise = new Promise((resolve, _reject) => {
+function input(prompt: string, initial = ''): Promise<string> {
+  const promise: Promise<string> = new Promise((resolve, _reject) => {
     rl.question(`${prompt} `, resolve);
   });
   if (initial) {
@@ -78,14 +81,13 @@ function input(prompt, initial = '') {
 
 let otp = '';
 
-main(async () => {
-  const [_executable, _script, ...packages] = process.argv;
+export async function publish(packages: string[], _extraArgs: string[]) {
   if (!packages.length) {
-    print.line('Expected at least one package name:');
+    print.line.red('Expected at least one package name:');
     const names = await getPackageNames();
     const basenames = names.map(name => basename(name));
     print.line(` ${basenames.join(', ')}`);
-    return 1;
+    bail();
   }
 
   if (!process.env.SKIP_CHECKS) {
@@ -95,7 +97,7 @@ main(async () => {
   for (const name of packages) {
     await withTemporaryDirectory(async dirname => {
       print.line(`Copying from ${name} to ${dirname}...`);
-      run('cp', ['-R', join('packages', name), dirname]);
+      capture('cp', ['-R', join('packages', name), dirname]);
 
       print.line('Remove blocking prepublishOnly hook...');
       const config = getPackageConfig(name);
@@ -111,7 +113,7 @@ main(async () => {
       print.line(`Publising version ${config.version}`);
 
       otp = await input('Please enter a OTP token:', otp);
-      const stdout = run(
+      const stdout = capture(
         'yarn',
         ['publish', '--access', 'public', '--otp', otp],
         {
@@ -122,7 +124,7 @@ main(async () => {
       const tag = `${name}-${config.version}`;
       const yes = await input(`Create tag ${tag}? [y/n]`, 'y');
       if (yes.match(/^\s*y(es?)?\s*/i)) {
-        run('git', [
+        capture('git', [
           'tag',
           '-s',
           '-m',
@@ -153,4 +155,4 @@ main(async () => {
       `---------------------------------------------------${hyphens}-\n`,
   );
   rl.close();
-});
+}

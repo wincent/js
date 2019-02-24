@@ -23,7 +23,10 @@ function escapeForRegExp(string: string) {
   return string.replace(pattern, '\\$&');
 }
 
-export async function check(packages: string[], extraArgs: string[]) {
+export async function checkChangelogs(
+  packages: string[],
+  _extraArgs: string[],
+) {
   let success = true;
   const packageSet = new Set(packages);
   print.line.yellow('Checking changelogs are up-to-date:');

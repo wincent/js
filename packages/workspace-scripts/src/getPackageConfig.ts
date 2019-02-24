@@ -12,7 +12,11 @@ export interface Config {
   devDependencies?: {
     [name: string]: string;
   };
+  name: string;
   peerDependencies?: {
+    [name: string]: string;
+  };
+  scripts: {
     [name: string]: string;
   };
   version: string;
