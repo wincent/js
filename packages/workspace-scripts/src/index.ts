@@ -22,6 +22,7 @@ const SUBCOMMANDS = {
   build: async () => (await import('./build')).build,
   'changelogs:check': async () => (await import('./changelogs')).check,
   'dependencies:check': async () => (await import('./dependencies')).check,
+  'dependencies:show': async () => (await import('./dependencies')).show,
   'format:check': async () => (await import('./format')).formatCheck,
   'lint:fix': async () => (await import('./lint')).lintFix,
   'test:watch': async () => (await import('./test')).testWatch,

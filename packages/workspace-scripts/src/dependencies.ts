@@ -324,3 +324,16 @@ export async function check(packages: string[], extraArgs: string[]) {
     bail();
   }
 }
+
+export async function show(packages: string[], extraArgs: string[]) {
+  await forEachPackage(async (name, config) => {
+    if (config.dependencies) {
+      Object.entries(config.dependencies).forEach(([dependency, version]) => {
+        if (dependency.startsWith('@wincent')) {
+          const pkg = basename(dependency);
+          print.line(`${name} depends on ${pkg} v${version}`);
+        }
+      });
+    }
+  });
+}

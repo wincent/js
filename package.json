@@ -38,6 +38,7 @@
     "changelogs:check": "workspace-scripts changelogs:check",
     "clean": "make clean",
     "dependencies:check": "workspace-scripts dependencies:check",
+    "dependencies:show": "workspace-scripts dependencies:show",
     "format": "workspace-scripts format",
     "format:check": "workspace-scripts format:check",
     "lint": "workspace-scripts lint",
