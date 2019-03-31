@@ -31,16 +31,23 @@ async function getPackageNames() {
 function runPrepublishChecks() {
   return new Promise((resolve, reject) => {
     const yarn = spawn('yarn', ['run', 'prepublish']);
+    if (!yarn.stderr || !yarn.stdout) {
+      throw new Error('spawn did not provide stderr and stdout');
+    }
+
     let stdout = '';
     let stderr = '';
+
     yarn.stderr.on('data', data => {
       stderr += data;
       print('.');
     });
+
     yarn.stdout.on('data', data => {
       stdout += data;
       print('.');
     });
+
     yarn.on('close', code => {
       if (code) {
         print.line(`\n${stdout}`);
