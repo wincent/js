@@ -65,7 +65,7 @@ async function forEachSourceFile(name: string, callback: Callback) {
 /**
  * Extracts a dependency name from a require target such as:
  *
- *   @babel/runtime-corejs2/core-js/set
+ *   @babel/runtime-corejs3/core-js/set
  *   ^^^^^^^^^^^^^^^^^^^^^^
  *
  * or:

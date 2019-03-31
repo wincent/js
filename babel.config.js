@@ -98,7 +98,17 @@ module.exports = function(api) {
         presets: [
           // Avoid "ReferenceError: regeneratorRuntime is not defined"
           // in Jest runs that use async functions.
-          ['@babel/preset-env', {targets: {node: 'current'}}],
+          [
+            '@babel/preset-env',
+            {
+              corejs: {
+                proposals: true,
+                version: 3,
+              },
+              targets: {node: 'current'},
+              useBuiltIns: 'usage',
+            },
+          ],
           ['@babel/preset-typescript', {isTSX: true, allExtensions: true}],
         ],
       },
@@ -107,18 +117,18 @@ module.exports = function(api) {
         plugins: [
           getMinifyReplaceConfig('development'),
           wrapLocal('@wincent/babel-plugin-invariant-transform'),
-          [
-            '@babel/plugin-transform-runtime',
-            {
-              corejs: 2,
-              helpers: true,
-              regenerator: true,
-              useESModules: false,
-            },
-          ],
         ],
         presets: [
-          ['@babel/preset-env', {}],
+          [
+            '@babel/preset-env',
+            {
+              corejs: {
+                proposals: true,
+                version: 3,
+              },
+              useBuiltIns: 'usage',
+            },
+          ],
           ['@babel/preset-typescript', {isTSX: true, allExtensions: true}],
         ],
       },
@@ -130,18 +140,15 @@ module.exports = function(api) {
             '@wincent/babel-plugin-invariant-transform',
             {strip: true},
           ]),
-          [
-            '@babel/plugin-transform-runtime',
-            {
-              corejs: 2,
-              helpers: true,
-              regenerator: true,
-              useESModules: false,
-            },
-          ],
         ],
         presets: [
-          ['@babel/preset-env', {}],
+          [
+            '@babel/preset-env',
+            {
+              corejs: 3,
+              useBuiltIns: 'usage',
+            },
+          ],
           ['@babel/preset-typescript', {isTSX: true, allExtensions: true}],
           ['minify', babelMinifyOptions],
         ],
@@ -154,15 +161,6 @@ module.exports = function(api) {
             '@wincent/babel-plugin-invariant-transform',
             {strip: true},
           ]),
-          [
-            '@babel/plugin-transform-runtime',
-            {
-              corejs: false /* assume Polyfill by user */,
-              helpers: false,
-              regenerator: false,
-              useESModules: true,
-            },
-          ],
         ],
         presets: [
           ['@babel/preset-env', {modules: false, targets: {esmodules: true}}],

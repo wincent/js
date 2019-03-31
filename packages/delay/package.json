@@ -29,8 +29,9 @@
     "typecheck:ts": "workspace-scripts typecheck:ts"
   },
   "dependencies": {
-    "@babel/runtime-corejs2": "7.4.2",
-    "@wincent/invariant": "0.0.1"
+    "@babel/runtime-corejs3": "7.4.2",
+    "@wincent/invariant": "0.0.1",
+    "core-js": "3.0.0"
   },
   "devDependencies": {
     "@wincent/workspace-scripts": "0.0.1"

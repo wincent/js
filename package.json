@@ -8,7 +8,6 @@
     "@babel/core": "*",
     "@babel/parser": "*",
     "@babel/plugin-syntax-dynamic-import": "*",
-    "@babel/plugin-transform-runtime": "*",
     "@babel/preset-env": "*",
     "@babel/preset-typescript": "*",
     "@babel/traverse": "*",
