@@ -1,6 +1,6 @@
 {
   "name": "@wincent/clamp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Clamps a numerical value between a minimum and a maximum",
   "main": "lib/index.js",
   "module": "lib/index.mjs",
