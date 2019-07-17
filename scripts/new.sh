@@ -108,10 +108,10 @@ if [ ! -e "$PACKAGE_DIR"/package.json ]; then
 		  "module": "lib/index.mjs",
 		  "types": "lib/index.d.ts",
 		  "files": [
+		    "lib/index.d.ts",
 		    "lib/index.js",
 		    "lib/index.js.flow",
-		    "lib/index.mjs",
-		    "lib/index.ts"
+		    "lib/index.mjs"
 		  ],
 		  "repository": "https://github.com/wincent/js/tree/master/packages/$PACKAGE",
 		  "author": "Greg Hurrell <greg@hurrell.net>",

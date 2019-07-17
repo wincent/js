@@ -10,10 +10,10 @@
   "types": "lib/index.d.ts",
   "files": [
     "bin/index.js",
+    "lib/index.d.ts",
     "lib/index.js",
     "lib/index.js.flow",
-    "lib/index.mjs",
-    "lib/index.ts"
+    "lib/index.mjs"
   ],
   "repository": "https://github.com/wincent/js/tree/master/packages/workspace-scripts",
   "author": "Greg Hurrell <greg@hurrell.net>",
