@@ -54,6 +54,20 @@ yarn bootstrap
 yarn build
 ```
 
+## Publishing
+
+```shell
+# For example, publishing a new version of @wincent/clamp:
+cd packages/clamp
+vim CHANGELOG.md
+git add -p
+yarn version --minor # or --major, or --patch
+
+# From the top-level:
+cd ..
+yarn publish clamp
+```
+
 ## License
 
 Copyright (c) 2019-present Greg Hurrell
