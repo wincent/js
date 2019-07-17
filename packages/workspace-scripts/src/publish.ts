@@ -129,7 +129,7 @@ export async function publish(packages: string[], _extraArgs: string[]) {
       );
       print.line(stdout);
       const tag = `${name}-${config.version}`;
-      const yes = await input(`Create tag ${tag}? [y/n]`, 'y');
+      const yes = await input(`Create tag ${tag}? [y/n]`, 'n');
       if (yes.match(/^\s*y(es?)?\s*/i)) {
         capture('git', [
           'tag',
