@@ -65,7 +65,7 @@ yarn version --minor # or --major, or --patch
 
 # From the top-level:
 cd ..
-yarn publish clamp
+yarn run publish clamp
 ```
 
 ## License
