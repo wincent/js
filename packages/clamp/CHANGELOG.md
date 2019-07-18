@@ -1,5 +1,9 @@
 # Changes
 
+## 0.3.0 (19 July 2019)
+
+- Rebuild with new Babel config to avoid unnecessary inclusion of core-js.
+
 ## 0.2.0 (18 July 2019)
 
 - Include "index.d.ts" file in published package.
