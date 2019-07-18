@@ -33,9 +33,9 @@
     "typecheck:ts": "./bin/index.js typecheck:ts"
   },
   "dependencies": {
-    "@babel/parser": "7.4.2",
-    "@babel/runtime-corejs3": "7.4.2",
-    "@babel/traverse": "7.4.0",
+    "@babel/parser": "7.5.5",
+    "@babel/runtime-corejs3": "7.5.5",
+    "@babel/traverse": "7.5.5",
     "core-js": "3.1.4",
     "regenerator-runtime": "0.13.2"
   }
