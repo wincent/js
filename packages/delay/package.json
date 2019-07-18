@@ -31,7 +31,7 @@
   "dependencies": {
     "@babel/runtime-corejs3": "7.4.2",
     "@wincent/invariant": "0.0.1",
-    "core-js": "3.0.0"
+    "core-js": "3.1.4"
   },
   "devDependencies": {
     "@wincent/workspace-scripts": "0.0.1"

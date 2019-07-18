@@ -122,7 +122,7 @@ async function checkForMissingDependencies() {
   const missing: {[name: string]: string[]} = {};
 
   await forEachPackage(async (name, config) => {
-    const modules = new Set();
+    const modules = new Set<string>();
 
     print(basename(`  ${name}: `));
 

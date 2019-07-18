@@ -43,9 +43,7 @@ export async function checkChangelogs(
       } else {
         success = false;
         print.line.red(
-          `BAD [Expected line matching: "## ${
-            config.version
-          } ($DAY $MONTH $YEAR)"]`,
+          `BAD [Expected line matching: "## ${config.version} ($DAY $MONTH $YEAR)"]`,
         );
       }
     }

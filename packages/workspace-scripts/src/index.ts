@@ -88,7 +88,10 @@ function getWorkspaceRoot(): string {
 function isSubcommand(
   subcommand: string | undefined,
 ): subcommand is Subcommand {
-  return !!subcommand && SUBCOMMANDS.hasOwnProperty(subcommand);
+  return (
+    !!subcommand &&
+    Object.prototype.hasOwnProperty.call(SUBCOMMANDS, subcommand)
+  );
 }
 
 function validatePackages(packages: string[], root: string): void {
