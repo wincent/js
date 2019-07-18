@@ -37,6 +37,14 @@ const commentOptions = {
   shouldPrintComment: value => /@license|@preserve/.test(value),
 };
 
+const pluginTransformModulesCommonJS = [
+  '@babel/plugin-transform-modules-commonjs',
+  {
+    noInterop: true,
+    strict: true,
+  },
+];
+
 /**
  * No-op Babel transform used as a fallback.
  */
@@ -92,6 +100,7 @@ module.exports = function(api) {
     env: {
       jest: {
         plugins: [
+          pluginTransformModulesCommonJS,
           getMinifyReplaceConfig('development'),
           wrapLocal('@wincent/babel-plugin-invariant-transform'),
         ],
@@ -115,6 +124,7 @@ module.exports = function(api) {
       development: {
         ...commentOptions,
         plugins: [
+          pluginTransformModulesCommonJS,
           getMinifyReplaceConfig('development'),
           wrapLocal('@wincent/babel-plugin-invariant-transform'),
         ],
@@ -135,6 +145,7 @@ module.exports = function(api) {
       production: {
         ...commentOptions,
         plugins: [
+          pluginTransformModulesCommonJS,
           getMinifyReplaceConfig('production'),
           wrapLocal([
             '@wincent/babel-plugin-invariant-transform',
