@@ -181,7 +181,8 @@ async function checkForMissingDependencies() {
     print.line.red('Add missing dependencies with:\n');
     Object.entries(missing).forEach(([name, dependencies]) => {
       print.line.red(
-        `(cd packages/${name} && yarn add ${dependencies.join(' ')})`,
+        // TODO: print right version number here too
+        `(cd packages/${name} && yarn add --exact ${dependencies.join(' ')})`,
       );
     });
     print();
