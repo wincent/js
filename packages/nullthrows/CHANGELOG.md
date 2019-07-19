@@ -1,6 +1,8 @@
 # Changes
 
-## master (not yet released)
+## 0.1.0 (19 July 2019)
+
+- Rebuild with new Babel config.
 
 ## 0.0.1 (30 January 2019)
 
