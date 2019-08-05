@@ -33,6 +33,7 @@ This is an experiment aimed at exploring the trade-offs involved in moving a bun
 | [@wincent/is-object](https://github.com/wincent/js/tree/master/packages/is-object)                                               | Determines whether a value is an object                                        |
 | [@wincent/nullthrows](https://github.com/wincent/js/tree/master/packages/nullthrows)                                             | Fail fast in the face of an unexpected null value                              |
 | [@wincent/stable-stringify](https://github.com/wincent/js/tree/master/packages/stable-stringify)                                 | Like `JSON.stringify` but produces stable output regardless of insertion order |
+| [@wincent/throttle](https://github.com/wincent/js/tree/master/packages/throttle)                                                 | Simple throttle |
 | [@wincent/workspace-scripts](https://github.com/wincent/js/tree/master/packages/workspace-scripts)                               | Helper scripts for working within Yarn workspaces                              |
 
 This table may not necessarily stay up to date, so please check [the packages directory](https://github.com/wincent/js/tree/master/packages).
