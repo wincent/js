@@ -20,18 +20,18 @@ export default function throttle<TArgs extends unknown[]>(
     const context = this;
     const now = Date.now();
 
-    if (timeout === null) {
+    const schedule = () => {
       timeout = setTimeout(() => (timeout = null), interval);
       last = now;
       fn.apply(context, args);
+    };
+
+    if (timeout === null) {
+      schedule();
     } else {
       const remaining = Math.max(last + interval - now, 0);
       clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        timeout = setTimeout(() => (timeout = null), interval);
-        last = now;
-        fn.apply(context, args);
-      }, remaining);
+      timeout = setTimeout(schedule, remaining);
     }
   };
 }
