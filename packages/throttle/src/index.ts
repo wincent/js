@@ -6,7 +6,7 @@
 /**
  * Throttle implementation that fires on the leading and trailing edges.
  * If multiple calls come in during the throttle interval, the last call's
- * argument and context are used, replacing those of any previously pending
+ * arguments and context are used, replacing those of any previously pending
  * calls.
  */
 export default function throttle<TArgs extends unknown[]>(
