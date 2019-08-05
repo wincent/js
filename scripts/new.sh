@@ -132,7 +132,7 @@ if [ ! -e "$PACKAGE_DIR"/package.json ]; then
 		  },
 		  "devDependencies": {
 		    "@wincent/workspace-scripts": $SCRIPTS_VERSION
-		  },
+		  }
 		}
 	HERE
 fi
