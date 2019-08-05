@@ -1,7 +1,7 @@
 {
   "name": "@wincent/throttle",
   "version": "0.0.1",
-  "description": "A JavaScript package",
+  "description": "Simple throttle implementation",
   "bin": {},
   "main": "lib/index.js",
   "module": "lib/index.mjs",
@@ -31,5 +31,8 @@
   },
   "devDependencies": {
     "@wincent/workspace-scripts": "0.0.1"
+  },
+  "dependencies": {
+    "core-js": "3.1.4"
   }
 }
