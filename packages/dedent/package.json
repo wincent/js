@@ -23,7 +23,7 @@
     "lint:fix": "workspace-scripts lint:fix:check dedent",
     "prepublishOnly": "echo 'Run `yarn run publish dedent` from top-level'; echo; false",
     "test": "workspace-scripts test dedent",
-    "test:watch": "workspace-scripts test dedent",
+    "test:watch": "workspace-scripts test:watch dedent",
     "typecheck": "workspace-scripts typecheck",
     "typecheck:flow": "workspace-scripts typecheck:flow",
     "typecheck:ts": "workspace-scripts typecheck:ts"

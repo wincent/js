@@ -27,7 +27,7 @@
     "lint:fix": "./bin/index.js lint:fix:check workspace-scripts",
     "prepublishOnly": "echo 'Run `yarn publish ./bin/index.js` from top-level'; false",
     "test": "./bin/index.js test workspace-scripts",
-    "test:watch": "./bin/index.js test workspace-scripts",
+    "test:watch": "./bin/index.js test:watch workspace-scripts",
     "typecheck": "./bin/index.js typecheck",
     "typecheck:flow": "./bin/index.js typecheck:flow",
     "typecheck:ts": "./bin/index.js typecheck:ts"

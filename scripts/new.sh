@@ -125,7 +125,7 @@ if [ ! -e "$PACKAGE_DIR"/package.json ]; then
 		    "lint:fix": "workspace-scripts lint:fix:check $PACKAGE",
 		    "prepublishOnly": "echo 'Run \`yarn publish $PACKAGE\` from top-level'; false",
 		    "test": "workspace-scripts test $PACKAGE",
-		    "test:watch": "workspace-scripts test $PACKAGE",
+		    "test:watch": "workspace-scripts test:watch $PACKAGE",
 		    "typecheck": "workspace-scripts typecheck",
 		    "typecheck:flow": "workspace-scripts typecheck:flow",
 		    "typecheck:ts": "workspace-scripts typecheck:ts"

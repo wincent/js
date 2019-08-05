@@ -24,7 +24,7 @@
     "lint:fix": "workspace-scripts lint:fix:check throttle",
     "prepublishOnly": "echo 'Run `yarn publish throttle` from top-level'; false",
     "test": "workspace-scripts test throttle",
-    "test:watch": "workspace-scripts test throttle",
+    "test:watch": "workspace-scripts test:watch throttle",
     "typecheck": "workspace-scripts typecheck",
     "typecheck:flow": "workspace-scripts typecheck:flow",
     "typecheck:ts": "workspace-scripts typecheck:ts"

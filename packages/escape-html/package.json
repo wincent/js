@@ -23,7 +23,7 @@
     "lint:fix": "workspace-scripts lint:fix:check escape-html",
     "prepublishOnly": "echo 'Run `yarn run publish escape-html` from top-level'; echo; false",
     "test": "workspace-scripts test escape-html",
-    "test:watch": "workspace-scripts test escape-html",
+    "test:watch": "workspace-scripts test:watch escape-html",
     "typecheck": "workspace-scripts typecheck",
     "typecheck:flow": "workspace-scripts typecheck:flow",
     "typecheck:ts": "workspace-scripts typecheck:ts"

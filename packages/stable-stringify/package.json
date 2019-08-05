@@ -23,7 +23,7 @@
     "lint:fix": "workspace-scripts lint:fix:check stable-stringify",
     "prepublishOnly": "echo 'Run `yarn run publish stable-stringify` from top-level'; echo; false",
     "test": "workspace-scripts test stable-stringify",
-    "test:watch": "workspace-scripts test stable-stringify",
+    "test:watch": "workspace-scripts test:watch stable-stringify",
     "typecheck": "workspace-scripts typecheck",
     "typecheck:flow": "workspace-scripts typecheck:flow",
     "typecheck:ts": "workspace-scripts typecheck:ts"

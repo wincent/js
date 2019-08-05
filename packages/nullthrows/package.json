@@ -23,7 +23,7 @@
     "lint:fix": "workspace-scripts lint:fix:check nullthrows",
     "prepublishOnly": "echo 'Run `yarn run publish nullthrows` from top-level'; echo; false",
     "test": "workspace-scripts test nullthrows",
-    "test:watch": "workspace-scripts test nullthrows",
+    "test:watch": "workspace-scripts test:watch nullthrows",
     "typecheck": "workspace-scripts typecheck",
     "typecheck:flow": "workspace-scripts typecheck:flow",
     "typecheck:ts": "workspace-scripts typecheck:ts"

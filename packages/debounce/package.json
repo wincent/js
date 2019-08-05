@@ -23,7 +23,7 @@
     "lint:fix": "workspace-scripts lint:fix:check debounce",
     "prepublishOnly": "echo 'Run `yarn run publish debounce` from top-level'; echo; false",
     "test": "workspace-scripts test debounce",
-    "test:watch": "workspace-scripts test debounce",
+    "test:watch": "workspace-scripts test:watch debounce",
     "typecheck": "workspace-scripts typecheck",
     "typecheck:flow": "workspace-scripts typecheck:flow",
     "typecheck:ts": "workspace-scripts typecheck:ts"

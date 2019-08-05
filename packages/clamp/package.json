@@ -23,7 +23,7 @@
     "lint:fix": "workspace-scripts lint:fix:check clamp",
     "prepublishOnly": "echo 'Run `yarn publish clamp` from top-level'; false",
     "test": "workspace-scripts test clamp",
-    "test:watch": "workspace-scripts test clamp",
+    "test:watch": "workspace-scripts test:watch clamp",
     "typecheck": "workspace-scripts typecheck",
     "typecheck:flow": "workspace-scripts typecheck:flow",
     "typecheck:ts": "workspace-scripts typecheck:ts"

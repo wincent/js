@@ -24,7 +24,7 @@
     "lint:fix": "workspace-scripts lint:fix:check babel-plugin-invariant-transform",
     "prepublishOnly": "echo 'Run `yarn publish babel-plugin-invariant-transform` from top-level'; false",
     "test": "workspace-scripts test babel-plugin-invariant-transform",
-    "test:watch": "workspace-scripts test babel-plugin-invariant-transform",
+    "test:watch": "workspace-scripts test:watch babel-plugin-invariant-transform",
     "typecheck": "workspace-scripts typecheck",
     "typecheck:flow": "workspace-scripts typecheck:flow",
     "typecheck:ts": "workspace-scripts typecheck:ts"

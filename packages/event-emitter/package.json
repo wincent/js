@@ -23,7 +23,7 @@
     "lint:fix": "workspace-scripts lint:fix:check event-emitter",
     "prepublishOnly": "echo 'Run `yarn publish event-emitter` from top-level'; false",
     "test": "workspace-scripts test event-emitter",
-    "test:watch": "workspace-scripts test event-emitter",
+    "test:watch": "workspace-scripts test:watch event-emitter",
     "typecheck": "workspace-scripts typecheck",
     "typecheck:flow": "workspace-scripts typecheck:flow",
     "typecheck:ts": "workspace-scripts typecheck:ts"
