@@ -1,0 +1,35 @@
+{
+  "name": "@wincent/throttle",
+  "version": "0.0.1",
+  "description": "A JavaScript package",
+  "bin": {},
+  "main": "lib/index.js",
+  "module": "lib/index.mjs",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/index.d.ts",
+    "lib/index.js",
+    "lib/index.js.flow",
+    "lib/index.mjs"
+  ],
+  "repository": "https://github.com/wincent/js/tree/master/packages/throttle",
+  "author": "Greg Hurrell <greg@hurrell.net>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "workspace-scripts build throttle",
+    "format": "workspace-scripts format throttle",
+    "format:check": "workspace-scripts format:check throttle",
+    "lint": "workspace-scripts lint throttle",
+    "lint:fix": "workspace-scripts lint:fix:check throttle",
+    "prepublishOnly": "echo 'Run `yarn publish throttle` from top-level'; false",
+    "test": "workspace-scripts test throttle",
+    "test:watch": "workspace-scripts test throttle",
+    "typecheck": "workspace-scripts typecheck",
+    "typecheck:flow": "workspace-scripts typecheck:flow",
+    "typecheck:ts": "workspace-scripts typecheck:ts"
+  },
+  "devDependencies": {
+    "@wincent/workspace-scripts": "0.0.1"
+  }
+}

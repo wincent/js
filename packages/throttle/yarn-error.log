@@ -1,0 +1,65 @@
+Arguments: 
+  /Users/glh/n/bin/node /Users/glh/n/bin/yarn typecheck
+
+PATH: 
+  /Users/glh/bin:/Users/glh/.zsh/bin:/Users/glh/n/bin:/Users/glh/.cargo/bin:/usr/local/bin:/usr/local/sbin:/usr/local/opt/srm/bin:/Users/glh/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/glh/bin:/Users/glh/.zsh/bin:/Users/glh/n/bin:/Users/glh/.cargo/bin:/usr/local/sbin:/usr/local/opt/srm/bin:/Users/glh/bin/ec2-api-tools/bin:/Users/glh/.local/bin:/Users/glh/.cabal/bin:/Users/glh/bin/ec2-api-tools/bin:/Users/glh/.local/bin:/Users/glh/.cabal/bin
+
+Yarn version: 
+  1.17.3
+
+Node version: 
+  10.16.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/glh/code/js/packages/throttle/package.json: Unexpected token } in JSON at position 1166
+      at JSON.parse (<anonymous>)
+      at /Users/glh/n/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/Users/glh/n/lib/node_modules/yarn/lib/cli.js:304:30)
+      at /Users/glh/n/lib/node_modules/yarn/lib/cli.js:315:13
+
+npm manifest: 
+  {
+    "name": "@wincent/throttle",
+    "version": "0.0.1",
+    "description": "A JavaScript package",
+    "bin": {},
+    "main": "lib/index.js",
+    "module": "lib/index.mjs",
+    "types": "lib/index.d.ts",
+    "files": [
+      "lib/index.d.ts",
+      "lib/index.js",
+      "lib/index.js.flow",
+      "lib/index.mjs"
+    ],
+    "repository": "https://github.com/wincent/js/tree/master/packages/throttle",
+    "author": "Greg Hurrell <greg@hurrell.net>",
+    "license": "MIT",
+    "private": false,
+    "scripts": {
+      "build": "workspace-scripts build throttle",
+      "format": "workspace-scripts format throttle",
+      "format:check": "workspace-scripts format:check throttle",
+      "lint": "workspace-scripts lint throttle",
+      "lint:fix": "workspace-scripts lint:fix:check throttle",
+      "prepublishOnly": "echo 'Run `yarn publish throttle` from top-level'; false",
+      "test": "workspace-scripts test throttle",
+      "test:watch": "workspace-scripts test throttle",
+      "typecheck": "workspace-scripts typecheck",
+      "typecheck:flow": "workspace-scripts typecheck:flow",
+      "typecheck:ts": "workspace-scripts typecheck:ts"
+    },
+    "devDependencies": {
+      "@wincent/workspace-scripts": "0.0.1"
+    },
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
