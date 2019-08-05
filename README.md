@@ -65,7 +65,7 @@ git add -p
 yarn version --minor # or --major, or --patch
 
 # From the top-level:
-cd ..
+cd ../..
 yarn run publish clamp
 ```
 
