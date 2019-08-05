@@ -151,6 +151,14 @@ if [ ! -e "$PACKAGE_DIR"/src/index.ts ]; then
 	HERE
 fi
 
+if [ ! -e "$PACKAGE_DIR"/.yarnrc ]; then
+  cat > "$PACKAGE_DIR"/.yarnrc <<-HERE
+		# Make \`yarn version\` produce the right commit message and tag for this package.
+		version-tag-prefix "$PACKAGE-"
+		version-git-message "$PACKAGE/v%s"
+	HERE
+fi
+
 if [ ! -e "$PACKAGE_DIR"/src/index.js.flow ]; then
   cat > "$PACKAGE_DIR"/src/index.js.flow <<-HERE
 		/**
