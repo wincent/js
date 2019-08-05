@@ -5,8 +5,6 @@
 
 import debounce from '..';
 
-jest.useFakeTimers();
-
 describe('debounce()', () => {
   let fn: ReturnType<typeof jest.fn>;
 

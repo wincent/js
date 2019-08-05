@@ -5,19 +5,21 @@
 
 /**
  * Throttle implementation that fires on the leading and trailing edges.
- * If a call comes in when a pending call is yet to be processed, it replaces
- * the pending call.
+ * If multiple calls come in during the throttle interval, the last call's
+ * argument and context are used, replacing those of any previously pending
+ * calls.
  */
-export default function throttle<TArgs: Iterable<mixed>>(
-  fn: (...TArgs) => void,
+export default function throttle<TArgs extends unknown[]>(
+  fn: (...args: TArgs) => void,
   interval: number,
-): (...TArgs) => void {
-  let timeout = null;
-  let last = null;
-  return function() {
-    const args: TArgs = arguments;
+): (...args: TArgs) => void {
+  let timeout: ReturnType<typeof setTimeout> | null = null;
+  let last: number;
+
+  return function(this: any, ...args: TArgs): void {
     const context = this;
     const now = Date.now();
+
     if (timeout === null) {
       timeout = setTimeout(() => (timeout = null), interval);
       last = now;

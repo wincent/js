@@ -6,7 +6,7 @@
 import throttle from '..';
 
 describe('throttle()', () => {
-  let mockFunction;
+  let mockFunction: ReturnType<typeof jest.fn>;
 
   beforeEach(() => {
     mockFunction = jest.fn();
@@ -52,7 +52,7 @@ describe('throttle()', () => {
 
   it('uses the last-employed context when throttling multiple calls', () => {
     let context;
-    const throttled = throttle(function() {
+    const throttled = throttle(function(this: {}) {
       context = this;
     }, 100);
     const context1 = {};

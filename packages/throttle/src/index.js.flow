@@ -4,4 +4,7 @@
  * @license MIT
  */
 
-declare export default function throttle(t: T): T;
+declare export default function throttle<TArgs: Iterable<mixed>>(
+  fn: (...TArgs) => void,
+  interval: number,
+): (...TArgs) => void;

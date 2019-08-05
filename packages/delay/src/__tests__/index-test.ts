@@ -5,8 +5,6 @@
 
 import delay from '..';
 
-jest.useFakeTimers();
-
 describe('delay()', () => {
   it('returns a promise that resolves after a delay', async () => {
     // Hack around current limitations in Jest's fake timers.

@@ -15,6 +15,7 @@ module.exports = {
     '<rootDir>/packages/[^/]+/lib/',
     '<rootDir>/packages/[^/]+/node_modules/',
   ],
+  timers: 'fake',
   transform: {
     '^.+\\.[jt]s$': './support/babel-jest-wrapper.js',
   },
