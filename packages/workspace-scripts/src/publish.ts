@@ -117,7 +117,7 @@ export async function publish(packages: string[], _extraArgs: string[]) {
         JSON.stringify(config, null, 2),
       );
 
-      print.line(`Publising version ${config.version}`);
+      print.line(`Publishing version ${config.version}`);
 
       /* eslint-disable-next-line require-atomic-updates */
       otp = await input('Please enter a OTP token:', otp);
