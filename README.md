@@ -27,6 +27,7 @@ This is an experiment aimed at exploring the trade-offs involved in moving a bun
 | [@wincent/delay](https://github.com/wincent/js/tree/master/packages/delay)                                                       | A function that returns a promise that resolves after a delay                  |
 | [@wincent/escape-html](https://github.com/wincent/js/tree/master/packages/escape-html)                                           | Escapes unsafe characters in HTML                                              |
 | [@wincent/event-emitter](https://github.com/wincent/js/tree/master/packages/event-emitter)                                       | Simple event emitter                                                           |
+| [@wincent/frozen-set](https://github.com/wincent/js/tree/master/packages/frozen-set)                                             | ES6 Set stand-in for programming in an immutable style                         |
 | [@wincent/indent](https://github.com/wincent/js/tree/master/packages/indent)                                                     | Indenting utility                                                              |
 | [@wincent/invariant](https://github.com/wincent/js/tree/master/packages/invariant)                                               | Enforces an invariant                                                          |
 | [@wincent/babel-plugin-invariant-transform](https://github.com/wincent/js/tree/master/packages/babel-plugin-invariant-transform) | Transforms invariant() calls for development and production                    |
@@ -67,6 +68,29 @@ yarn version --minor # or --major, or --patch
 # From the top-level:
 cd ../..
 yarn run publish clamp
+```
+
+## Creating a new package
+
+```shell
+scripts/new.sh some-package
+cd packages/some-package
+git add -N .
+```
+
+- Edit "description" field in "package.json".
+- Define implementation.
+- Add tests.
+- Declare Flow types.
+- Update package CHANGELOG.md.
+- Add table row to top-level README.md.
+
+```shell
+git add --patch
+yarn version --patch
+# From the top-level:
+cd ../..
+yarn run publish some-package
 ```
 
 ## License

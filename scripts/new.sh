@@ -101,7 +101,7 @@ if [ ! -e "$PACKAGE_DIR"/package.json ]; then
   cat > "$PACKAGE_DIR"/package.json <<-HERE
 		{
 		  "name": "@wincent/$PACKAGE",
-		  "version": "0.0.1",
+		  "version": "0.0.0",
 		  "description": "A JavaScript package",
 		  $BINARIES
 		  "main": "lib/index.js",

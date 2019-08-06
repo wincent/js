@@ -1,0 +1,41 @@
+/**
+ * @copyright Copyright (c) 2019-present Greg Hurrell
+ * @flow strict
+ * @license MIT
+ */
+
+declare export default class FrozenSet<T> {
+  constructor(
+    iterable: ?Iterable<T>,
+    callback: ?(s: FrozenSet<T>) => void,
+  ): FrozenSet<T>;
+
+  add(value: T): FrozenSet<T>;
+
+  clear(): void;
+
+  clone(callback: (FrozenSet<T>) => void): FrozenSet<T>;
+
+  delete(value: T): boolean;
+
+  entries(): Iterable<[T, T]>;
+
+  // "$FlowIssue" because strict-mode disallows "any" (unclear-type).
+  forEach(
+    callbackfn: (value: T, value2: T, set: Set<T>) => void,
+    thisArg?: $FlowIssue,
+  ): void;
+
+  freeze(): void;
+
+  has(value: T): boolean;
+
+  keys(): Iterable<T>;
+
+  values(): Iterable<T>;
+
+  @@iterator(): Iterator<T>;
+
+  // $FlowIssue: silence strict error "unsafe-getters-setters".
+  get size(): number;
+}

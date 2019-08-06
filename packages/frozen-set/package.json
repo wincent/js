@@ -1,0 +1,38 @@
+{
+  "name": "@wincent/frozen-set",
+  "version": "0.0.1",
+  "description": "An ES6 Set stand-in for programming in an immutable style",
+  "bin": {},
+  "main": "lib/index.js",
+  "module": "lib/index.mjs",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/index.d.ts",
+    "lib/index.js",
+    "lib/index.js.flow",
+    "lib/index.mjs"
+  ],
+  "repository": "https://github.com/wincent/js/tree/master/packages/frozen-set",
+  "author": "Greg Hurrell <greg@hurrell.net>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "workspace-scripts build frozen-set",
+    "format": "workspace-scripts format frozen-set",
+    "format:check": "workspace-scripts format:check frozen-set",
+    "lint": "workspace-scripts lint frozen-set",
+    "lint:fix": "workspace-scripts lint:fix:check frozen-set",
+    "prepublishOnly": "echo 'Run `yarn publish frozen-set` from top-level'; false",
+    "test": "workspace-scripts test frozen-set",
+    "test:watch": "workspace-scripts test:watch frozen-set",
+    "typecheck": "workspace-scripts typecheck",
+    "typecheck:flow": "workspace-scripts typecheck:flow",
+    "typecheck:ts": "workspace-scripts typecheck:ts"
+  },
+  "devDependencies": {
+    "@wincent/workspace-scripts": "0.0.1"
+  },
+  "dependencies": {
+    "core-js": "3.1.4"
+  }
+}
