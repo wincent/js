@@ -88,6 +88,7 @@ git add -N .
 ```shell
 git add --patch
 yarn version --patch
+
 # From the top-level:
 cd ../..
 yarn run publish some-package
