@@ -1,6 +1,6 @@
 {
   "name": "@wincent/escape-html",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Escapes unsafe characters in HTML",
   "main": "lib/index.js",
   "module": "lib/index.mjs",
