@@ -40,8 +40,8 @@ const commentOptions = {
 const pluginTransformModulesCommonJS = [
   '@babel/plugin-transform-modules-commonjs',
   {
+    loose: true,
     noInterop: true,
-    strict: true,
   },
 ];
 
